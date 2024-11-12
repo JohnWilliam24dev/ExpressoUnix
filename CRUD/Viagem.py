@@ -7,10 +7,9 @@ class Viagem:
         self.hora=hora
         self.origem=origem
         self.destino=destino
-        self.distancia= util.buscar_distancia(origem,destino)
         
-    def get_distancia(self):
-        return self.distancia
+        
+    
     
     
     def get_valor_total(self):
