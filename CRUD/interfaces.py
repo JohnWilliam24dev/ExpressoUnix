@@ -82,9 +82,7 @@ def interface_transporte():
             continuar=True
         else: 
             continuar=False
-from os import system as S
-import subprocess
-import json
+
 
 def interface_passageiro():
     continuar = True
@@ -125,9 +123,7 @@ def interface_passageiro():
         loop = input("Deseja cadastrar mais um passageiro (S/N): ")
         continuar = loop.lower() == "s"
 
-from os import system as S
-import subprocess
-import json
+
 
 def interface_viagem():
     continuar = True
@@ -168,9 +164,7 @@ def interface_viagem():
         loop = input("Deseja cadastrar mais uma viagem (S/N): ")
         continuar = loop.lower() == "s"
 
-from os import system as S
-import subprocess
-import json
+
 
 def interface_passagem():
     continuar = True
@@ -221,10 +215,8 @@ def interface_passagem():
         loop = input("Deseja cadastrar mais uma passagem (S/N): ")
         continuar = loop.lower() == "s"
 
-interface_passagem()
-from os import system as S
-import subprocess
-import json
+
+
 
 def interface_funcionario():
     continuar = True
@@ -261,6 +253,6 @@ def interface_funcionario():
         loop = input("Deseja cadastrar mais um funcionário (S/N): ")
         continuar = loop.lower() == "s"
 
-interface_funcionario()
+
 
 

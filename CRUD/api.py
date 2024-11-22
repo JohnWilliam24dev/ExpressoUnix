@@ -12,21 +12,21 @@ def hello_world():
     return jsonify({'message': 'Olá, Mundo!'},
                    {'string':'API saindo quentin'}), 200, {'Content-Type': 'application/json; charset=utf-8'}
 
-@app.route('')
+
 
 
 
 @app.route('/expresso_unix/adm/registrar_passagem', methods=['POST'])
 def post_passagem():
     return api_passagem.registrar_passagem()
-@app.route('/expresso_unix/adm/registrar_viagem', methods=['POST'])
-def post_passagem():
-    return api_passagem.registrar_passagem()
 @app.route('/expresso_unix/adm/registrar_funcionario', methods=['POST'])
-def post_passagem():
-    return api_passagem.registrar_passagem()
+def post_funcionario():
+    return api_funcionario.registrar_funcionario()
+@app.route('/expresso_unix/adm/registrar_viagem', methods=['POST'])
+def post_viagem():
+    return api_viagem.registrar_viagem()
 @app.route('/expresso_unix/adm/registrar_passageiro', methods=['POST'])
-def post_passagem():
+def post_passageiro():
     return api_passageiro.registrar_passageiro()
 
 @app.route('/expresso_unix/adm/registrar_transporte', methods=['POST'])

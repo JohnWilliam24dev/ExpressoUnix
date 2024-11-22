@@ -1,59 +1,40 @@
 from os import system as S
-from Model import Transporte
-continuar= True
-while continuar ==True:
+import interfaces
 
-    S("clear")
-    print("Escolha a classe de onibus a ser cadastrado")
-    print("1) Convencional")
-    print("2) Executivo")
-    print("3) Semi-Leito")
-    print("4) Leito")
-    print("5) Premium")
-    input_classe=int(input("-->"))
-    capacidade=input("Digite a capacidade: ")
-    S("clear")
-    print("1) Disponivel")
-    print("2) Indisponivel")
-    input_status=int(input("Digite o Status: "))
-    def switch_status(input):
-        if input==1:
-            return "Disponivel"
-        elif input==2:
-            return "Indisponivel"
-    def switch_case_classe(input_classe): 
+def menu_principal():
+    continuar = True
+    while continuar:
+        S("clear")
+        print("Bem-vindo ao Sistema de Gestão Expresso Unix")
+        print("Escolha uma opção para acessar o cadastro:")
+        print("1) Cadastro de Transporte")
+        print("2) Cadastro de Viagem")
+        print("3) Cadastro de Passagem")
+        print("4) Cadastro de Funcionário")
+        print("5) Sair")
+        
+        try:
+            opcao = int(input("--> "))
+        except ValueError:
+            print("Opção inválida! Por favor, insira um número.")
+            input("Pressione Enter para continuar...")
+            continue
+        
+        if opcao == 1:
+            interfaces.interface_transporte()
+        elif opcao == 2:
+            interfaces.interface_viagem()
+        elif opcao == 3:
+            interfaces.interface_passagem()
+        elif opcao == 4:
+            interfaces.interface_funcionario()
+        elif opcao == 5:
+            continuar = False
+            print("Saindo do sistema...")
+        else:
+            print("Opção inválida! Tente novamente.")
+        
+        if continuar:
+            continuar = input("Deseja continuar as operações? (S/N): ").strip().lower() == "s"
 
-        match input_classe: 
-
-            case 1: 
-
-                return "Convencional" 
-
-            case 2: 
-
-                return "Executivo" 
-
-            case 3: 
-
-                return "Semi-Leito" 
-            
-            case 4: 
-
-                return "Leito"
-            
-            case 5: 
-
-                return "Premium"
-
-            case _: 
-
-                return "0" 
-    status= switch_status(input_status)
-    classe=switch_case_classe(input_classe)
-    onibus= Transporte(classe,capacidade,status)
-    onibus.cadastrar()
-    loop=input("Deseja cadastrar mais um veiculo (S/N):")
-    if loop=="S" or loop=="s":
-        continuar=True
-    else: 
-        continuar=False
+menu_principal()

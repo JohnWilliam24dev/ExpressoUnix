@@ -63,9 +63,7 @@ def buscar_horario(origem:str,destino:str):
             hour = hour.replace(".","")
             
         return hour
-print(buscar_distancia("campinas sp","Santos sp"))
-horario=buscar_horario("campinas sp","santos sp")
-print(horario)
+
 
 def conversor_de_horario(horario: str)->str:
     
@@ -83,7 +81,7 @@ def conversor_de_horario(horario: str)->str:
         time=time.replace(" ","")
         return time        
 
-print(conversor_de_horario(horario))
+
 def calculadora_horario(horario:str,horario_partida:str)->str:
     
     hora=int(extrair_horas(horario))
@@ -110,5 +108,5 @@ def calculadora_horario(horario:str,horario_partida:str)->str:
 
     
     return hora_chegada.strftime("%H:%M:%S")
-print(calculadora_horario(horario,"09:00:00"))
+
 
