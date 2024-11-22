@@ -1,12 +1,13 @@
 import mysql.connector
+from .CrudInterface import CrudInterface
 
-class Transporte:
+class Transporte(CrudInterface):
     def __init__(self, classe, capacidade, status):
         self.classe = classe
         self.capacidade = capacidade
         self.status = status
 
-    def cadastrar_transporte(self):
+    def cadastrar(self):
         conexao = mysql.connector.connect(
             host="localhost",      
             user="root",    
@@ -17,7 +18,6 @@ class Transporte:
         command = "INSERT INTO veiculo (classe, capacidade, status_veiculo) VALUES (%s, %s, %s)"
         valores = (self.classe, self.capacidade, self.status)
         
-        # Grava o comando SQL em um arquivo para referência
         with open("insert.sql", "a") as arquivo:
             arquivo.write(f"INSERT INTO veiculo (classe, capacidade, status_veiculo) VALUES ({self.classe}, {self.capacidade}, {self.status});\n")
 
@@ -31,8 +31,8 @@ class Transporte:
             cursor.close()
             conexao.close()
     
-    @staticmethod
-    def buscar_transporte(transporte_id):
+    
+    def buscar(self,transporte_id):
         conexao = mysql.connector.connect(
             host="localhost",      
             user="root",    
@@ -40,11 +40,14 @@ class Transporte:
             database="ExpressoUnix"
         )
         cursor = conexao.cursor()
-        command = "SELECT * FROM veiculo WHERE id = %s"
+        command = "SELECT * FROM veiculo WHERE id_veiculo = %s"
         
         try:
             cursor.execute(command, (transporte_id,))
             transporte = cursor.fetchone()
+            self.classe=transporte[1]
+            self.capacidade=transporte[2]
+            self.status=transporte[3]
             if transporte:
                 print("Transporte encontrado:", transporte)
                 return transporte
@@ -57,7 +60,7 @@ class Transporte:
             cursor.close()
             conexao.close()
 
-    def atualizar_transporte(self, transporte_id):
+    def atualizar(self, transporte_id):
         conexao = mysql.connector.connect(
             host="localhost",      
             user="root",    
@@ -68,7 +71,7 @@ class Transporte:
         command = """
             UPDATE veiculo
             SET classe = %s, capacidade = %s, status_veiculo = %s
-            WHERE id = %s
+            WHERE id_veiculo = %s
         """
         valores = (self.classe, self.capacidade, self.status, transporte_id)
 
@@ -83,7 +86,7 @@ class Transporte:
             conexao.close()
     
     @staticmethod
-    def deletar_transporte(transporte_id):
+    def deletar(transporte_id):
         conexao = mysql.connector.connect(
             host="localhost",      
             user="root",    
@@ -91,7 +94,7 @@ class Transporte:
             database="ExpressoUnix"
         )
         cursor = conexao.cursor()
-        command = "DELETE FROM veiculo WHERE id = %s"
+        command = "DELETE FROM veiculo WHERE id_veiculo = %s"
 
         try:
             cursor.execute(command, (transporte_id,))

@@ -1,5 +1,5 @@
 from os import system as S
-from Transporte import Transporte
+from Model import Transporte
 continuar= True
 while continuar ==True:
 
@@ -51,7 +51,7 @@ while continuar ==True:
     status= switch_status(input_status)
     classe=switch_case_classe(input_classe)
     onibus= Transporte(classe,capacidade,status)
-    onibus.cadastrar_transporte()
+    onibus.cadastrar()
     loop=input("Deseja cadastrar mais um veiculo (S/N):")
     if loop=="S" or loop=="s":
         continuar=True
