@@ -1,4 +1,4 @@
-package com.johnwilliam.ExpressoUnix.Enum;
+package com.johnwilliam.ExpressoUnix.Enums;
 
 public enum StatusPassagem {
     Valido,

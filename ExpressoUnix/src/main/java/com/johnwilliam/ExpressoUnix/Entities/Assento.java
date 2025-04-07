@@ -1,7 +1,8 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
+import com.johnwilliam.ExpressoUnix.Enums.StatusAssento;
+
 import jakarta.persistence.*;
-import com.johnwilliam.ExpressoUnix.Enum.StatusAssento;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"id_viagem", "numeroAssento"})})
@@ -9,11 +10,14 @@ public class Assento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id; 
+    Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_viagem", nullable = false)
+    @JoinColumn(name = "id_viagem", nullable = false, referencedColumnName = "id",insertable = false, updatable = false)
     Viagem viagem;
+
+    @Column(name="id_viagem")
+    private long idViagem;
 
     @Column(nullable = false)
     int numeroAssento;
@@ -38,11 +42,11 @@ public class Assento {
     public void setId(Long id) {
         this.id = id;
     }
-    public Viagem getViagem() {
-        return viagem;
+    public long getIdViagem() { //perceba que não há getters e setters para Viagem apenas para id viagem
+        return idViagem;
     }
-    public void setViagem(Viagem viagem) {
-        this.viagem = viagem;
+    public void setIdViagem(long idViagem) {
+        this.idViagem = idViagem;
     }
     public int getNumeroAssento() {
         return numeroAssento;

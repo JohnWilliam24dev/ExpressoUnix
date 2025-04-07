@@ -8,22 +8,22 @@ public class Passageiro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id; // mapeia id_passageiro
+    private Long id;
 
     @Column(nullable = false, length = 150)
-    String nome;
+    private String nome;
 
     @Column(nullable = false, length = 150)
-    String email;
+    private String email;
 
     @Column(nullable = false, length = 15)
-    String telefone;
+    private String telefone;
 
     @Column(nullable = false, length = 11)
-    String cpf;
+    private String cpf;
 
     @Column(nullable = false)
-    LocalDate dataNascimento;
+    private LocalDate dataNascimento;
 
     public Passageiro() {}
 
@@ -35,38 +35,41 @@ public class Passageiro {
         this.dataNascimento = dataNascimento;
     }
 
-    // Getters e Setters
-
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getNome() {
         return nome;
     }
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public String getEmail() {
         return email;
     }
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getTelefone() {
         return telefone;
     }
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
     public String getCpf() {
         return cpf;
     }
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }

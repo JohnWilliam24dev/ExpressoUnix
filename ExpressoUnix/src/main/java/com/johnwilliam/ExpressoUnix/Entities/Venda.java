@@ -9,28 +9,42 @@ public class Venda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id; 
+    private Long id;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    LocalDateTime horarioEmissao;
+    private LocalDateTime horarioEmissao;
 
     @ManyToOne
-    @JoinColumn(name = "id_funcionario", nullable = false)
-    Funcionario funcionario;
+    @JoinColumn(name = "id_funcionario",  referencedColumnName = "id", insertable = false, updatable = false)
+    private Funcionario funcionario;
+
+    @Column(name = "id_funcionario", nullable = false)
+    private long idFuncionario;
 
     @ManyToOne
-    @JoinColumn(name = "id_passagem", nullable = false)
-    Passagem passagem;
+    @JoinColumn(name = "id_passagem",  referencedColumnName = "id", insertable = false, updatable = false)
+    private Passagem passagem;
+
+    @Column(name = "id_passagem", nullable = false)
+    private long idPassagem;
 
     public Venda() {}
 
     public Venda(Funcionario funcionario, Passagem passagem) {
         this.funcionario = funcionario;
+        this.idFuncionario = (funcionario != null) ? funcionario.getId() : 0;
         this.passagem = passagem;
+        this.idPassagem = (passagem != null) ? passagem.getId() : 0;
     }
 
-    
+    public Venda(Long id, Funcionario funcionario, Passagem passagem) {
+        this.id = id;
+        this.funcionario = funcionario;
+        this.idFuncionario = (funcionario != null) ? funcionario.getId() : 0;
+        this.passagem = passagem;
+        this.idPassagem = (passagem != null) ? passagem.getId() : 0;
+    }
 
     public Long getId() {
         return id;
@@ -38,22 +52,26 @@ public class Venda {
     public void setId(Long id) {
         this.id = id;
     }
+
     public LocalDateTime getHorarioEmissao() {
         return horarioEmissao;
     }
     public void setHorarioEmissao(LocalDateTime horarioEmissao) {
         this.horarioEmissao = horarioEmissao;
     }
-    public Funcionario getFuncionario() {
-        return funcionario;
+
+    // Apenas getters e setters para os identificadores
+    public long getIdFuncionario() {
+        return idFuncionario;
     }
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setIdFuncionario(long idFuncionario) {
+        this.idFuncionario = idFuncionario;
     }
-    public Passagem getPassagem() {
-        return passagem;
+
+    public long getIdPassagem() {
+        return idPassagem;
     }
-    public void setPassagem(Passagem passagem) {
-        this.passagem = passagem;
+    public void setIdPassagem(long idPassagem) {
+        this.idPassagem = idPassagem;
     }
 }
