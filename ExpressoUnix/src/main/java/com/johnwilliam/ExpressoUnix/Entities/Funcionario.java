@@ -1,7 +1,9 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
-import java.time.LocalDate;
+
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Funcionario {
@@ -19,6 +21,9 @@ public class Funcionario {
     @Column(nullable = false)
     private String cargo;
 
+    @OneToMany(mappedBy = "funcionario", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Venda> vendas;
+
     public Funcionario() {}
 
     public Funcionario(String nome, LocalDate dataNascimento, String cargo) {
@@ -34,31 +39,17 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+    public LocalDate getDataNascimento() { return dataNascimento; }
+    public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
 
-    public String getCargo() {
-        return cargo;
-    }
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
+    public String getCargo() { return cargo; }
+    public void setCargo(String cargo) { this.cargo = cargo; }
+
+   
 }

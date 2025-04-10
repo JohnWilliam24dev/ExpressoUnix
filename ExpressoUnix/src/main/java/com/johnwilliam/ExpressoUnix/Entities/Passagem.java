@@ -1,13 +1,16 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
+
+import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
+import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"id_viagem", "id_assento"})})
+
 public class Passagem {
 
     @Id
@@ -19,23 +22,20 @@ public class Passagem {
     private StatusPassagem status;
 
     @ManyToOne
-    @JoinColumn(name = "id_viagem",  referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_viagem", referencedColumnName = "id", insertable = false, updatable = false)
     private Viagem viagem;
-    
     @Column(name = "id_viagem", nullable = false)
     private long idViagem;
 
     @ManyToOne
     @JoinColumn(name = "id_assento", referencedColumnName = "id", insertable = false, updatable = false)
     private Assento assento;
-    
     @Column(name = "id_assento", nullable = false)
     private long idAssento;
 
     @ManyToOne
-    @JoinColumn(name = "id_passageiro",  referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_passageiro", referencedColumnName = "id", insertable = false, updatable = false)
     private Passageiro passageiro;
-    
     @Column(name = "id_passageiro", nullable = false)
     private long idPassageiro;
 
@@ -57,6 +57,9 @@ public class Passagem {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
+    @OneToMany(mappedBy = "passagem", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Venda> vendas;
+
     public Passagem() {}
 
     public Passagem(StatusPassagem status, Viagem viagem, Assento assento, Passageiro passageiro,
@@ -77,81 +80,37 @@ public class Passagem {
         this.preco = preco;
     }
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public StatusPassagem getStatus() {
-        return status;
-    }
-    public void setStatus(StatusPassagem status) {
-        this.status = status;
-    }
+    public StatusPassagem getStatus() { return status; }
+    public void setStatus(StatusPassagem status) { this.status = status; }
 
-    // Apenas getters e setters dos identificadores
-    public long getIdViagem() {
-        return idViagem;
-    }
-    public void setIdViagem(long idViagem) {
-        this.idViagem = idViagem;
-    }
+    public long getIdViagem() { return idViagem; }
+    public void setIdViagem(long idViagem) { this.idViagem = idViagem; }
 
-    public long getIdAssento() {
-        return idAssento;
-    }
-    public void setIdAssento(long idAssento) {
-        this.idAssento = idAssento;
-    }
+    public long getIdAssento() { return idAssento; }
+    public void setIdAssento(long idAssento) { this.idAssento = idAssento; }
 
-    public long getIdPassageiro() {
-        return idPassageiro;
-    }
-    public void setIdPassageiro(long idPassageiro) {
-        this.idPassageiro = idPassageiro;
-    }
+    public long getIdPassageiro() { return idPassageiro; }
+    public void setIdPassageiro(long idPassageiro) { this.idPassageiro = idPassageiro; }
 
-    public LocalDate getDataPassagem() {
-        return dataPassagem;
-    }
-    public void setDataPassagem(LocalDate dataPassagem) {
-        this.dataPassagem = dataPassagem;
-    }
+    public LocalDate getDataPassagem() { return dataPassagem; }
+    public void setDataPassagem(LocalDate dataPassagem) { this.dataPassagem = dataPassagem; }
 
-    public LocalTime getHoraPassagem() {
-        return horaPassagem;
-    }
-    public void setHoraPassagem(LocalTime horaPassagem) {
-        this.horaPassagem = horaPassagem;
-    }
+    public LocalTime getHoraPassagem() { return horaPassagem; }
+    public void setHoraPassagem(LocalTime horaPassagem) { this.horaPassagem = horaPassagem; }
 
-    public String getOrigem() {
-        return origem;
-    }
-    public void setOrigem(String origem) {
-        this.origem = origem;
-    }
+    public String getOrigem() { return origem; }
+    public void setOrigem(String origem) { this.origem = origem; }
 
-    public String getDestino() {
-        return destino;
-    }
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
+    public String getDestino() { return destino; }
+    public void setDestino(String destino) { this.destino = destino; }
 
-    public BigDecimal getDistancia() {
-        return distancia;
-    }
-    public void setDistancia(BigDecimal distancia) {
-        this.distancia = distancia;
-    }
+    public BigDecimal getDistancia() { return distancia; }
+    public void setDistancia(BigDecimal distancia) { this.distancia = distancia; }
 
-    public BigDecimal getPreco() {
-        return preco;
-    }
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
-    }
+    public BigDecimal getPreco() { return preco; }
+    public void setPreco(BigDecimal preco) { this.preco = preco; }
+
 }

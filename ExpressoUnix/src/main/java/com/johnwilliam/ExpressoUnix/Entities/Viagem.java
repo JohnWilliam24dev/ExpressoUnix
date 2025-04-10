@@ -1,8 +1,10 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
+
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 public class Viagem {
@@ -12,7 +14,7 @@ public class Viagem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_veiculo",  referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_veiculo", referencedColumnName = "id", insertable = false, updatable = false)
     private Veiculo veiculo;
 
     @Column(name = "id_veiculo", nullable = false)
@@ -30,6 +32,12 @@ public class Viagem {
     @Column(nullable = false, length = 100)
     private String destino;
 
+    @OneToMany(mappedBy = "viagem", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Assento> assentos;
+
+    @OneToMany(mappedBy = "viagem", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Passagem> passagens;
+
     public Viagem() {}
 
     public Viagem(Veiculo veiculo, LocalDate dataViagem, LocalTime horaViagem, String origem, String destino) {
@@ -41,46 +49,23 @@ public class Viagem {
         this.destino = destino;
     }
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    // Apenas getter e setter para o identificador do veículo
-    public long getIdVeiculo() {
-        return idVeiculo;
-    }
-    public void setIdVeiculo(long idVeiculo) {
-        this.idVeiculo = idVeiculo;
-    }
+    public long getIdVeiculo() { return idVeiculo; }
+    public void setIdVeiculo(long idVeiculo) { this.idVeiculo = idVeiculo; }
 
-    public LocalDate getDataViagem() {
-        return dataViagem;
-    }
-    public void setDataViagem(LocalDate dataViagem) {
-        this.dataViagem = dataViagem;
-    }
+    public LocalDate getDataViagem() { return dataViagem; }
+    public void setDataViagem(LocalDate dataViagem) { this.dataViagem = dataViagem; }
 
-    public LocalTime getHoraViagem() {
-        return horaViagem;
-    }
-    public void setHoraViagem(LocalTime horaViagem) {
-        this.horaViagem = horaViagem;
-    }
+    public LocalTime getHoraViagem() { return horaViagem; }
+    public void setHoraViagem(LocalTime horaViagem) { this.horaViagem = horaViagem; }
 
-    public String getOrigem() {
-        return origem;
-    }
-    public void setOrigem(String origem) {
-        this.origem = origem;
-    }
+    public String getOrigem() { return origem; }
+    public void setOrigem(String origem) { this.origem = origem; }
 
-    public String getDestino() {
-        return destino;
-    }
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
+    public String getDestino() { return destino; }
+    public void setDestino(String destino) { this.destino = destino; }
+
+    
 }
