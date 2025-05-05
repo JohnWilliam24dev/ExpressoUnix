@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.johnwilliam.ExpressoUnix.Entities.Veiculo;
+import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.VeiculoJPA;
 
 @Repository
@@ -16,19 +16,19 @@ public class VeiculoRepository {
         this.veiculoJPA = veiculoJPA;
     }
     
-    public void createVeiculo(Veiculo veiculo) {
+    public void createVeiculo(VeiculoModels veiculo) {
         veiculoJPA.save(veiculo);
     }
     
-    public Veiculo getVeiculoById(long id) {
+    public VeiculoModels getVeiculoById(long id) {
         return veiculoJPA.findById(id).get();
     }
     
-    public List<Veiculo> getAllVeiculo() {
+    public List<VeiculoModels> getAllVeiculo() {
         return veiculoJPA.findAll();
     }
     
-    public void updateVeiculo( Veiculo veiculo) {
+    public void updateVeiculo( VeiculoModels veiculo) {
         
         this.veiculoJPA.save(veiculo);
     }

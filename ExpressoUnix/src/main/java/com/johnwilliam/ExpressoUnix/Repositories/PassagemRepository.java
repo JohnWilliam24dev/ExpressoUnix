@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.johnwilliam.ExpressoUnix.Entities.Passagem;
+
+import com.johnwilliam.ExpressoUnix.Models.PassagemModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.PassagemJPA;
 
 @Repository
@@ -16,19 +17,19 @@ public class PassagemRepository {
         this.passagemJPA = passagemJPA;
     }
     
-    public void createPassagem(Passagem passagem) {
+    public void createPassagem(PassagemModels passagem) {
         passagemJPA.save(passagem);
     }
     
-    public Passagem getPassagemById(long id) {
+    public PassagemModels getPassagemById(long id) {
         return passagemJPA.findById(id).get();
     }
     
-    public List<Passagem> getAllPassagem() {
+    public List<PassagemModels> getAllPassagem() {
         return passagemJPA.findAll();
     }
     
-    public void updatePassagem(Passagem passagem) {
+    public void updatePassagem(PassagemModels passagem) {
         
         this.passagemJPA.save(passagem);
     }

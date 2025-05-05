@@ -2,7 +2,8 @@ package com.johnwilliam.ExpressoUnix.Applications;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.johnwilliam.ExpressoUnix.Entities.Venda;
+
+import com.johnwilliam.ExpressoUnix.Models.VendaModels;
 import com.johnwilliam.ExpressoUnix.Repositories.VendaRepository;
 
 @Service
@@ -13,19 +14,19 @@ public class VendaApplication {
         this.vendaRepository = vendaRepository;
     }
     
-    public void createVenda(Venda venda){
+    public void createVenda(VendaModels venda){
         vendaRepository.createVenda(venda);
     }
     
-    public Venda getVendaById(long id) {
+    public VendaModels getVendaById(long id) {
         return vendaRepository.getVendaById(id);
     }
     
-    public List<Venda> getAllVenda() {
+    public List<VendaModels> getAllVenda() {
         return vendaRepository.getAllVenda();
     }
     
-    public void updateVenda( Venda venda) {
+    public void updateVenda( VendaModels venda) {
         vendaRepository.updateVenda( venda);
     }
     

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.johnwilliam.ExpressoUnix.Entities.Funcionario;
+import com.johnwilliam.ExpressoUnix.Models.FuncionarioModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.FuncionarioJPA;
 @Repository
 public class FuncionarioRepository {
@@ -14,16 +14,16 @@ public class FuncionarioRepository {
     public FuncionarioRepository(FuncionarioJPA funcionarioJPA) {
         this.funcionarioJPA = funcionarioJPA;
     }
-    public void createFuncionario(Funcionario funcionario){
+    public void createFuncionario(FuncionarioModels funcionario){
         funcionarioJPA.save(funcionario);
     }
-    public Funcionario getFuncionarioById(long id){
+    public FuncionarioModels getFuncionarioById(long id){
         return funcionarioJPA.findById(id).get();
     }
-    public List<Funcionario> getAllFuncionario(){
+    public List<FuncionarioModels> getAllFuncionario(){
         return funcionarioJPA.findAll();
     }
-    public void updateFuncionario( Funcionario funcionario){
+    public void updateFuncionario( FuncionarioModels funcionario){
        
        this.funcionarioJPA.save(funcionario);
     }

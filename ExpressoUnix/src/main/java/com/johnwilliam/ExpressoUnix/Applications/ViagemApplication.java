@@ -2,7 +2,8 @@ package com.johnwilliam.ExpressoUnix.Applications;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.johnwilliam.ExpressoUnix.Entities.Viagem;
+
+import com.johnwilliam.ExpressoUnix.Models.ViagemModels;
 import com.johnwilliam.ExpressoUnix.Repositories.ViagemRepository;
 
 @Service
@@ -13,19 +14,19 @@ public class ViagemApplication {
         this.viagemRepository = viagemRepository;
     }
     
-    public void createViagem(Viagem viagem){
+    public void createViagem(ViagemModels viagem){
         viagemRepository.createViagem(viagem);
     }
     
-    public Viagem getViagemById(long id) {
+    public ViagemModels getViagemById(long id) {
         return viagemRepository.getViagemById(id);
     }
     
-    public List<Viagem> getAllViagem() {
+    public List<ViagemModels> getAllViagem() {
         return viagemRepository.getAllViagem();
     }
     
-    public void updateViagem(Viagem viagem) {
+    public void updateViagem(ViagemModels viagem) {
         viagemRepository.updateViagem( viagem);
     }
     

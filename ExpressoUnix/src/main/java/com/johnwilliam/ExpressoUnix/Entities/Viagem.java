@@ -1,38 +1,26 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
-
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-
 public class Viagem {
-
     
     private Long id;
-
     
     private Veiculo veiculo;
 
-
     private long idVeiculo;
-
     
     private LocalDate dataViagem;
-
     
     private LocalTime horaViagem;
-
     
     private String origem;
 
-
     private String destino;
-
     
     private List<Assento> assentos;
-
     
     private List<Passagem> passagens;
 

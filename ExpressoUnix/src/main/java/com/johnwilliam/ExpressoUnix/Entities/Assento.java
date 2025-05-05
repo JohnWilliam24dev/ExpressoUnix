@@ -8,21 +8,15 @@ import java.util.List;
 
 public class Assento {
 
-
     private Long id;
 
-    
     private Viagem viagem;
-
     
     private long idViagem;
-
     
     private int numeroAssento;
-
     
     private StatusAssento statusAssento = StatusAssento.Livre;
-
     
     private List<Passagem> passagens;
 

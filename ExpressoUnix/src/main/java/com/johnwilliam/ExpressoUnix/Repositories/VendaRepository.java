@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.johnwilliam.ExpressoUnix.Entities.Venda;
+import com.johnwilliam.ExpressoUnix.Models.VendaModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.VendaJPA;
 
 @Repository
@@ -16,19 +16,19 @@ public class VendaRepository {
         this.vendaJPA = vendaJPA;
     }
     
-    public void createVenda(Venda venda) {
+    public void createVenda(VendaModels venda) {
         vendaJPA.save(venda);
     }
     
-    public Venda getVendaById(long id) {
+    public VendaModels getVendaById(long id) {
         return vendaJPA.findById(id).get();
     }
     
-    public List<Venda> getAllVenda() {
+    public List<VendaModels> getAllVenda() {
         return vendaJPA.findAll();
     }
     
-    public void updateVenda( Venda venda) {
+    public void updateVenda( VendaModels venda) {
         
         this.vendaJPA.save(venda);
     }

@@ -2,7 +2,8 @@ package com.johnwilliam.ExpressoUnix.Applications;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.johnwilliam.ExpressoUnix.Entities.Veiculo;
+
+import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
 import com.johnwilliam.ExpressoUnix.Repositories.VeiculoRepository;
 
 @Service
@@ -13,19 +14,19 @@ public class VeiculoApplication {
         this.veiculoRepository = veiculoRepository;
     }
     
-    public void createVeiculo(Veiculo veiculo){
+    public void createVeiculo(VeiculoModels veiculo){
         veiculoRepository.createVeiculo(veiculo);
     }
     
-    public Veiculo getVeiculoById(long id) {
+    public VeiculoModels getVeiculoById(long id) {
         return veiculoRepository.getVeiculoById(id);
     }
     
-    public List<Veiculo> getAllVeiculo() {
+    public List<VeiculoModels> getAllVeiculo() {
         return veiculoRepository.getAllVeiculo();
     }
     
-    public void updateVeiculo( Veiculo veiculo) {
+    public void updateVeiculo( VeiculoModels veiculo) {
         veiculoRepository.updateVeiculo(veiculo);
     }
     

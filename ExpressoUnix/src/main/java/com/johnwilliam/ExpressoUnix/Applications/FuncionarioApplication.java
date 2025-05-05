@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.johnwilliam.ExpressoUnix.Entities.*;
+
+import com.johnwilliam.ExpressoUnix.Models.FuncionarioModels;
 import com.johnwilliam.ExpressoUnix.Repositories.*;
 
 @Service
@@ -13,16 +14,16 @@ public class FuncionarioApplication {
     public FuncionarioApplication(FuncionarioRepository funcionarioRepository){
         this.funcionarioRepository = funcionarioRepository;
     }
-    public void createFuncionario(Funcionario funcionario){
+    public void createFuncionario(FuncionarioModels funcionario){
         funcionarioRepository.createFuncionario(funcionario);
     }
-    public Funcionario getFuncionarioById(long id) {
+    public FuncionarioModels getFuncionarioById(long id) {
         return funcionarioRepository.getFuncionarioById(id);
     }
-    public List<Funcionario> getAllFuncionario() {
+    public List<FuncionarioModels> getAllFuncionario() {
         return funcionarioRepository.getAllFuncionario();
     }
-    public void updateFuncionario(Funcionario funcionario) {
+    public void updateFuncionario(FuncionarioModels funcionario) {
         funcionarioRepository.updateFuncionario( funcionario);
     }
     public void deleteFuncionario(long id) {

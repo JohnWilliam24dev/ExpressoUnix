@@ -2,7 +2,8 @@ package com.johnwilliam.ExpressoUnix.Applications;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.johnwilliam.ExpressoUnix.Entities.Passageiro;
+
+import com.johnwilliam.ExpressoUnix.Models.PassageiroModels;
 import com.johnwilliam.ExpressoUnix.Repositories.PassageiroRepository;
 
 @Service
@@ -13,19 +14,19 @@ public class PassageiroApplication {
         this.passageiroRepository = passageiroRepository;
     }
     
-    public void createPassageiro(Passageiro passageiro){
+    public void createPassageiro(PassageiroModels passageiro){
         passageiroRepository.createPassageiro(passageiro);
     }
     
-    public Passageiro getPassageiroById(long id) {
+    public PassageiroModels getPassageiroById(long id) {
         return passageiroRepository.getPassageiroById(id);
     }
     
-    public List<Passageiro> getAllPassageiro() {
+    public List<PassageiroModels> getAllPassageiro() {
         return passageiroRepository.getAllPassageiro();
     }
     
-    public void updatePassageiro( Passageiro passageiro) {
+    public void updatePassageiro( PassageiroModels passageiro) {
         passageiroRepository.updatePassageiro( passageiro);
     }
     

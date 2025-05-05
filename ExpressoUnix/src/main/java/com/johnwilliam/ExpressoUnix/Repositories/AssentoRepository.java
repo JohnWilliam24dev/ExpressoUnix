@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.johnwilliam.ExpressoUnix.Entities.Assento;
+
+import com.johnwilliam.ExpressoUnix.Models.AssentoModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.AssentoJPA;
 @Repository
 public class AssentoRepository {
@@ -13,16 +14,16 @@ public class AssentoRepository {
     public AssentoRepository(AssentoJPA assentoJPA) {
         this.assentoJPA = assentoJPA;
     }
-    public void createAssento(Assento assento){
+    public void createAssento(AssentoModels assento){
         assentoJPA.save(assento);
     }
-    public Assento getAssentoById(long id){
+    public AssentoModels getAssentoById(long id){
         return assentoJPA.findById(id).get();
     }
-    public List<Assento> getAllAssento(){
+    public List<AssentoModels> getAllAssento(){
         return assentoJPA.findAll();
     }
-    public void updateAssento( Assento assento){
+    public void updateAssento( AssentoModels assento){
         this.assentoJPA.save(assento);
     }
     public void deleteAssento(long id){

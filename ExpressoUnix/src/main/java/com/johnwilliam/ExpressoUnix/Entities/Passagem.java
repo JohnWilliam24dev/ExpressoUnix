@@ -7,51 +7,35 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
-
-
-
 public class Passagem {
 
-
     private Long id;
-
    
     private StatusPassagem status;
-
     
     private Viagem viagem;
     
     private long idViagem;
-
    
     private Assento assento;
     
     private long idAssento;
-
    
     private Passageiro passageiro;
    
     private long idPassageiro;
-
     
     private LocalDate dataPassagem;
-
    
     private LocalTime horaPassagem;
-
    
     private String origem;
 
-
     private String destino;
-
     
     private BigDecimal distancia;
-
     
     private BigDecimal preco;
-
 
     private List<Venda> vendas;
 

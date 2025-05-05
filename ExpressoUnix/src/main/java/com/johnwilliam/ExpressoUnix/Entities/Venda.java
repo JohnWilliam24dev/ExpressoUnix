@@ -1,24 +1,15 @@
 package com.johnwilliam.ExpressoUnix.Entities;
-
-
-
 import java.time.LocalDateTime;
 
-
-
 public class Venda {
-
     
     private Long id;
-
     
     private LocalDateTime horarioEmissao;
-
     
     private Funcionario funcionario;
     
     private long idFuncionario;
-
    
     private Passagem passagem;
     

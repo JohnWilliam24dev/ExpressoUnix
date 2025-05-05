@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.johnwilliam.ExpressoUnix.Entities.Viagem;
+import com.johnwilliam.ExpressoUnix.Models.ViagemModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.ViagemJPA;
 
 @Repository
@@ -16,19 +16,19 @@ public class ViagemRepository {
         this.viagemJPA = viagemJPA;
     }
     
-    public void createViagem(Viagem viagem) {
+    public void createViagem(ViagemModels viagem) {
         viagemJPA.save(viagem);
     }
     
-    public Viagem getViagemById(long id) {
+    public ViagemModels getViagemById(long id) {
         return viagemJPA.findById(id).get();
     }
     
-    public List<Viagem> getAllViagem() {
+    public List<ViagemModels> getAllViagem() {
         return viagemJPA.findAll();
     }
     
-    public void updateViagem( Viagem viagem) {
+    public void updateViagem( ViagemModels viagem) {
         
         this.viagemJPA.save(viagem);
     }

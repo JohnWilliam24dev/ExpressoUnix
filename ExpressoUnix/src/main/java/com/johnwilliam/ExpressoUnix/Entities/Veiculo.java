@@ -1,26 +1,18 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
-
-
 import java.util.List;
 import com.johnwilliam.ExpressoUnix.Enums.Classe;
 import com.johnwilliam.ExpressoUnix.Enums.StatusVeiculo;
 
-
 public class Veiculo {
-
     
     private Long id;
-
     
     private Classe classe;
-
     
     private int capacidade;
-
     
     private StatusVeiculo statusVeiculo = StatusVeiculo.Disponivel;
-
     
     private List<Viagem> viagens;
 

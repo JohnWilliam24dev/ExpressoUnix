@@ -8,18 +8,13 @@ import java.util.List;
 
 public class Funcionario {
 
-    
     private long id;
-
     
     private String nome;
-
     
     private LocalDate dataNascimento;
-
     
     private String cargo;
-
     
     private List<Venda> vendas;
 
