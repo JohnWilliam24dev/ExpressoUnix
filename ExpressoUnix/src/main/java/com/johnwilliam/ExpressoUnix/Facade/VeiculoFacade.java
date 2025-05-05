@@ -3,7 +3,8 @@ package com.johnwilliam.ExpressoUnix.Facade;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.VeiculoApplication;
-import com.johnwilliam.ExpressoUnix.Entities.Veiculo;
+
+import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
 
 @Component
 public class VeiculoFacade {
@@ -13,19 +14,19 @@ public class VeiculoFacade {
         this.veiculoApplication = veiculoApplication;
     }
     
-    public void createVeiculo(Veiculo veiculo) {
+    public void createVeiculo(VeiculoModels veiculo) {
         veiculoApplication.createVeiculo(veiculo);
     }
     
-    public Veiculo getVeiculoById(long id) {
+    public VeiculoModels getVeiculoById(long id) {
         return veiculoApplication.getVeiculoById(id);
     }
     
-    public List<Veiculo> getAllVeiculo() {
+    public List<VeiculoModels> getAllVeiculo() {
         return veiculoApplication.getAllVeiculo();
     }
     
-    public void updateVeiculo(Veiculo veiculo) {
+    public void updateVeiculo(VeiculoModels veiculo) {
         veiculoApplication.updateVeiculo( veiculo);
     }
     

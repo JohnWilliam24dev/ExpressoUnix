@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.johnwilliam.ExpressoUnix.Entities.Passageiro;
+
 import com.johnwilliam.ExpressoUnix.Facade.PassageiroFacade;
+import com.johnwilliam.ExpressoUnix.Models.PassageiroModels;
 
 @RestController
 @RequestMapping("/passageiro")
@@ -20,22 +21,22 @@ public class PassageiroController {
     }
 
     @PostMapping
-    public void createPassageiro(@RequestBody Passageiro passageiro) {
+    public void createPassageiro(@RequestBody PassageiroModels passageiro) {
         passageiroFacade.createPassageiro(passageiro);
     }
 
     @GetMapping("/{id}")
-    public Passageiro getPassageiroById(@PathVariable long id) {
+    public PassageiroModels getPassageiroById(@PathVariable long id) {
         return passageiroFacade.getPassageiroById(id);
     }
 
     @GetMapping
-    public List<Passageiro> getAllPassageiros() {
+    public List<PassageiroModels> getAllPassageiros() {
         return passageiroFacade.getAllPassageiro();
     }
 
     @PutMapping("/{id}")
-    public void updatePassageiro(@RequestBody Passageiro passageiro) {
+    public void updatePassageiro(@RequestBody PassageiroModels passageiro) {
         passageiroFacade.updatePassageiro(passageiro);
     }
 

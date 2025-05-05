@@ -3,7 +3,8 @@ package com.johnwilliam.ExpressoUnix.Facade;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.PassageiroApplication;
-import com.johnwilliam.ExpressoUnix.Entities.Passageiro;
+
+import com.johnwilliam.ExpressoUnix.Models.PassageiroModels;
 
 @Component
 public class PassageiroFacade {
@@ -13,19 +14,19 @@ public class PassageiroFacade {
         this.passageiroApplication = passageiroApplication;
     }
     
-    public void createPassageiro(Passageiro passageiro) {
+    public void createPassageiro(PassageiroModels passageiro) {
         passageiroApplication.createPassageiro(passageiro);
     }
     
-    public Passageiro getPassageiroById(long id) {
+    public PassageiroModels getPassageiroById(long id) {
         return passageiroApplication.getPassageiroById(id);
     }
     
-    public List<Passageiro> getAllPassageiro() {
+    public List<PassageiroModels> getAllPassageiro() {
         return passageiroApplication.getAllPassageiro();
     }
     
-    public void updatePassageiro( Passageiro passageiro) {
+    public void updatePassageiro( PassageiroModels passageiro) {
         passageiroApplication.updatePassageiro(passageiro);
     }
     

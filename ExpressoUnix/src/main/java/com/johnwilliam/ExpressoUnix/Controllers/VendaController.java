@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.johnwilliam.ExpressoUnix.Entities.Venda;
+
 import com.johnwilliam.ExpressoUnix.Facade.VendaFacade;
+import com.johnwilliam.ExpressoUnix.Models.VendaModels;
 
 @RestController
 @RequestMapping("/venda")
@@ -20,22 +21,22 @@ public class VendaController {
     }
 
     @PostMapping
-    public void createVenda(@RequestBody Venda venda) {
+    public void createVenda(@RequestBody VendaModels venda) {
         vendaFacade.createVenda(venda);
     }
 
     @GetMapping("/{id}")
-    public Venda getVendaById(@PathVariable long id) {
+    public VendaModels getVendaById(@PathVariable long id) {
         return vendaFacade.getVendaById(id);
     }
 
     @GetMapping
-    public List<Venda> getAllVendas() {
+    public List<VendaModels> getAllVendas() {
         return vendaFacade.getAllVenda();
     }
 
     @PutMapping("/{id}")
-    public void updateVenda(@RequestBody Venda venda) {
+    public void updateVenda(@RequestBody VendaModels venda) {
         vendaFacade.updateVenda(venda);
     }
 

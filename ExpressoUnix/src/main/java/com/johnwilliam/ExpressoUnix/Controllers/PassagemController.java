@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.johnwilliam.ExpressoUnix.Entities.Passagem;
+
 import com.johnwilliam.ExpressoUnix.Facade.PassagemFacade;
+import com.johnwilliam.ExpressoUnix.Models.PassagemModels;
 
 @RestController
 @RequestMapping("/passagem")
@@ -20,22 +21,22 @@ public class PassagemController {
     }
 
     @PostMapping
-    public void createPassagem(@RequestBody Passagem passagem) {
+    public void createPassagem(@RequestBody PassagemModels passagem) {
         passagemFacade.createPassagem(passagem);
     }
 
     @GetMapping("/{id}")
-    public Passagem getPassagemById(@PathVariable long id) {
+    public PassagemModels getPassagemById(@PathVariable long id) {
         return passagemFacade.getPassagemById(id);
     }
 
     @GetMapping
-    public List<Passagem> getAllPassagens() {
+    public List<PassagemModels> getAllPassagens() {
         return passagemFacade.getAllPassagem();
     }
 
     @PutMapping("/{id}")
-    public void updatePassagem(@RequestBody Passagem passagem) {
+    public void updatePassagem(@RequestBody PassagemModels passagem) {
         passagemFacade.updatePassagem(passagem);
     }
 

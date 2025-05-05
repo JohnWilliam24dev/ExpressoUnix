@@ -3,7 +3,8 @@ package com.johnwilliam.ExpressoUnix.Facade;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.FuncionarioApplication;
-import com.johnwilliam.ExpressoUnix.Entities.Funcionario;
+
+import com.johnwilliam.ExpressoUnix.Models.FuncionarioModels;
 
 @Component
 public class FuncionarioFacade {
@@ -13,19 +14,19 @@ public class FuncionarioFacade {
         this.funcionarioApplication = funcionarioApplication;
     }
     
-    public void createFuncionario(Funcionario funcionario) {
+    public void createFuncionario(FuncionarioModels funcionario) {
         funcionarioApplication.createFuncionario(funcionario);
     }
     
-    public Funcionario getFuncionarioById(long id) {
+    public FuncionarioModels getFuncionarioById(long id) {
         return funcionarioApplication.getFuncionarioById(id);
     }
     
-    public List<Funcionario> getAllFuncionario() {
+    public List<FuncionarioModels> getAllFuncionario() {
         return funcionarioApplication.getAllFuncionario();
     }
     
-    public void updateFuncionario( Funcionario funcionario) {
+    public void updateFuncionario( FuncionarioModels funcionario) {
         funcionarioApplication.updateFuncionario( funcionario);
     }
     

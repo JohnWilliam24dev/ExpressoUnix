@@ -1,12 +1,10 @@
 package com.johnwilliam.ExpressoUnix.Controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import com.johnwilliam.ExpressoUnix.Entities.Viagem;
 import com.johnwilliam.ExpressoUnix.Facade.ViagemFacade;
+import com.johnwilliam.ExpressoUnix.Models.ViagemModels;
 
 @RestController
 @RequestMapping("/viagem")
@@ -20,22 +18,22 @@ public class ViagemController {
     }
 
     @PostMapping
-    public void createViagem(@RequestBody Viagem viagem) {
+    public void createViagem(@RequestBody ViagemModels viagem) {
         viagemFacade.createViagem(viagem);
     }
 
     @GetMapping("/{id}")
-    public Viagem getViagemById(@PathVariable long id) {
+    public ViagemModels getViagemById(@PathVariable long id) {
         return viagemFacade.getViagemById(id);
     }
 
     @GetMapping
-    public List<Viagem> getAllViagens() {
+    public List<ViagemModels> getAllViagens() {
         return viagemFacade.getAllViagem();
     }
 
     @PutMapping("/{id}")
-    public void updateViagem(@RequestBody Viagem viagem) {
+    public void updateViagem(@RequestBody ViagemModels viagem) {
         viagemFacade.updateViagem(viagem);
     }
 
