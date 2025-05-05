@@ -1,34 +1,33 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
 
-import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
+
 
 public class Passageiro {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long id;
 
-    @Column(nullable = false, length = 150)
+    
     private String nome;
 
-    @Column(nullable = false, length = 150)
+    
     private String email;
 
-    @Column(nullable = false, length = 15)
+    
     private String telefone;
 
-    @Column(nullable = false, length = 11)
+    
     private String cpf;
 
-    @Column(nullable = false)
+    
     private LocalDate dataNascimento;
 
-    @OneToMany(mappedBy = "passageiro", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    
     private List<Passagem> passagens;
 
     public Passageiro() {}

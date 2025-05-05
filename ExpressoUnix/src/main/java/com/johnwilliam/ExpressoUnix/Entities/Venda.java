@@ -1,32 +1,27 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 
-@Entity
+
 
 public class Venda {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long id;
 
-    @CreationTimestamp
-    @Column(nullable = false, updatable = false)
+    
     private LocalDateTime horarioEmissao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_funcionario", referencedColumnName = "id", insertable = false, updatable = false)
+    
     private Funcionario funcionario;
-    @Column(name = "id_funcionario", nullable = false)
+    
     private long idFuncionario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_passagem", referencedColumnName = "id", insertable = false, updatable = false)
+   
     private Passagem passagem;
-    @Column(name = "id_passagem", nullable = false)
+    
     private long idPassagem;
 
     public Venda() {}

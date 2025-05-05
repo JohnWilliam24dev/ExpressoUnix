@@ -2,33 +2,28 @@ package com.johnwilliam.ExpressoUnix.Entities;
 
 
 import com.johnwilliam.ExpressoUnix.Enums.StatusAssento;
-import jakarta.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"id_viagem", "numeroAssento"})})
+
 
 public class Assento {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_viagem", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
+    
     private Viagem viagem;
 
-    @Column(name="id_viagem")
+    
     private long idViagem;
 
-    @Column(nullable = false)
+    
     private int numeroAssento;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    
     private StatusAssento statusAssento = StatusAssento.Livre;
 
-    @OneToMany(mappedBy = "assento", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    
     private List<Passagem> passagens;
 
     public Assento() {}

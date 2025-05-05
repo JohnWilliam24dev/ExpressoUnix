@@ -2,62 +2,57 @@ package com.johnwilliam.ExpressoUnix.Entities;
 
 
 import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
-import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"id_viagem", "id_assento"})})
+
+
 
 public class Passagem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+   
     private StatusPassagem status;
 
-    @ManyToOne
-    @JoinColumn(name = "id_viagem", referencedColumnName = "id", insertable = false, updatable = false)
+    
     private Viagem viagem;
-    @Column(name = "id_viagem", nullable = false)
+    
     private long idViagem;
 
-    @ManyToOne
-    @JoinColumn(name = "id_assento", referencedColumnName = "id", insertable = false, updatable = false)
+   
     private Assento assento;
-    @Column(name = "id_assento", nullable = false)
+    
     private long idAssento;
 
-    @ManyToOne
-    @JoinColumn(name = "id_passageiro", referencedColumnName = "id", insertable = false, updatable = false)
+   
     private Passageiro passageiro;
-    @Column(name = "id_passageiro", nullable = false)
+   
     private long idPassageiro;
 
-    @Column(nullable = false)
+    
     private LocalDate dataPassagem;
 
-    @Column(nullable = false)
+   
     private LocalTime horaPassagem;
 
-    @Column(nullable = false, length = 100)
+   
     private String origem;
 
-    @Column(nullable = false, length = 100)
+
     private String destino;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    
     private BigDecimal distancia;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    
     private BigDecimal preco;
 
-    @OneToMany(mappedBy = "passagem", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+
     private List<Venda> vendas;
 
     public Passagem() {}

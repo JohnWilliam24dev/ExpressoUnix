@@ -1,41 +1,39 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
 
-import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@Entity
+
 public class Viagem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_veiculo", referencedColumnName = "id", insertable = false, updatable = false)
+    
     private Veiculo veiculo;
 
-    @Column(name = "id_veiculo", nullable = false)
+
     private long idVeiculo;
 
-    @Column(nullable = false)
+    
     private LocalDate dataViagem;
 
-    @Column(nullable = false)
+    
     private LocalTime horaViagem;
 
-    @Column(nullable = false, length = 100)
+    
     private String origem;
 
-    @Column(nullable = false, length = 100)
+
     private String destino;
 
-    @OneToMany(mappedBy = "viagem", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    
     private List<Assento> assentos;
 
-    @OneToMany(mappedBy = "viagem", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    
     private List<Passagem> passagens;
 
     public Viagem() {}

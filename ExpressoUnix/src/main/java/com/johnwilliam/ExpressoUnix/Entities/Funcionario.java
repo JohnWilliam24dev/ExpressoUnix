@@ -1,27 +1,26 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
 
-import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
+
 public class Funcionario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private long id;
 
-    @Column(nullable = false)
+    
     private String nome;
 
-    @Column(nullable = false)
+    
     private LocalDate dataNascimento;
 
-    @Column(nullable = false)
+    
     private String cargo;
 
-    @OneToMany(mappedBy = "funcionario", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    
     private List<Venda> vendas;
 
     public Funcionario() {}

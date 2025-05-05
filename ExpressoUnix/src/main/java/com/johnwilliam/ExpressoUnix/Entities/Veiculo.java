@@ -1,30 +1,27 @@
 package com.johnwilliam.ExpressoUnix.Entities;
 
 
-import jakarta.persistence.*;
+
 import java.util.List;
 import com.johnwilliam.ExpressoUnix.Enums.Classe;
 import com.johnwilliam.ExpressoUnix.Enums.StatusVeiculo;
 
-@Entity
+
 public class Veiculo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    
     private Classe classe;
 
-    @Column(nullable = false)
+    
     private int capacidade;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    
     private StatusVeiculo statusVeiculo = StatusVeiculo.Disponivel;
 
-    @OneToMany(mappedBy = "veiculo", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    
     private List<Viagem> viagens;
 
     public Veiculo() {}
