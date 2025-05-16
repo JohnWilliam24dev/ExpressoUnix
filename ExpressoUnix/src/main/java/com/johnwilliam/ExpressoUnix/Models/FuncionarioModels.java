@@ -14,6 +14,15 @@ public class FuncionarioModels {
 
     @Column(nullable = false)
     private String nome;
+    
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String telefone;
+
+    @Column(nullable = false)
+    private String cpf;
 
     @Column(nullable = false)
     private LocalDate dataNascimento;
@@ -26,18 +35,16 @@ public class FuncionarioModels {
 
     public FuncionarioModels() {}
 
-    public FuncionarioModels(String nome, LocalDate dataNascimento, String cargo) {
+    public FuncionarioModels(String nome,String email,String telefone,String cpf, LocalDate dataNascimento, String cargo) {
         this.nome = nome;
+        this.email=email;
+        this.telefone=telefone;
+        this.cpf=cpf;
         this.dataNascimento = dataNascimento;
         this.cargo = cargo;
     }
 
-    public FuncionarioModels(long id, String nome, LocalDate dataNascimento, String cargo) {
-        this.id = id;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.cargo = cargo;
-    }
+    
 
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }

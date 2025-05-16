@@ -16,7 +16,7 @@ public class Veiculo {
     
     private List<Viagem> viagens;
 
-    public Veiculo() {}
+    
 
     public Veiculo(Classe classe, int capacidade, StatusVeiculo statusVeiculo) {
         this.classe = classe;
