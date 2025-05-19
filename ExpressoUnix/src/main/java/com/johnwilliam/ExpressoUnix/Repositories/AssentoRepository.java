@@ -17,6 +17,9 @@ public class AssentoRepository {
     public void createAssento(AssentoModels assento){
         assentoJPA.save(assento);
     }
+    public void createAllAssento(List<AssentoModels> lista_assentos){
+        assentoJPA.saveAll(lista_assentos);
+    }
     public AssentoModels getAssentoById(long id){
         return assentoJPA.findById(id).get();
     }

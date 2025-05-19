@@ -3,6 +3,7 @@ package com.johnwilliam.ExpressoUnix.Applications;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+import com.johnwilliam.ExpressoUnix.Entities.Veiculo;
 import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
 import com.johnwilliam.ExpressoUnix.Repositories.VeiculoRepository;
 
@@ -32,5 +33,13 @@ public class VeiculoApplication {
     
     public void deleteVeiculo(long id) {
         veiculoRepository.deleteVeiculo(id);
+    }
+    public Veiculo transformModelToEntity(VeiculoModels veiculoModels){
+        Veiculo veiculo = new Veiculo();
+        veiculo.setClasse(veiculoModels.getClasse());
+        veiculo.setCapacidade(veiculoModels.getCapacidade());
+        veiculo.setStatusVeiculo(veiculoModels.getStatusVeiculo());
+
+        return veiculo;
     }
 }

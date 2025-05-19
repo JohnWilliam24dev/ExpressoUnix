@@ -12,11 +12,12 @@ public class Veiculo {
     
     private int capacidade;
     
+    
     private StatusVeiculo statusVeiculo = StatusVeiculo.Disponivel;
     
     private List<Viagem> viagens;
 
-    
+    public Veiculo(){}
 
     public Veiculo(Classe classe, int capacidade, StatusVeiculo statusVeiculo) {
         this.classe = classe;
@@ -24,17 +25,35 @@ public class Veiculo {
         this.statusVeiculo = statusVeiculo;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Classe getClasse() {
+        return classe;
+    }
 
-    public Classe getClasse() { return classe; }
-    public void setClasse(Classe classe) { this.classe = classe; }
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+    }
 
-    public int getCapacidade() { return capacidade; }
-    public void setCapacidade(int capacidade) { this.capacidade = capacidade; }
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
 
-    public StatusVeiculo getStatusVeiculo() { return statusVeiculo; }
-    public void setStatusVeiculo(StatusVeiculo statusVeiculo) { this.statusVeiculo = statusVeiculo; }
+    public StatusVeiculo getStatusVeiculo() {
+        return statusVeiculo;
+    }
 
+    public void setStatusVeiculo(StatusVeiculo statusVeiculo) {
+        this.statusVeiculo = statusVeiculo;
+    }
+
+    public void verifyCapacity(){
+        if (capacidade>60 || capacidade<2) {
+            throw new IllegalArgumentException("A capacidade deve ser no maximo 60 assentos");
+        } 
+    }
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    
     
 }

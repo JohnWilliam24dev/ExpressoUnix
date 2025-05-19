@@ -12,8 +12,6 @@ public class Assento {
 
     private Viagem viagem;
     
-    
-    
     private int numeroAssento;
     
     private StatusAssento statusAssento = StatusAssento.Livre;
@@ -29,7 +27,7 @@ public class Assento {
     }
 
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    
 
     public int getNumeroAssento() { return numeroAssento; }
     public void setNumeroAssento(int numeroAssento) { this.numeroAssento = numeroAssento; }
