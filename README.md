@@ -4,6 +4,6 @@ O Expresso Unix consiste em uma API/Backend versátil para qualquer empresa de t
 ## 📚 Documentação
 
 - [Guia-Técnico](Documentação/guia-tecnico.md)
-- [Guia de Uso](docs/guia_uso.md)
+- [Comercial](Documentação/comercial.md)
 - [API](docs/api.md)
 
