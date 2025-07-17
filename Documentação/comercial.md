@@ -93,7 +93,7 @@ Componente central do sistema, responsável por lidar com a lógica principal de
 
 ---
 
-## 🧐 Diferenciais do Sistema
+## Diferenciais do Sistema
 
 - **Unificação total da jornada do passageiro**;
 - **Flexibilidade modular para empresas de qualquer porte**;
