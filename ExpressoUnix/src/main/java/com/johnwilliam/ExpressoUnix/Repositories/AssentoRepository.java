@@ -14,8 +14,13 @@ public class AssentoRepository {
     public AssentoRepository(AssentoJPA assentoJPA) {
         this.assentoJPA = assentoJPA;
     }
+    public void createAssento(List<AssentoModels> assento){
+        assentoJPA.saveAll(assento);
+        
+    }
     public void createAssento(AssentoModels assento){
         assentoJPA.save(assento);
+        
     }
     public void createAllAssento(List<AssentoModels> lista_assentos){
         assentoJPA.saveAll(lista_assentos);

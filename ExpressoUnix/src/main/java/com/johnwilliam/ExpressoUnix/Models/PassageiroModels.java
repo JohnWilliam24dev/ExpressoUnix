@@ -4,7 +4,11 @@ package com.johnwilliam.ExpressoUnix.Models;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 
 public class PassageiroModels {
@@ -59,5 +63,13 @@ public class PassageiroModels {
     public LocalDate getDataNascimento() { return dataNascimento; }
     public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
 
+    public List<PassagemModels> getPassagens() {
+        return passagens;
+    }
+
+    public void setPassagens(List<PassagemModels> passagens) {
+        this.passagens = passagens;
+    }
+    
     
 }

@@ -10,7 +10,7 @@ public class Assento {
 
     private Long id;
 
-    private Viagem viagem;
+    private long viagem;
     
     private int numeroAssento;
     
@@ -18,15 +18,16 @@ public class Assento {
     
     private List<Passagem> passagens;
 
-    
-
-    public Assento(Viagem viagem, int numeroAssento, StatusAssento statusAssento) {
+    public Assento(long id, long viagem, int numeroAssento, StatusAssento statusAssento) {
         this.viagem = viagem;
         this.numeroAssento = numeroAssento;
         this.statusAssento = statusAssento;
     }
 
     public Long getId() { return id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
     
 
     public int getNumeroAssento() { return numeroAssento; }
@@ -34,6 +35,23 @@ public class Assento {
 
     public StatusAssento getStatusAssento() { return statusAssento; }
     public void setStatusAssento(StatusAssento statusAssento) { this.statusAssento = statusAssento; }
+    
+    
 
+    public long getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(long viagem) {
+        this.viagem = viagem;
+    }
+
+    public List<Passagem> getPassagens() {
+        return passagens;
+    }
+
+    public void setPassagens(List<Passagem> passagens) {
+        this.passagens = passagens;
+    }
     
 }

@@ -4,7 +4,11 @@ package com.johnwilliam.ExpressoUnix.Models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 
 public class VendaModels {
@@ -61,4 +65,13 @@ public class VendaModels {
 
     public PassagemModels getPassagem() { return passagem; }
     public void setPassagem(PassagemModels passagem) { this.passagem = passagem; }
+
+    public FuncionarioModels getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(FuncionarioModels funcionario) {
+        this.funcionario = funcionario;
+    }
+    
 }

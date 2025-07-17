@@ -5,7 +5,11 @@ import jakarta.persistence.*;
 import java.util.List;
 import com.johnwilliam.ExpressoUnix.Enums.Classe;
 import com.johnwilliam.ExpressoUnix.Enums.StatusVeiculo;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 public class VeiculoModels {
 
@@ -46,6 +50,14 @@ public class VeiculoModels {
 
     public StatusVeiculo getStatusVeiculo() { return statusVeiculo; }
     public void setStatusVeiculo(StatusVeiculo statusVeiculo) { this.statusVeiculo = statusVeiculo; }
+
+    public List<ViagemModels> getViagens() {
+        return viagens;
+    }
+
+    public void setViagens(List<ViagemModels> viagens) {
+        this.viagens = viagens;
+    }
 
     
 }

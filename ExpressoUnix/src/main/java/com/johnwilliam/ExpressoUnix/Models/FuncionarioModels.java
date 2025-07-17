@@ -4,7 +4,11 @@ package com.johnwilliam.ExpressoUnix.Models;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 public class FuncionarioModels {
 
@@ -27,6 +31,7 @@ public class FuncionarioModels {
     @Column(nullable = false)
     private LocalDate dataNascimento;
 
+    
     @Column(nullable = false)
     private String cargo;
 
@@ -43,7 +48,37 @@ public class FuncionarioModels {
         this.dataNascimento = dataNascimento;
         this.cargo = cargo;
     }
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public List<VendaModels> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<VendaModels> vendas) {
+        this.vendas = vendas;
+    }
     
 
     public long getId() { return id; }

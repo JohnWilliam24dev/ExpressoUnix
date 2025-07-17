@@ -6,7 +6,9 @@ public class Text {
     public Text(String text) {
         this.text = text;
     }
-    
+    public String getValue(){
+        return text;
+    }
     public void setText(String text) {
         this.text = text;
     }

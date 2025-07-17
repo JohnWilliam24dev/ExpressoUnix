@@ -17,7 +17,7 @@ public class AssentoApplication {
         assentoRepository.createAssento(assento);
     }
     public void createAllAssento(List<AssentoModels> lista_AssentoModels){
-        createAllAssento(lista_AssentoModels);
+        assentoRepository.createAllAssento(lista_AssentoModels);
     }
     public AssentoModels getAssentoById(long id) {
         return assentoRepository.getAssentoById(id);

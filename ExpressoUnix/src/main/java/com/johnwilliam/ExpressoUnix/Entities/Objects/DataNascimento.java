@@ -11,6 +11,9 @@ public class DataNascimento {
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
+    public LocalDate getValue(){
+        return dataNascimento;
+    }
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }

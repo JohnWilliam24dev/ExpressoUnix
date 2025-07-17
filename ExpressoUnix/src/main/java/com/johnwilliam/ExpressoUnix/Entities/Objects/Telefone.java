@@ -6,6 +6,10 @@ public class Telefone {
         this.telefone=telefone;
         
     }
+    public String getValue(){
+        return telefone;
+    }
+
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }

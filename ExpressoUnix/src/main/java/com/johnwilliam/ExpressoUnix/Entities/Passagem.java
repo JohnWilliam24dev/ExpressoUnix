@@ -14,11 +14,11 @@ public class Passagem {
    
     private StatusPassagem status;
     
-    private Viagem viagem;
+    private long viagem;
    
-    private Assento assento;
+    private long assento;
    
-    private Passageiro passageiro;
+    private long passageiro;
    
     private LocalDate dataPassagem;
    
@@ -36,7 +36,7 @@ public class Passagem {
 
     
 
-    public Passagem(StatusPassagem status, Viagem viagem, Assento assento, Passageiro passageiro,
+    public Passagem(long id,StatusPassagem status, long viagem, long assento, long passageiro,
                     LocalDate dataPassagem, LocalTime horaPassagem, String origem, String destino,
                     BigDecimal distancia, BigDecimal preco) {
         this.status = status;
@@ -63,10 +63,10 @@ public class Passagem {
     public LocalTime getHoraPassagem() { return horaPassagem; }
     public void setHoraPassagem(LocalTime horaPassagem) { this.horaPassagem = horaPassagem; }
 
-    public String getOrigem() { return origem.toString(); }
+    public Text getOrigem() { return origem; }
     public void setOrigem(String origem) { this.origem.setText(origem);; }
 
-    public String getDestino() { return destino.toString(); }
+    public Text getDestino() { return destino; }
     public void setDestino(String destino) { this.destino.setText(destino); }
 
     public BigDecimal getDistancia() { return distancia; }
@@ -74,5 +74,45 @@ public class Passagem {
 
     public BigDecimal getPreco() { return preco; }
     public void setPreco(BigDecimal preco) { this.preco = preco; }
+
+    public long getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(long viagem) {
+        this.viagem = viagem;
+    }
+
+    public long getAssento() {
+        return assento;
+    }
+
+    public void setAssento(long assento) {
+        this.assento = assento;
+    }
+
+    public long getPassageiro() {
+        return passageiro;
+    }
+
+    public void setPassageiro(long passageiro) {
+        this.passageiro = passageiro;
+    }
+
+    public void setOrigem(Text origem) {
+        this.origem = origem;
+    }
+
+    public void setDestino(Text destino) {
+        this.destino = destino;
+    }
+
+    public List<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
+    }
 
 }

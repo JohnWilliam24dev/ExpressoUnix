@@ -16,8 +16,8 @@ public class ViagemRepository {
         this.viagemJPA = viagemJPA;
     }
     
-    public void createViagem(ViagemModels viagem) {
-        viagemJPA.save(viagem);
+    public ViagemModels createViagem(ViagemModels viagem) {
+        return viagemJPA.save(viagem);
     }
     
     public ViagemModels getViagemById(long id) {

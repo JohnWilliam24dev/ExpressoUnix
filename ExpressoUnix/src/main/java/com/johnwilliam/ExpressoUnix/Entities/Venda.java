@@ -7,16 +7,16 @@ public class Venda {
     
     private LocalDateTime horarioEmissao;
     
-    private Funcionario funcionario;
+    private long funcionario;
     
 
    
-    private Passagem passagem;
+    private long passagem;
     
 
     
 
-    public Venda(Funcionario funcionario, Passagem passagem) {
+    public Venda(long id, long funcionario, long passagem, LocalDateTime horarioEmissao) {
         this.funcionario = funcionario;
         
         this.passagem = passagem;
@@ -24,6 +24,30 @@ public class Venda {
     }
 
    
+
+    public long getFuncionario() {
+        return funcionario;
+    }
+
+
+
+    public void setFuncionario(long funcionario) {
+        this.funcionario = funcionario;
+    }
+
+
+
+    public long getPassagem() {
+        return passagem;
+    }
+
+
+
+    public void setPassagem(long passagem) {
+        this.passagem = passagem;
+    }
+
+
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

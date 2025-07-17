@@ -19,10 +19,27 @@ public class Veiculo {
 
     public Veiculo(){}
 
-    public Veiculo(Classe classe, int capacidade, StatusVeiculo statusVeiculo) {
+    public Veiculo(long id,Classe classe, int capacidade, StatusVeiculo statusVeiculo) {
+        this.id=id;
         this.classe = classe;
         this.capacidade = capacidade;
         this.statusVeiculo = statusVeiculo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Viagem> getViagens() {
+        return viagens;
+    }
+
+    public void setViagens(List<Viagem> viagens) {
+        this.viagens = viagens;
     }
 
     public Classe getClasse() {

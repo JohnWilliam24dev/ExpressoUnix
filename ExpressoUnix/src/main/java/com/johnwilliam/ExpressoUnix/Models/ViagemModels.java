@@ -5,7 +5,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 public class ViagemModels {
 
@@ -66,6 +70,30 @@ public class ViagemModels {
 
     public String getDestino() { return destino; }
     public void setDestino(String destino) { this.destino = destino; }
+
+    public VeiculoModels getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(VeiculoModels veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public List<AssentoModels> getAssentos() {
+        return assentos;
+    }
+
+    public void setAssentos(List<AssentoModels> assentos) {
+        this.assentos = assentos;
+    }
+
+    public List<PassagemModels> getPassagens() {
+        return passagens;
+    }
+
+    public void setPassagens(List<PassagemModels> passagens) {
+        this.passagens = passagens;
+    }
 
     
 }

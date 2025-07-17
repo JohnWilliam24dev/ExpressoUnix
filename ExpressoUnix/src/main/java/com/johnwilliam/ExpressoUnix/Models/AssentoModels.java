@@ -1,13 +1,15 @@
 package com.johnwilliam.ExpressoUnix.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.johnwilliam.ExpressoUnix.Enums.StatusAssento;
 import jakarta.persistence.*;
 import java.util.List;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"id_viagem", "numeroAssento"})})
-
 public class AssentoModels {
 
     @Id
@@ -54,4 +56,13 @@ public class AssentoModels {
 
     public List<PassagemModels> getPassagens() { return passagens; }
     public void setPassagens(List<PassagemModels> passagens) { this.passagens = passagens; }
+
+    public ViagemModels getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(ViagemModels viagem) {
+        this.viagem = viagem;
+    }
+    
 }

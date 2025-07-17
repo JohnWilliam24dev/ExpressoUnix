@@ -7,6 +7,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"id_viagem", "id_assento"})})
@@ -62,16 +67,16 @@ public class PassagemModels {
 
     public PassagemModels() {}
 
-    public PassagemModels(StatusPassagem status, ViagemModels viagem, AssentoModels assento, PassageiroModels passageiro,
+    public PassagemModels(StatusPassagem status, long viagem, long assento, long passageiro,
                     LocalDate dataPassagem, LocalTime horaPassagem, String origem, String destino,
                     BigDecimal distancia, BigDecimal preco) {
         this.status = status;
-        this.viagem = viagem;
-        this.idViagem = (viagem != null) ? viagem.getId() : 0;
-        this.assento = assento;
-        this.idAssento = (assento != null) ? assento.getId() : 0;
-        this.passageiro = passageiro;
-        this.idPassageiro = (passageiro != null) ? passageiro.getId() : 0;
+       
+        this.idViagem = viagem ;
+        
+        this.idAssento = assento ;
+        
+        this.idPassageiro = passageiro;
         this.dataPassagem = dataPassagem;
         this.horaPassagem = horaPassagem;
         this.origem = origem;
@@ -112,5 +117,38 @@ public class PassagemModels {
 
     public BigDecimal getPreco() { return preco; }
     public void setPreco(BigDecimal preco) { this.preco = preco; }
+
+    public ViagemModels getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(ViagemModels viagem) {
+        this.viagem = viagem;
+    }
+
+    public AssentoModels getAssento() {
+        return assento;
+    }
+
+    public void setAssento(AssentoModels assento) {
+        this.assento = assento;
+    }
+
+    public PassageiroModels getPassageiro() {
+        return passageiro;
+    }
+
+    public void setPassageiro(PassageiroModels passageiro) {
+        this.passageiro = passageiro;
+    }
+
+    public List<VendaModels> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<VendaModels> vendas) {
+        this.vendas = vendas;
+    }
+    
 
 }

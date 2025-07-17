@@ -6,14 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.johnwilliam.ExpressoUnix.Entities.Objects.Text;
+import com.johnwilliam.ExpressoUnix.Facade.VeiculoFacade;
 import com.johnwilliam.ExpressoUnix.Models.AssentoModels;
+import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
 
 
 public class Viagem {
     
     private Long id;
     
-    private Veiculo veiculo;
+    
+
+    private VeiculoModels veiculo;
 
     private LocalDate dataViagem;
     
@@ -27,25 +31,34 @@ public class Viagem {
     
     private List<Passagem> passagens;
 
-    public Viagem(){
 
-    }
+   
 
-    public Viagem(Veiculo veiculo, LocalDate dataViagem, LocalTime horaViagem, String origem, String destino) {
+    public Viagem(long id,VeiculoModels veiculo, LocalDate dataViagem, LocalTime horaViagem, String origem, String destino) {
+        this.id=id;
         this.veiculo = veiculo;
         this.dataViagem = dataViagem;
         this.horaViagem = horaViagem;
         this.origem = new Text(origem);
         this.destino = new Text(destino);
+        
     }
     
    
 
-    public Veiculo getVeiculo() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public VeiculoModels getVeiculo() {
         return veiculo;
     }
 
-    public void setVeiculo(Veiculo veiculo) {
+    public void setVeiculo(VeiculoModels veiculo) {
         this.veiculo = veiculo;
     }
 
@@ -81,7 +94,7 @@ public class Viagem {
         this.setDestino(destino);
     }
 
-    public void disponibilizarAssentos(){
+    public List<AssentoModels> disponibilizarAssentos(){
         int capacidade=veiculo.getCapacidade();
         this.assentos= new ArrayList<>();
         for(int i=0;i<=capacidade;i++){
@@ -91,6 +104,7 @@ public class Viagem {
             assentos.add(assento);
 
         }
+        return assentos;
     }
     public List<AssentoModels> getAssentos() {
         return assentos;
