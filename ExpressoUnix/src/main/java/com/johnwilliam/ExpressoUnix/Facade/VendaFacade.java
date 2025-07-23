@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.VendaApplication;
 
-import com.johnwilliam.ExpressoUnix.Models.VendaModels;
+import com.johnwilliam.ExpressoUnix.DTO.VendaDTO;
 
 @Component
 public class VendaFacade {
@@ -14,19 +14,19 @@ public class VendaFacade {
         this.vendaApplication = vendaApplication;
     }
     
-    public void createVenda(VendaModels venda) {
+    public void createVenda(VendaDTO venda) {
         vendaApplication.createVenda(venda);
     }
     
-    public VendaModels getVendaById(long id) {
+    public VendaDTO getVendaById(long id) {
         return vendaApplication.getVendaById(id);
     }
     
-    public List<VendaModels> getAllVenda() {
+    public List<VendaDTO> getAllVenda() {
         return vendaApplication.getAllVenda();
     }
     
-    public void updateVenda(VendaModels venda) {
+    public void updateVenda(VendaDTO venda) {
         vendaApplication.updateVenda( venda);
     }
     

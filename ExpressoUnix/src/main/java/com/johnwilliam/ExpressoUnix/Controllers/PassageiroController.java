@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import com.johnwilliam.ExpressoUnix.Facade.PassageiroFacade;
-import com.johnwilliam.ExpressoUnix.Models.PassageiroModels;
+import com.johnwilliam.ExpressoUnix.DTO.PassageiroDTO;
 
 @RestController
 @RequestMapping("/passageiro")
@@ -21,22 +21,22 @@ public class PassageiroController {
     }
 
     @PostMapping
-    public void createPassageiro(@RequestBody PassageiroModels passageiro) {
+    public void createPassageiro(@RequestBody PassageiroDTO passageiro) {
         passageiroFacade.createPassageiro(passageiro);
     }
 
     @GetMapping("/{id}")
-    public PassageiroModels getPassageiroById(@PathVariable long id) {
+    public PassageiroDTO getPassageiroById(@PathVariable long id) {
         return passageiroFacade.getPassageiroById(id);
     }
 
     @GetMapping
-    public List<PassageiroModels> getAllPassageiros() {
+    public List<PassageiroDTO> getAllPassageiros() {
         return passageiroFacade.getAllPassageiro();
     }
 
     @PutMapping("/{id}")
-    public void updatePassageiro(@RequestBody PassageiroModels passageiro) {
+    public void updatePassageiro(@RequestBody PassageiroDTO passageiro) {
         passageiroFacade.updatePassageiro(passageiro);
     }
 

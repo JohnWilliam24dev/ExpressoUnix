@@ -3,6 +3,10 @@ package com.johnwilliam.ExpressoUnix.Entities;
 
 import com.johnwilliam.ExpressoUnix.Entities.Objects.Text;
 import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
+import com.johnwilliam.ExpressoUnix.Models.AssentoModels;
+import com.johnwilliam.ExpressoUnix.DTO.ViagemDTO;
+import com.johnwilliam.ExpressoUnix.DTO.AssentoDTO;
+import com.johnwilliam.ExpressoUnix.DTO.PassageiroDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,11 +18,11 @@ public class Passagem {
    
     private StatusPassagem status;
     
-    private long viagem;
+    private ViagemDTO viagem;
    
-    private long assento;
+    private AssentoDTO assento;
    
-    private long passageiro;
+    private PassageiroDTO passageiro;
    
     private LocalDate dataPassagem;
    
@@ -36,7 +40,7 @@ public class Passagem {
 
     
 
-    public Passagem(long id,StatusPassagem status, long viagem, long assento, long passageiro,
+    public Passagem(long id, StatusPassagem status, ViagemDTO viagem, AssentoDTO assento, PassageiroDTO passageiro,
                     LocalDate dataPassagem, LocalTime horaPassagem, String origem, String destino,
                     BigDecimal distancia, BigDecimal preco) {
         this.status = status;
@@ -75,27 +79,29 @@ public class Passagem {
     public BigDecimal getPreco() { return preco; }
     public void setPreco(BigDecimal preco) { this.preco = preco; }
 
-    public long getViagem() {
+
+
+    public ViagemDTO getViagem() {
         return viagem;
     }
 
-    public void setViagem(long viagem) {
+    public void setViagem(ViagemDTO viagem) {
         this.viagem = viagem;
     }
 
-    public long getAssento() {
+    public AssentoDTO getAssento() {
         return assento;
     }
 
-    public void setAssento(long assento) {
+    public void setAssento(AssentoDTO assento) {
         this.assento = assento;
     }
 
-    public long getPassageiro() {
+    public PassageiroDTO getPassageiro() {
         return passageiro;
     }
 
-    public void setPassageiro(long passageiro) {
+    public void setPassageiro(PassageiroDTO passageiro) {
         this.passageiro = passageiro;
     }
 

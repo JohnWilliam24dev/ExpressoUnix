@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.FuncionarioApplication;
 
-import com.johnwilliam.ExpressoUnix.Models.FuncionarioModels;
+import com.johnwilliam.ExpressoUnix.DTO.FuncionarioDTO;
 
 @Component
 public class FuncionarioFacade {
@@ -14,19 +14,19 @@ public class FuncionarioFacade {
         this.funcionarioApplication = funcionarioApplication;
     }
     
-    public void createFuncionario(FuncionarioModels funcionario) {
+    public void createFuncionario(FuncionarioDTO funcionario) {
         funcionarioApplication.createFuncionario(funcionario);
     }
     
-    public FuncionarioModels getFuncionarioById(long id) {
+    public FuncionarioDTO getFuncionarioById(long id) {
         return funcionarioApplication.getFuncionarioById(id);
     }
     
-    public List<FuncionarioModels> getAllFuncionario() {
+    public List<FuncionarioDTO> getAllFuncionario() {
         return funcionarioApplication.getAllFuncionario();
     }
     
-    public void updateFuncionario( FuncionarioModels funcionario) {
+    public void updateFuncionario( FuncionarioDTO funcionario) {
         funcionarioApplication.updateFuncionario( funcionario);
     }
     

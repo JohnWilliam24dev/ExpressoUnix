@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import com.johnwilliam.ExpressoUnix.Facade.FuncionarioFacade;
-import com.johnwilliam.ExpressoUnix.Models.FuncionarioModels;
+import com.johnwilliam.ExpressoUnix.DTO.FuncionarioDTO;
 
 @RestController
 @RequestMapping("/funcionario")
@@ -21,22 +21,22 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public void createFuncionario(@RequestBody FuncionarioModels funcionario) {
+    public void createFuncionario(@RequestBody FuncionarioDTO funcionario) {
         funcionarioFacade.createFuncionario(funcionario);
     }
 
     @GetMapping("/{id}")
-    public FuncionarioModels getFuncionarioById(@PathVariable long id) {
+    public FuncionarioDTO getFuncionarioById(@PathVariable long id) {
         return funcionarioFacade.getFuncionarioById(id);
     }
 
     @GetMapping
-    public List<FuncionarioModels> getAllFuncionarios() {
+    public List<FuncionarioDTO> getAllFuncionarios() {
         return funcionarioFacade.getAllFuncionario();
     }
 
     @PutMapping("/{id}")
-    public void updateFuncionario(@RequestBody FuncionarioModels funcionario) {
+    public void updateFuncionario(@RequestBody FuncionarioDTO funcionario) {
         funcionarioFacade.updateFuncionario(funcionario);
     }
 

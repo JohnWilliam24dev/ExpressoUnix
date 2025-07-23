@@ -3,46 +3,50 @@ package com.johnwilliam.ExpressoUnix.Applications;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+
 import com.johnwilliam.ExpressoUnix.Entities.Viagem;
-import com.johnwilliam.ExpressoUnix.Entities.Mappers.ViagemMapper;
-import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
-import com.johnwilliam.ExpressoUnix.Models.ViagemModels;
-import com.johnwilliam.ExpressoUnix.Repositories.AssentoRepository;
-import com.johnwilliam.ExpressoUnix.Repositories.VeiculoRepository;
+import com.johnwilliam.ExpressoUnix.Mappers.ViagemMapper;
+
+import com.johnwilliam.ExpressoUnix.DTO.ViagemDTO;
+
 import com.johnwilliam.ExpressoUnix.Repositories.ViagemRepository;
 
 @Service
 public class ViagemApplication {
     private ViagemRepository viagemRepository;
-    private VeiculoRepository veiculoRepository;
-    private AssentoRepository assentoRepository;
-    public ViagemApplication(ViagemRepository viagemRepository,VeiculoRepository veiculoRepository, AssentoRepository assentoRepository){
+    private AssentoApplication assentoApplication;
+    private ViagemMapper viagemMapper;
+    
+    public ViagemApplication(ViagemRepository viagemRepository, ViagemMapper viagemMapper,AssentoApplication assentoApplication){
         this.viagemRepository = viagemRepository;
-        this.veiculoRepository=veiculoRepository;
-        this.assentoRepository=assentoRepository;
+        this.viagemMapper=viagemMapper;
+        this.assentoApplication=assentoApplication;
+        
     }
     
-    public void createViagem(ViagemModels viagemModel){
+    public void createViagem(ViagemDTO viagemDTO){
+        Viagem entity= viagemMapper.DTOtoEntity(viagemDTO);
+        viagemRepository.createViagem(viagemMapper.entityToModel(entity));
+
         
-        ViagemModels viagemCriada=viagemRepository.createViagem(viagemModel);
-        VeiculoModels veiculo=veiculoRepository.getVeiculoById(viagemCriada.getIdVeiculo());
-        Viagem viagem= ViagemMapper.toEntity(viagemCriada,veiculo);
-        assentoRepository.createAssento(viagem.disponibilizarAssentos());
+        assentoApplication.createAllAssento(entity.disponibilizarAssentos());
         
 
         
     }
     
-    public ViagemModels getViagemById(long id) {
-        return viagemRepository.getViagemById(id);
+    public ViagemDTO getViagemById(long id) {
+
+        return viagemMapper.modelToDTO(viagemRepository.getViagemById(id)); 
     }
     
-    public List<ViagemModels> getAllViagem() {
-        return viagemRepository.getAllViagem();
+    public List<ViagemDTO> getAllViagem() {
+        return viagemMapper.modelToDTOList(viagemRepository.getAllViagem());
     }
     
-    public void updateViagem(ViagemModels viagem) {
-        viagemRepository.updateViagem( viagem);
+    public void updateViagem(ViagemDTO viagem) {
+        Viagem entity= viagemMapper.DTOtoEntity(viagem);
+        viagemRepository.updateViagem( viagemMapper.entityToModel(entity));
     }
     
     public void deleteViagem(long id) {

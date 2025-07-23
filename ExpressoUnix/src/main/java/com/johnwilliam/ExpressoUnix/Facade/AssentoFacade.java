@@ -3,8 +3,8 @@ package com.johnwilliam.ExpressoUnix.Facade;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.AssentoApplication;
+import com.johnwilliam.ExpressoUnix.DTO.AssentoDTO;
 
-import com.johnwilliam.ExpressoUnix.Models.AssentoModels;
 
 @Component
 public class AssentoFacade {
@@ -14,19 +14,19 @@ public class AssentoFacade {
         this.assentoApplication = assentoApplication;
     }
     
-    public void createAssento(AssentoModels assento) {
+    public void createAssento(AssentoDTO assento) {
         assentoApplication.createAssento(assento);
     }
     
-    public AssentoModels getAssentoById(long id) {
+    public AssentoDTO getAssentoById(long id) {
         return assentoApplication.getAssentoById(id);
     }
     
-    public List<AssentoModels> getAllAssento() {
+    public List<AssentoDTO> getAllAssento() {
         return assentoApplication.getAllAssento();
     }
     
-    public void updateAssento( AssentoModels assento) {
+    public void updateAssento( AssentoDTO assento) {
         assentoApplication.updateAssento( assento);
     }
     

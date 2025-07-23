@@ -6,18 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.johnwilliam.ExpressoUnix.Entities.Objects.Text;
-import com.johnwilliam.ExpressoUnix.Facade.VeiculoFacade;
 import com.johnwilliam.ExpressoUnix.Models.AssentoModels;
-import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
+import com.johnwilliam.ExpressoUnix.DTO.VeiculoDTO;
 
 
 public class Viagem {
     
     private Long id;
     
-    
-
-    private VeiculoModels veiculo;
+    private VeiculoDTO veiculo;
 
     private LocalDate dataViagem;
     
@@ -34,7 +31,7 @@ public class Viagem {
 
    
 
-    public Viagem(long id,VeiculoModels veiculo, LocalDate dataViagem, LocalTime horaViagem, String origem, String destino) {
+    public Viagem(long id, VeiculoDTO veiculo, LocalDate dataViagem, LocalTime horaViagem, String origem, String destino) {
         this.id=id;
         this.veiculo = veiculo;
         this.dataViagem = dataViagem;
@@ -54,11 +51,11 @@ public class Viagem {
         this.id = id;
     }
 
-    public VeiculoModels getVeiculo() {
+    public VeiculoDTO getVeiculo() {
         return veiculo;
     }
 
-    public void setVeiculo(VeiculoModels veiculo) {
+    public void setVeiculo(VeiculoDTO veiculo) {
         this.veiculo = veiculo;
     }
 

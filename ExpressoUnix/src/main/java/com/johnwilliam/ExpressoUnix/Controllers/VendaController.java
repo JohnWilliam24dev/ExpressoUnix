@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import com.johnwilliam.ExpressoUnix.Facade.VendaFacade;
-import com.johnwilliam.ExpressoUnix.Models.VendaModels;
+import com.johnwilliam.ExpressoUnix.DTO.VendaDTO;
 
 @RestController
 @RequestMapping("/venda")
@@ -21,22 +21,22 @@ public class VendaController {
     }
 
     @PostMapping
-    public void createVenda(@RequestBody VendaModels venda) {
+    public void createVenda(@RequestBody VendaDTO venda) {
         vendaFacade.createVenda(venda);
     }
 
     @GetMapping("/{id}")
-    public VendaModels getVendaById(@PathVariable long id) {
+    public VendaDTO getVendaById(@PathVariable long id) {
         return vendaFacade.getVendaById(id);
     }
 
     @GetMapping
-    public List<VendaModels> getAllVendas() {
+    public List<VendaDTO> getAllVendas() {
         return vendaFacade.getAllVenda();
     }
 
     @PutMapping("/{id}")
-    public void updateVenda(@RequestBody VendaModels venda) {
+    public void updateVenda(@RequestBody VendaDTO venda) {
         vendaFacade.updateVenda(venda);
     }
 

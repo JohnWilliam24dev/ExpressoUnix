@@ -1,6 +1,7 @@
 package com.johnwilliam.ExpressoUnix.Models;
 
 
+
 import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
 import jakarta.persistence.*;
 import java.math.BigDecimal;

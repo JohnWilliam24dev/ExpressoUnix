@@ -4,42 +4,40 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.johnwilliam.ExpressoUnix.Entities.Veiculo;
-import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
+import com.johnwilliam.ExpressoUnix.Mappers.VeiculoMapper;
+import com.johnwilliam.ExpressoUnix.DTO.VeiculoDTO;
 import com.johnwilliam.ExpressoUnix.Repositories.VeiculoRepository;
 
 @Service
 public class VeiculoApplication {
     private VeiculoRepository veiculoRepository;
+    private VeiculoMapper veiculoMapper;
     
-    public VeiculoApplication(VeiculoRepository veiculoRepository){
+    public VeiculoApplication(VeiculoRepository veiculoRepository, VeiculoMapper veiculoMapper){
         this.veiculoRepository = veiculoRepository;
+        this.veiculoMapper=veiculoMapper;
     }
     
-    public void createVeiculo(VeiculoModels veiculo){
-        veiculoRepository.createVeiculo(veiculo);
+    public void createVeiculo(VeiculoDTO veiculo){
+        Veiculo entity= veiculoMapper.DTOtoEntity(veiculo);
+        veiculoRepository.createVeiculo(veiculoMapper.entityToModel(entity));
     }
     
-    public VeiculoModels getVeiculoById(long id) {
-        return veiculoRepository.getVeiculoById(id);
+    public VeiculoDTO getVeiculoById(long id) {
+        return veiculoMapper.modelToDTO(veiculoRepository.getVeiculoById(id)); 
     }
     
-    public List<VeiculoModels> getAllVeiculo() {
-        return veiculoRepository.getAllVeiculo();
+    public List<VeiculoDTO> getAllVeiculo() {
+        return veiculoMapper.modelToDTOList(veiculoRepository.getAllVeiculo()); 
     }
     
-    public void updateVeiculo( VeiculoModels veiculo) {
-        veiculoRepository.updateVeiculo(veiculo);
+    public void updateVeiculo( VeiculoDTO veiculo) {
+        Veiculo entity= veiculoMapper.DTOtoEntity(veiculo);
+        veiculoRepository.updateVeiculo(veiculoMapper.entityToModel(entity));
     }
     
     public void deleteVeiculo(long id) {
         veiculoRepository.deleteVeiculo(id);
     }
-    public Veiculo transformModelToEntity(VeiculoModels veiculoModels){
-        Veiculo veiculo = new Veiculo();
-        veiculo.setClasse(veiculoModels.getClasse());
-        veiculo.setCapacidade(veiculoModels.getCapacidade());
-        veiculo.setStatusVeiculo(veiculoModels.getStatusVeiculo());
-
-        return veiculo;
-    }
+    
 }

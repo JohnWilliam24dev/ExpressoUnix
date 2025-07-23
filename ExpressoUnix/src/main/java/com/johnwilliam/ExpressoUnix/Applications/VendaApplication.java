@@ -3,31 +3,37 @@ package com.johnwilliam.ExpressoUnix.Applications;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-import com.johnwilliam.ExpressoUnix.Models.VendaModels;
+import com.johnwilliam.ExpressoUnix.DTO.VendaDTO;
+import com.johnwilliam.ExpressoUnix.Entities.Venda;
+import com.johnwilliam.ExpressoUnix.Mappers.VendaMapper;
 import com.johnwilliam.ExpressoUnix.Repositories.VendaRepository;
 
 @Service
 public class VendaApplication {
     private VendaRepository vendaRepository;
+    private VendaMapper vendaMapper;
     
-    public VendaApplication(VendaRepository vendaRepository){
+    public VendaApplication(VendaRepository vendaRepository, VendaMapper vendaMapper){
         this.vendaRepository = vendaRepository;
+        this.vendaMapper= vendaMapper;
     }
     
-    public void createVenda(VendaModels venda){
-        vendaRepository.createVenda(venda);
+    public void createVenda(VendaDTO venda){
+        Venda entity= vendaMapper.DTOtoEntity(venda);
+        vendaRepository.createVenda(vendaMapper.entityToModel(entity));
     }
     
-    public VendaModels getVendaById(long id) {
-        return vendaRepository.getVendaById(id);
+    public VendaDTO getVendaById(long id) {
+        return vendaMapper.modelToDTO(vendaRepository.getVendaById(id)); 
     }
     
-    public List<VendaModels> getAllVenda() {
-        return vendaRepository.getAllVenda();
+    public List<VendaDTO> getAllVenda() {
+        return vendaMapper.modelToDTOList(vendaRepository.getAllVenda()); 
     }
     
-    public void updateVenda( VendaModels venda) {
-        vendaRepository.updateVenda( venda);
+    public void updateVenda( VendaDTO venda) {
+        Venda entity= vendaMapper.DTOtoEntity(venda);
+        vendaRepository.updateVenda( vendaMapper.entityToModel(entity));
     }
     
     public void deleteVenda(long id) {

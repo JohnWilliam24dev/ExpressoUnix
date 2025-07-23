@@ -3,7 +3,7 @@ package com.johnwilliam.ExpressoUnix.Facade;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.ViagemApplication;
-import com.johnwilliam.ExpressoUnix.Models.ViagemModels;
+import com.johnwilliam.ExpressoUnix.DTO.ViagemDTO;
 
 @Component
 public class ViagemFacade {
@@ -13,19 +13,19 @@ public class ViagemFacade {
         this.viagemApplication = viagemApplication;
     }
     
-    public void createViagem(ViagemModels viagem) {
+    public void createViagem(ViagemDTO viagem) {
         viagemApplication.createViagem(viagem);
     }
     
-    public ViagemModels getViagemById(long id) {
+    public ViagemDTO getViagemById(long id) {
         return viagemApplication.getViagemById(id);
     }
     
-    public List<ViagemModels> getAllViagem() {
+    public List<ViagemDTO> getAllViagem() {
         return viagemApplication.getAllViagem();
     }
     
-    public void updateViagem(ViagemModels viagem) {
+    public void updateViagem(ViagemDTO viagem) {
         viagemApplication.updateViagem(viagem);
     }
     

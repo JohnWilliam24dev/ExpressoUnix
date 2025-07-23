@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.PassageiroApplication;
 
-import com.johnwilliam.ExpressoUnix.Models.PassageiroModels;
+import com.johnwilliam.ExpressoUnix.DTO.PassageiroDTO;
 
 @Component
 public class PassageiroFacade {
@@ -14,19 +14,19 @@ public class PassageiroFacade {
         this.passageiroApplication = passageiroApplication;
     }
     
-    public void createPassageiro(PassageiroModels passageiro) {
+    public void createPassageiro(PassageiroDTO passageiro) {
         passageiroApplication.createPassageiro(passageiro);
     }
     
-    public PassageiroModels getPassageiroById(long id) {
+    public PassageiroDTO getPassageiroById(long id) {
         return passageiroApplication.getPassageiroById(id);
     }
     
-    public List<PassageiroModels> getAllPassageiro() {
+    public List<PassageiroDTO> getAllPassageiro() {
         return passageiroApplication.getAllPassageiro();
     }
     
-    public void updatePassageiro( PassageiroModels passageiro) {
+    public void updatePassageiro( PassageiroDTO passageiro) {
         passageiroApplication.updatePassageiro(passageiro);
     }
     

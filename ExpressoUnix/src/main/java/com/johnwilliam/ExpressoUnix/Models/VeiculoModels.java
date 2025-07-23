@@ -3,6 +3,8 @@ package com.johnwilliam.ExpressoUnix.Models;
 
 import jakarta.persistence.*;
 import java.util.List;
+
+
 import com.johnwilliam.ExpressoUnix.Enums.Classe;
 import com.johnwilliam.ExpressoUnix.Enums.StatusVeiculo;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

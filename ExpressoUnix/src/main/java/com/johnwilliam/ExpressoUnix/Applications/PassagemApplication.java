@@ -3,31 +3,38 @@ package com.johnwilliam.ExpressoUnix.Applications;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-import com.johnwilliam.ExpressoUnix.Models.PassagemModels;
+import com.johnwilliam.ExpressoUnix.DTO.PassagemDTO;
+import com.johnwilliam.ExpressoUnix.Entities.Passagem;
+import com.johnwilliam.ExpressoUnix.Mappers.PassagemMapper;
 import com.johnwilliam.ExpressoUnix.Repositories.PassagemRepository;
 
 @Service
 public class PassagemApplication {
     private PassagemRepository passagemRepository;
+    private PassagemMapper passagemMapper;
     
-    public PassagemApplication(PassagemRepository passagemRepository){
+    public PassagemApplication(PassagemRepository passagemRepository,PassagemMapper passagemMapper){
         this.passagemRepository = passagemRepository;
+        this.passagemMapper= passagemMapper;
     }
     
-    public void createPassagem(PassagemModels passagem){
-        passagemRepository.createPassagem(passagem);
+    public void createPassagem(PassagemDTO passagem){
+        Passagem entity = passagemMapper.DTOtoEntity(passagem);
+        passagemRepository.createPassagem(passagemMapper.entityToModel(entity));
     }
     
-    public PassagemModels getPassagemById(long id) {
-        return passagemRepository.getPassagemById(id);
+    public PassagemDTO getPassagemById(long id) {
+
+        return passagemMapper.modelToDTO(passagemRepository.getPassagemById(id)); 
     }
     
-    public List<PassagemModels> getAllPassagem() {
-        return passagemRepository.getAllPassagem();
+    public List<PassagemDTO> getAllPassagem() {
+        return passagemMapper.modelToDTOList(passagemRepository.getAllPassagem()); 
     }
     
-    public void updatePassagem( PassagemModels passagem) {
-        passagemRepository.updatePassagem( passagem);
+    public void updatePassagem( PassagemDTO passagem) {
+        Passagem entity = passagemMapper.DTOtoEntity(passagem);
+        passagemRepository.updatePassagem( passagemMapper.entityToModel(entity));
     }
     
     public void deletePassagem(long id) {

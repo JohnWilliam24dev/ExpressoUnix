@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
+import com.johnwilliam.ExpressoUnix.DTO.AssentoDTO;
 import com.johnwilliam.ExpressoUnix.Facade.AssentoFacade;
-import com.johnwilliam.ExpressoUnix.Models.AssentoModels;
+
 
 @RestController
 @RequestMapping("/assento")
@@ -21,22 +21,22 @@ public class AssentoController {
     }
 
     @PostMapping
-    public void createAssento(@RequestBody AssentoModels assento) {
+    public void createAssento(@RequestBody AssentoDTO assento) {
         assentoFacade.createAssento(assento);
     }
 
     @GetMapping("/{id}")
-    public AssentoModels getAssentoById(@PathVariable long id) {
+    public AssentoDTO getAssentoById(@PathVariable long id) {
         return assentoFacade.getAssentoById(id);
     }
 
     @GetMapping
-    public List<AssentoModels> getAllAssentos() {
+    public List<AssentoDTO> getAllAssentos() {
         return assentoFacade.getAllAssento();
     }
 
     @PutMapping("/{id}")
-    public void updateAssento(@RequestBody AssentoModels assento) {
+    public void updateAssento(@RequestBody AssentoDTO assento) {
         assentoFacade.updateAssento( assento);
     }
 

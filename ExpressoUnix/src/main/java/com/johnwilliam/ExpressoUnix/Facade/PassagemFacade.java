@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.PassagemApplication;
 
-import com.johnwilliam.ExpressoUnix.Models.PassagemModels;
+import com.johnwilliam.ExpressoUnix.DTO.PassagemDTO;
 
 @Component
 public class PassagemFacade {
@@ -14,19 +14,19 @@ public class PassagemFacade {
         this.passagemApplication = passagemApplication;
     }
     
-    public void createPassagem(PassagemModels passagem) {
+    public void createPassagem(PassagemDTO passagem) {
         passagemApplication.createPassagem(passagem);
     }
     
-    public PassagemModels getPassagemById(long id) {
+    public PassagemDTO getPassagemById(long id) {
         return passagemApplication.getPassagemById(id);
     }
     
-    public List<PassagemModels> getAllPassagem() {
+    public List<PassagemDTO> getAllPassagem() {
         return passagemApplication.getAllPassagem();
     }
     
-    public void updatePassagem(PassagemModels passagem) {
+    public void updatePassagem(PassagemDTO passagem) {
         passagemApplication.updatePassagem( passagem);
     }
     

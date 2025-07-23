@@ -1,44 +1,20 @@
-package com.johnwilliam.ExpressoUnix.Models;
+package com.johnwilliam.ExpressoUnix.DTO;
 
-
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
-
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Entity
-
-public class PassageiroModels {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PassageiroDTO {
     private Long id;
-
-    @Column(nullable = false, length = 150)
     private String nome;
-
-    @Column(nullable = false, length = 150)
     private String email;
-
-    @Column(nullable = false, length = 15)
     private String telefone;
-
-    @Column(nullable = false, length = 11)
     private String cpf;
-
-    @Column(nullable = false)
     private LocalDate dataNascimento;
+    private List<PassagemDTO> passagens;
 
-    @OneToMany(mappedBy = "passageiro", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private List<PassagemModels> passagens;
+    public PassageiroDTO() {}
 
-    public PassageiroModels() {}
-
-    public PassageiroModels(String nome, String email, String telefone, String cpf, LocalDate dataNascimento) {
+    public PassageiroDTO(String nome, String email, String telefone, String cpf, LocalDate dataNascimento) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -64,13 +40,6 @@ public class PassageiroModels {
     public LocalDate getDataNascimento() { return dataNascimento; }
     public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
 
-    public List<PassagemModels> getPassagens() {
-        return passagens;
-    }
-
-    public void setPassagens(List<PassagemModels> passagens) {
-        this.passagens = passagens;
-    }
-    
-    
+    public List<PassagemDTO> getPassagens() { return passagens; }
+    public void setPassagens(List<PassagemDTO> passagens) { this.passagens = passagens; }
 }

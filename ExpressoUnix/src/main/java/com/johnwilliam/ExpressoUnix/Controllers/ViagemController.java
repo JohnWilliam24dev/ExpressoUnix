@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.johnwilliam.ExpressoUnix.Facade.ViagemFacade;
-import com.johnwilliam.ExpressoUnix.Models.ViagemModels;
+import com.johnwilliam.ExpressoUnix.DTO.ViagemDTO;
 
 @RestController
 @RequestMapping("/viagem")
@@ -18,22 +18,22 @@ public class ViagemController {
     }
 
     @PostMapping
-    public void createViagem(@RequestBody ViagemModels viagem) {
+    public void createViagem(@RequestBody ViagemDTO viagem) {
         viagemFacade.createViagem(viagem);
     }
 
     @GetMapping("/{id}")
-    public ViagemModels getViagemById(@PathVariable long id) {
+    public ViagemDTO getViagemById(@PathVariable long id) {
         return viagemFacade.getViagemById(id);
     }
 
     @GetMapping
-    public List<ViagemModels> getAllViagens() {
+    public List<ViagemDTO> getAllViagens() {
         return viagemFacade.getAllViagem();
     }
 
     @PutMapping("/{id}")
-    public void updateViagem(@RequestBody ViagemModels viagem) {
+    public void updateViagem(@RequestBody ViagemDTO viagem) {
         viagemFacade.updateViagem(viagem);
     }
 

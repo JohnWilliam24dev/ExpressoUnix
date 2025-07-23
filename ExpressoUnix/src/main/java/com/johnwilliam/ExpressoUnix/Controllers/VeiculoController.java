@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import com.johnwilliam.ExpressoUnix.Facade.VeiculoFacade;
-import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
+import com.johnwilliam.ExpressoUnix.DTO.VeiculoDTO;
 
 @RestController
 @RequestMapping("/veiculo")
@@ -21,22 +21,22 @@ public class VeiculoController {
     }
 
     @PostMapping
-    public void createVeiculo(@RequestBody VeiculoModels veiculo) {
+    public void createVeiculo(@RequestBody VeiculoDTO veiculo) {
         veiculoFacade.createVeiculo(veiculo);
     }
 
     @GetMapping("/{id}")
-    public VeiculoModels getVeiculoById(@PathVariable long id) {
+    public VeiculoDTO getVeiculoById(@PathVariable long id) {
         return veiculoFacade.getVeiculoById(id);
     }
 
     @GetMapping
-    public List<VeiculoModels> getAllVeiculos() {
+    public List<VeiculoDTO> getAllVeiculos() {
         return veiculoFacade.getAllVeiculo();
     }
 
     @PutMapping("/{id}")
-    public void updateVeiculo(@RequestBody VeiculoModels veiculo) {
+    public void updateVeiculo(@RequestBody VeiculoDTO veiculo) {
         veiculoFacade.updateVeiculo(veiculo);
     }
 

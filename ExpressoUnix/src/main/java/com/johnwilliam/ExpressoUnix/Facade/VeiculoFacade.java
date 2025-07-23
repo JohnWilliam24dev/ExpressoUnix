@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.johnwilliam.ExpressoUnix.Applications.VeiculoApplication;
 
-import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
+import com.johnwilliam.ExpressoUnix.DTO.VeiculoDTO;
 
 @Component
 public class VeiculoFacade {
@@ -14,19 +14,19 @@ public class VeiculoFacade {
         this.veiculoApplication = veiculoApplication;
     }
     
-    public void createVeiculo(VeiculoModels veiculo) {
+    public void createVeiculo(VeiculoDTO veiculo) {
         veiculoApplication.createVeiculo(veiculo);
     }
     
-    public VeiculoModels getVeiculoById(long id) {
+    public VeiculoDTO getVeiculoById(long id) {
         return veiculoApplication.getVeiculoById(id);
     }
     
-    public List<VeiculoModels> getAllVeiculo() {
+    public List<VeiculoDTO> getAllVeiculo() {
         return veiculoApplication.getAllVeiculo();
     }
     
-    public void updateVeiculo(VeiculoModels veiculo) {
+    public void updateVeiculo(VeiculoDTO veiculo) {
         veiculoApplication.updateVeiculo( veiculo);
     }
     
