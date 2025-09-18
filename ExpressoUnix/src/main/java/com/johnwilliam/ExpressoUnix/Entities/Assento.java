@@ -23,6 +23,11 @@ public class Assento {
         this.numeroAssento = numeroAssento;
         this.statusAssento = statusAssento;
     }
+    public Assento( long viagem, int numeroAssento, StatusAssento statusAssento) {
+        this.viagem = viagem;
+        this.numeroAssento = numeroAssento;
+        this.statusAssento = statusAssento;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) {

@@ -15,12 +15,21 @@ import com.johnwilliam.ExpressoUnix.Entities.Assento;
 public class AssentoMapper {
 
     public Assento DTOtoEntity(AssentoDTO DTO) {
-        return new Assento(
+        if (DTO.getId()==null) {
+            return new Assento(
+            DTO.getIdViagem(),
+            DTO.getNumeroAssento(),
+            DTO.getStatusAssento()
+        );
+        } else {
+            return new Assento(
             DTO.getId(),
             DTO.getIdViagem(),
             DTO.getNumeroAssento(),
             DTO.getStatusAssento()
         );
+        }
+        
     }
     public Assento modeltoEntity(AssentoModels model) {
         return new Assento(
@@ -32,7 +41,10 @@ public class AssentoMapper {
     }
     public AssentoModels entityToModel(Assento entity) {
         AssentoModels model = new AssentoModels();
-        model.setId(entity.getId());
+        if (entity.getId()!=null) {
+            model.setId(entity.getId());
+        }
+        
         model.setIdViagem(entity.getViagem());
         model.setNumeroAssento(entity.getNumeroAssento());
         model.setStatusAssento(entity.getStatusAssento());

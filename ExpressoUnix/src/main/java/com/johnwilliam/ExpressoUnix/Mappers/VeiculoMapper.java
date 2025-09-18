@@ -14,17 +14,19 @@ import com.johnwilliam.ExpressoUnix.Models.VeiculoModels;
 public class VeiculoMapper {
 
     public Veiculo DTOtoEntity(VeiculoDTO dto) {
-        return new Veiculo(
-            dto.getId(),
-            dto.getClasse(),
-            dto.getCapacidade(),
-            dto.getStatusVeiculo()
-        );
+        if (dto.getId() == null) {
+        return new Veiculo(dto.getClasse(), dto.getCapacidade(), dto.getStatusVeiculo());
+    } else {
+        return new Veiculo(dto.getId(), dto.getClasse(), dto.getCapacidade(), dto.getStatusVeiculo());
+    }
+        
     }
 
     public VeiculoModels entityToModel(Veiculo entity) {
         VeiculoModels model = new VeiculoModels();
-        model.setId(entity.getId());
+        if (entity.getId()!=null) {
+            model.setId(entity.getId());
+        }
         model.setClasse(entity.getClasse());
         model.setCapacidade(entity.getCapacidade());
         model.setStatusVeiculo(entity.getStatusVeiculo());

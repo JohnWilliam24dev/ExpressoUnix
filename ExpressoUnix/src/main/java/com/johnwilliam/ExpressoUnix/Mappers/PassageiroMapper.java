@@ -13,7 +13,16 @@ import java.util.stream.Collectors;
 public class PassageiroMapper {
 
     public Passageiro DTOtoEntity(PassageiroDTO dto) {
-        return new Passageiro(
+        if (dto.getId()==null) {
+            return new Passageiro(
+            dto.getNome(),
+            dto.getEmail(),
+            dto.getTelefone(),
+            dto.getCpf(),
+            dto.getDataNascimento()
+        );
+        } else {
+            return new Passageiro(
             dto.getId(),
             dto.getNome(),
             dto.getEmail(),
@@ -21,6 +30,8 @@ public class PassageiroMapper {
             dto.getCpf(),
             dto.getDataNascimento()
         );
+        }
+        
     }
 
     public Passageiro modelToEntity(PassageiroModels model) {
@@ -36,7 +47,10 @@ public class PassageiroMapper {
 
     public PassageiroModels entityToModel(Passageiro entity) {
         PassageiroModels model = new PassageiroModels();
-        model.setId(entity.getId());
+        if (entity.getId()!=null) {
+            model.setId(entity.getId());
+        }
+        
         model.setNome(entity.getNome().getValue());
         model.setEmail(entity.getEmail().getValue());
         model.setTelefone(entity.getTelefone().getValue());

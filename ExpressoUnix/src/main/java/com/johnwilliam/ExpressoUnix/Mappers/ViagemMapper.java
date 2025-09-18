@@ -19,19 +19,34 @@ public class ViagemMapper {
 
     }
     public Viagem DTOtoEntity(ViagemDTO dto) {
-        return new Viagem(
-            dto.getId(),
+        if (dto.getId()==null) {
+            return new Viagem(
+            
             veiculoFacade.getVeiculoById(dto.getIdVeiculo()),
             dto.getDataViagem(),
             dto.getHoraViagem(),
             dto.getOrigem(),
             dto.getDestino()
         );
+        }else{
+             return new Viagem(
+            dto.getId(),
+            veiculoFacade.getVeiculoById(dto.getIdVeiculo()),
+            dto.getDataViagem(),
+            dto.getHoraViagem(),
+            dto.getOrigem(),
+            dto.getDestino()
+            );
+        }
+        
     }
 
     public ViagemModels entityToModel(Viagem entity) {
         ViagemModels model = new ViagemModels();
-        model.setId(entity.getId());
+        if (entity.getId()!=null) {
+            model.setId(entity.getId());
+        }
+        
         model.setIdVeiculo(entity.getVeiculo().getId());
         model.setDataViagem(entity.getDataViagem());
         model.setHoraViagem(entity.getHoraViagem());

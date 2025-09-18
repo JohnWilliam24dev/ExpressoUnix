@@ -28,6 +28,14 @@ public class Passageiro {
     
 
     public Passageiro(long id,String nome, String email, String telefone, String cpf, LocalDate dataNascimento) {
+        this.id=id;
+        this.nome= new Text(nome);
+        this.email = new Email(email);
+        this.telefone = new Telefone(telefone);
+        this.cpf = new CPF(cpf);
+        this.dataNascimento = new DataNascimento(dataNascimento);
+    }
+    public Passageiro(String nome, String email, String telefone, String cpf, LocalDate dataNascimento) {
         this.nome= new Text(nome);
         this.email = new Email(email);
         this.telefone = new Telefone(telefone);

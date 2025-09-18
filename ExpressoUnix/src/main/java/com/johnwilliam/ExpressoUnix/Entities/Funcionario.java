@@ -27,7 +27,15 @@ public class Funcionario {
     
     private List<Venda> vendas;
 
-    
+    public Funcionario(long id,String nome,String email,String telefone,String cpf, LocalDate dataNascimento, String cargo) {
+        this.id=id;
+        this.nome= new Text(nome);
+        this.email= new Email(email);
+        this.telefone=new Telefone(telefone);
+        this.cpf=new CPF(cpf);
+        this.dataNascimento = new DataNascimento(dataNascimento);
+        this.cargo = new Text(cargo);
+    }
 
     public Funcionario(String nome,String email,String telefone,String cpf, LocalDate dataNascimento, String cargo) {
         this.nome= new Text(nome);
@@ -40,7 +48,7 @@ public class Funcionario {
 
     
 
-    public long getId() { return id; }
+    public Long getId() { return id; }
     public void setId(long id) { this.id = id; }
 
     public Text getNome() {

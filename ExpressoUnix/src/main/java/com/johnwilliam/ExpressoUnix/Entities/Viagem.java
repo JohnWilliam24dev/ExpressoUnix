@@ -40,6 +40,15 @@ public class Viagem {
         this.destino = new Text(destino);
         
     }
+    public Viagem( VeiculoDTO veiculo, LocalDate dataViagem, LocalTime horaViagem, String origem, String destino) {
+        
+        this.veiculo = veiculo;
+        this.dataViagem = dataViagem;
+        this.horaViagem = horaViagem;
+        this.origem = new Text(origem);
+        this.destino = new Text(destino);
+        
+    }
     
    
 

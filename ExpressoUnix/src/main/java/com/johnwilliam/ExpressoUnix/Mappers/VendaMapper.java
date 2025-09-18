@@ -14,17 +14,30 @@ import com.johnwilliam.ExpressoUnix.Models.VendaModels;
 public class VendaMapper {
 
     public Venda DTOtoEntity(VendaDTO dto) {
-        return new Venda(
+        if (dto.getId()==null) {
+            return new Venda(
+            
+            dto.getIdFuncionario(),
+            dto.getIdPassagem(),
+            dto.getHorarioEmissao()
+        );
+        }else{
+            return new Venda(
             dto.getId(),
             dto.getIdFuncionario(),
             dto.getIdPassagem(),
             dto.getHorarioEmissao()
         );
+        }
+        
     }
 
     public VendaModels entityToModel(Venda entity) {
         VendaModels model = new VendaModels();
-        model.setId(entity.getId());
+        if (entity.getId()!=null) {
+            model.setId(entity.getId());
+        }
+        
         model.setIdFuncionario(entity.getFuncionario());
         model.setIdPassagem(entity.getPassagem());
         model.setHorarioEmissao(entity.getHorarioEmissao());

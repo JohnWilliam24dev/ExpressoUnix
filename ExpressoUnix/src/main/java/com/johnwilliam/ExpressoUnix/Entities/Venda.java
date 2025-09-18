@@ -17,12 +17,16 @@ public class Venda {
     
 
     public Venda(long id, long funcionario, long passagem, LocalDateTime horarioEmissao) {
+        this.id=id;
         this.funcionario = funcionario;
-        
         this.passagem = passagem;
-        
+        this.horarioEmissao=horarioEmissao;
     }
-
+    public Venda( long funcionario, long passagem, LocalDateTime horarioEmissao) {
+        this.funcionario = funcionario;
+        this.passagem = passagem;
+        this.horarioEmissao=horarioEmissao;
+    }
    
 
     public long getFuncionario() {

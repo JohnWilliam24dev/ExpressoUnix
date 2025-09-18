@@ -27,7 +27,21 @@ public class PassagemMapper {
     }
 
     public Passagem DTOtoEntity(PassagemDTO dto) {
-        return new Passagem(
+        if (dto.getId()==null) {
+            return new Passagem(
+            dto.getStatus(),
+            viagemFacade.getViagemById(dto.getIdViagem()),
+            assentoFacade.getAssentoById(dto.getIdAssento()),
+            passageiroFacade.getPassageiroById(dto.getIdPassageiro()),
+            dto.getDataPassagem(),
+            dto.getHoraPassagem(),
+            dto.getOrigem(),
+            dto.getDestino(),
+            dto.getDistancia(),
+            dto.getPreco()
+        );
+        } else {
+            return new Passagem(
             dto.getId(),
             dto.getStatus(),
             viagemFacade.getViagemById(dto.getIdViagem()),
@@ -40,6 +54,8 @@ public class PassagemMapper {
             dto.getDistancia(),
             dto.getPreco()
         );
+        }
+        
     }
 
     
@@ -77,7 +93,10 @@ public class PassagemMapper {
 
     public PassagemModels entityToModel(Passagem entity) {
         PassagemModels model = new PassagemModels();
-        model.setId(entity.getId());
+        if(entity.getId()!=null){
+            model.setId(entity.getId());
+        }
+        
         model.setStatus(entity.getStatus());
         model.setIdViagem(entity.getViagem().getId());
         model.setIdAssento(entity.getAssento().getId());

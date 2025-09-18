@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class FuncionarioDTO {
-    private long id;
+    private Long id;
     private String nome;
     private String email;
     private String telefone;
@@ -24,7 +24,7 @@ public class FuncionarioDTO {
         this.cargo = cargo;
     }
 
-    public long getId() { return id; }
+    public Long getId() { return id; }
     public void setId(long id) { this.id = id; }
 
     public String getNome() { return nome; }

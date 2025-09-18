@@ -14,7 +14,8 @@ import com.johnwilliam.ExpressoUnix.Models.FuncionarioModels;
 public class FuncionarioMapper {
 
     public Funcionario DTOtoEntity(FuncionarioDTO dto) {
-        return new Funcionario(
+        if (dto.getId()== null) {
+            return new Funcionario(
             dto.getNome(),
             dto.getEmail(),
             dto.getTelefone(),
@@ -22,6 +23,18 @@ public class FuncionarioMapper {
             dto.getDataNascimento(),
             dto.getCargo()
         );
+        } else {
+            return new Funcionario(
+            dto.getId(),
+            dto.getNome(),
+            dto.getEmail(),
+            dto.getTelefone(),
+            dto.getCpf(),
+            dto.getDataNascimento(),
+            dto.getCargo()
+            );
+        }
+        
     }
 
     public FuncionarioModels entityToModel(Funcionario entity) {
@@ -33,7 +46,10 @@ public class FuncionarioMapper {
             entity.getDataNascimento().getValue(),
             entity.getCargo().getValue()
         );
-        model.setId(entity.getId());
+        if (entity.getId()!=null) {
+            model.setId(entity.getId());
+        }
+        
         return model;
     }
 

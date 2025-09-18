@@ -25,6 +25,11 @@ public class Veiculo {
         this.capacidade = capacidade;
         this.statusVeiculo = statusVeiculo;
     }
+    public Veiculo(Classe classe, int capacidade, StatusVeiculo statusVeiculo) {
+        this.classe = classe;
+        this.capacidade = capacidade;
+        this.statusVeiculo = statusVeiculo;
+    }
 
     public Long getId() {
         return id;

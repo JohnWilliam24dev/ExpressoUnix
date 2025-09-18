@@ -43,6 +43,22 @@ public class Passagem {
     public Passagem(long id, StatusPassagem status, ViagemDTO viagem, AssentoDTO assento, PassageiroDTO passageiro,
                     LocalDate dataPassagem, LocalTime horaPassagem, String origem, String destino,
                     BigDecimal distancia, BigDecimal preco) {
+        this.id=id;
+        this.status = status;
+        this.viagem = viagem;
+        this.assento = assento;
+        this.passageiro = passageiro;
+        this.dataPassagem = dataPassagem;
+        this.horaPassagem = horaPassagem;
+        this.origem = new Text(origem);
+        this.destino = new Text(destino);
+        this.distancia = distancia;
+        this.preco = preco;
+    }
+
+     public Passagem( StatusPassagem status, ViagemDTO viagem, AssentoDTO assento, PassageiroDTO passageiro,
+                    LocalDate dataPassagem, LocalTime horaPassagem, String origem, String destino,
+                    BigDecimal distancia, BigDecimal preco) {
         this.status = status;
         this.viagem = viagem;
         this.assento = assento;
