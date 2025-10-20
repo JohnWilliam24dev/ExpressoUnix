@@ -10,7 +10,7 @@ import com.johnwilliam.ExpressoUnix.Facade.AssentoFacade;
 
 
 @RestController
-@RequestMapping("/assento")
+@RequestMapping("assento")
 public class AssentoController {
 
     private final AssentoFacade assentoFacade;

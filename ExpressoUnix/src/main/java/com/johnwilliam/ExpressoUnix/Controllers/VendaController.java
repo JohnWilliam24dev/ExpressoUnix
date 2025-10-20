@@ -10,7 +10,7 @@ import com.johnwilliam.ExpressoUnix.Facade.VendaFacade;
 import com.johnwilliam.ExpressoUnix.DTO.VendaDTO;
 
 @RestController
-@RequestMapping("/venda")
+@RequestMapping("venda")
 public class VendaController {
 
     private final VendaFacade vendaFacade;

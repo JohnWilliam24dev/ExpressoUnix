@@ -10,7 +10,7 @@ import com.johnwilliam.ExpressoUnix.Facade.FuncionarioFacade;
 import com.johnwilliam.ExpressoUnix.DTO.FuncionarioDTO;
 
 @RestController
-@RequestMapping("/funcionario")
+@RequestMapping("funcionario")
 public class FuncionarioController {
 
     private final FuncionarioFacade funcionarioFacade;

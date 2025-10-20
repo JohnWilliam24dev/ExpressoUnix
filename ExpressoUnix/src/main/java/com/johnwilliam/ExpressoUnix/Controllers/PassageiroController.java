@@ -10,7 +10,7 @@ import com.johnwilliam.ExpressoUnix.Facade.PassageiroFacade;
 import com.johnwilliam.ExpressoUnix.DTO.PassageiroDTO;
 
 @RestController
-@RequestMapping("/passageiro")
+@RequestMapping("passageiro")
 public class PassageiroController {
 
     private final PassageiroFacade passageiroFacade;

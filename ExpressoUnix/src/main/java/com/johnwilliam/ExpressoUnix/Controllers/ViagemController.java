@@ -7,7 +7,7 @@ import com.johnwilliam.ExpressoUnix.Facade.ViagemFacade;
 import com.johnwilliam.ExpressoUnix.DTO.ViagemDTO;
 
 @RestController
-@RequestMapping("/viagem")
+@RequestMapping("viagem")
 public class ViagemController {
 
     private final ViagemFacade viagemFacade;

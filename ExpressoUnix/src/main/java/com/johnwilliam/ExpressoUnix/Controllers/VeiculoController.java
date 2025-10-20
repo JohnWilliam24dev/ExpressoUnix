@@ -10,7 +10,7 @@ import com.johnwilliam.ExpressoUnix.Facade.VeiculoFacade;
 import com.johnwilliam.ExpressoUnix.DTO.VeiculoDTO;
 
 @RestController
-@RequestMapping("/veiculo")
+@RequestMapping("veiculo")
 public class VeiculoController {
 
     private final VeiculoFacade veiculoFacade;
