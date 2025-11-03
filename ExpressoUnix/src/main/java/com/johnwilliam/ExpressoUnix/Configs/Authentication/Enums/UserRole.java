@@ -1,4 +1,4 @@
-package com.johnwilliam.ExpressoUnix.Configs.Enums;
+package com.johnwilliam.ExpressoUnix.Configs.Authentication.Enums;
 
 public enum UserRole {
     ADMIN("ADMIN"),

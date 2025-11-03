@@ -1,6 +1,6 @@
-package com.johnwilliam.ExpressoUnix.Configs.Models;
+package com.johnwilliam.ExpressoUnix.Configs.Authentication.Models;
 
-import com.johnwilliam.ExpressoUnix.Configs.Enums.UserRole;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,8 +1,8 @@
-package com.johnwilliam.ExpressoUnix.Configs.Services;
+package com.johnwilliam.ExpressoUnix.Configs.Authentication.Services;
 
-import com.johnwilliam.ExpressoUnix.Configs.DTO.UserDTO;
-import com.johnwilliam.ExpressoUnix.Configs.Models.User;
-import com.johnwilliam.ExpressoUnix.Configs.Repositories.UserRepository;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.DTO.UserDTO;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Models.User;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

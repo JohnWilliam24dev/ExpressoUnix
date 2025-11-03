@@ -1,9 +1,9 @@
 package com.johnwilliam.ExpressoUnix.Controllers;
 
-import com.johnwilliam.ExpressoUnix.Configs.DTO.UserDTO;
-import com.johnwilliam.ExpressoUnix.Configs.Infra.Jwt.JwtService;
-import com.johnwilliam.ExpressoUnix.Configs.Models.User;
-import com.johnwilliam.ExpressoUnix.Configs.Services.UserService;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.DTO.UserDTO;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Infra.Jwt.JwtService;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Models.User;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

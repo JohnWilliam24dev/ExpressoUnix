@@ -1,6 +1,6 @@
-package com.johnwilliam.ExpressoUnix.Configs.Infra.Security;
+package com.johnwilliam.ExpressoUnix.Configs.Authentication.Infra.Security;
 
-import com.johnwilliam.ExpressoUnix.Configs.Repositories.UserRepository;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

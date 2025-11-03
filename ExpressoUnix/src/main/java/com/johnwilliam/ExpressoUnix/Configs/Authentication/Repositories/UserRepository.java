@@ -1,6 +1,6 @@
-package com.johnwilliam.ExpressoUnix.Configs.Repositories;
+package com.johnwilliam.ExpressoUnix.Configs.Authentication.Repositories;
 
-import com.johnwilliam.ExpressoUnix.Configs.Models.User;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

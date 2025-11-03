@@ -1,11 +1,10 @@
-package com.johnwilliam.ExpressoUnix.Configs.Infra.Jwt;
+package com.johnwilliam.ExpressoUnix.Configs.Authentication.Infra.Jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.johnwilliam.ExpressoUnix.Configs.DTO.UserDTO;
-import com.johnwilliam.ExpressoUnix.Configs.Models.User;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Models.User;
 import  org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

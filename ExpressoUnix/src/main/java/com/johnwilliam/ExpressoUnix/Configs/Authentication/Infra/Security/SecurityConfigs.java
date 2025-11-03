@@ -1,7 +1,7 @@
-package com.johnwilliam.ExpressoUnix.Configs.Infra.Security;
+package com.johnwilliam.ExpressoUnix.Configs.Authentication.Infra.Security;
 
-import com.johnwilliam.ExpressoUnix.Configs.Infra.Jwt.JwtAuthenticationFilter;
-import com.johnwilliam.ExpressoUnix.Configs.Repositories.UserRepository;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Infra.Jwt.JwtAuthenticationFilter;
+import com.johnwilliam.ExpressoUnix.Configs.Authentication.Repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -36,6 +36,8 @@ public class SecurityConfigs {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/qr-code").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/qr-code/decode").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/assento").hasAnyRole("ADMIN", "GESTAO")
                         .requestMatchers(HttpMethod.PUT, "/assento/**").hasAnyRole("ADMIN", "GESTAO")

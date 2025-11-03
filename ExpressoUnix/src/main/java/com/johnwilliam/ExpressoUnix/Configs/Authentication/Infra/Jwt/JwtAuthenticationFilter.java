@@ -1,4 +1,4 @@
-package com.johnwilliam.ExpressoUnix.Configs.Infra.Jwt;
+package com.johnwilliam.ExpressoUnix.Configs.Authentication.Infra.Jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
