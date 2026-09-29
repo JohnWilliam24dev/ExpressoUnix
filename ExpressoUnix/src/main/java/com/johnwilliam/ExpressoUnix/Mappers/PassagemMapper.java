@@ -77,7 +77,7 @@ public class PassagemMapper {
     }
 
     public PassagemDTO entityToDTO(Passagem entity) {
-        return new PassagemDTO(
+        PassagemDTO dto = new PassagemDTO(
             entity.getStatus(),
             entity.getViagem().getId(),
             entity.getAssento().getId(),
@@ -89,6 +89,8 @@ public class PassagemMapper {
             entity.getDistancia(),
             entity.getPreco()
         );
+        dto.setId(entity.getId());
+        return dto;
     }
 
     public PassagemModels entityToModel(Passagem entity) {
@@ -110,7 +112,7 @@ public class PassagemMapper {
         return model;
     }
     public PassagemDTO modelToDTO(PassagemModels entity) {
-        return new PassagemDTO(
+        PassagemDTO dto = new PassagemDTO(
             entity.getStatus(),
             entity.getViagem().getId(),
             entity.getAssento().getId(),
@@ -122,6 +124,8 @@ public class PassagemMapper {
             entity.getDistancia(),
             entity.getPreco()
         );
+        dto.setId(entity.getId());
+        return dto;
     }
 
     // List converters

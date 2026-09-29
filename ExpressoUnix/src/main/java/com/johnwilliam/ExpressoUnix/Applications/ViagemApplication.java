@@ -4,7 +4,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.johnwilliam.ExpressoUnix.Entities.Viagem;
+import com.johnwilliam.ExpressoUnix.Enums.StatusVeiculo;
+import com.johnwilliam.ExpressoUnix.Exceptions.BusinessException;
 import com.johnwilliam.ExpressoUnix.Mappers.ViagemMapper;
 import com.johnwilliam.ExpressoUnix.Models.ViagemModels;
 
@@ -25,8 +29,12 @@ public class ViagemApplication {
         
     }
     
+    @Transactional
     public void createViagem(ViagemDTO viagemDTO){
-        Viagem entity= viagemMapper.DTOtoEntity(viagemDTO);
+        Viagem entity= viagemMapper.DTOtoEntity(viagemDTO); // 404 se o veiculo nao existe
+        if (entity.getVeiculo().getStatusVeiculo() == StatusVeiculo.Indisponivel) {
+            throw new BusinessException("O veiculo informado esta indisponivel");
+        }
         ViagemModels saved = viagemRepository.createViagem(viagemMapper.entityToModel(entity));
         entity.setId(saved.getId());
 
