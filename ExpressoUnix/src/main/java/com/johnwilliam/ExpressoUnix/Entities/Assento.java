@@ -19,6 +19,7 @@ public class Assento {
     private List<Passagem> passagens;
 
     public Assento(long id, long viagem, int numeroAssento, StatusAssento statusAssento) {
+        this.id = id;
         this.viagem = viagem;
         this.numeroAssento = numeroAssento;
         this.statusAssento = statusAssento;

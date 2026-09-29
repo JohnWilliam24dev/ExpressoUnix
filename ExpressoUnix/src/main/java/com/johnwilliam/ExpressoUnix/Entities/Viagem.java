@@ -97,7 +97,7 @@ public class Viagem {
     }
 
     public void setDestino(String destino) {
-        this.setDestino(destino);
+        this.destino.setText(destino);
     }
 
     public List<AssentoModels> disponibilizarAssentos(){
