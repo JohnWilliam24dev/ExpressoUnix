@@ -103,7 +103,7 @@ public class Viagem {
     public List<AssentoModels> disponibilizarAssentos(){
         int capacidade=veiculo.getCapacidade();
         this.assentos= new ArrayList<>();
-        for(int i=0;i<=capacidade;i++){
+        for(int i=1;i<=capacidade;i++){
             AssentoModels assento = new AssentoModels();
             assento.setIdViagem(this.id);
             assento.setNumeroAssento(i);

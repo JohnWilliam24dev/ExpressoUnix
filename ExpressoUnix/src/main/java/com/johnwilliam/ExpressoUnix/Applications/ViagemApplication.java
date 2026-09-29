@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.johnwilliam.ExpressoUnix.Entities.Viagem;
 import com.johnwilliam.ExpressoUnix.Mappers.ViagemMapper;
+import com.johnwilliam.ExpressoUnix.Models.ViagemModels;
 
 import com.johnwilliam.ExpressoUnix.DTO.ViagemDTO;
 
@@ -26,7 +27,8 @@ public class ViagemApplication {
     
     public void createViagem(ViagemDTO viagemDTO){
         Viagem entity= viagemMapper.DTOtoEntity(viagemDTO);
-        viagemRepository.createViagem(viagemMapper.entityToModel(entity));
+        ViagemModels saved = viagemRepository.createViagem(viagemMapper.entityToModel(entity));
+        entity.setId(saved.getId());
 
         
         assentoApplication.createAllAssento(entity.disponibilizarAssentos());
