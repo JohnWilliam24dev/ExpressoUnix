@@ -1,5 +1,7 @@
 package com.johnwilliam.ExpressoUnix.Entities.Objects;
 
+import com.johnwilliam.ExpressoUnix.Exceptions.BusinessException;
+
 public class Text {
     private String text;
 
@@ -14,7 +16,7 @@ public class Text {
     }
     public void verifyLength(int limit){
         if(text.length()>limit){
-            throw new IllegalArgumentException("O atributo ultrapassa o limite estabelecido");
+            throw new BusinessException("O atributo ultrapassa o limite estabelecido");
         }
 
     }

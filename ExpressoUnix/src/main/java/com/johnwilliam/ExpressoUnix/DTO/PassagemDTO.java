@@ -3,35 +3,64 @@ package com.johnwilliam.ExpressoUnix.DTO;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+
 import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
+
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 public class PassagemDTO {
     private Long id;
+
+    @NotNull(message = "status e obrigatorio")
     private StatusPassagem status;
+
+    @Positive(message = "idViagem deve ser informado")
     private long idViagem;
+
+    @Positive(message = "idAssento deve ser informado")
     private long idAssento;
+
+    @Positive(message = "idPassageiro deve ser informado")
     private long idPassageiro;
+
+    @NotNull(message = "dataPassagem e obrigatoria")
     private LocalDate dataPassagem;
+
+    @NotNull(message = "horaPassagem e obrigatoria")
     private LocalTime horaPassagem;
+
+    @NotBlank(message = "origem e obrigatoria")
+    @Size(max = 100, message = "origem deve ter no maximo 100 caracteres")
     private String origem;
+
+    @NotBlank(message = "destino e obrigatorio")
+    @Size(max = 100, message = "destino deve ter no maximo 100 caracteres")
     private String destino;
+
+    @NotNull(message = "distancia e obrigatoria")
+    @Positive(message = "distancia deve ser maior que zero")
+    @Digits(integer = 8, fraction = 2, message = "distancia aceita ate 8 inteiros e 2 decimais")
     private BigDecimal distancia;
+
+    @NotNull(message = "preco e obrigatorio")
+    @PositiveOrZero(message = "preco nao pode ser negativo")
+    @Digits(integer = 8, fraction = 2, message = "preco aceita ate 8 inteiros e 2 decimais")
     private BigDecimal preco;
-    private ViagemDTO viagem;
-    private AssentoDTO assento;
-    private PassageiroDTO passageiro;
-    private List<VendaDTO> vendas;
 
     public PassagemDTO() {}
 
-    public PassagemDTO(StatusPassagem status, long viagem, long assento, long passageiro,
+    public PassagemDTO(StatusPassagem status, long idViagem, long idAssento, long idPassageiro,
                        LocalDate dataPassagem, LocalTime horaPassagem, String origem, String destino,
                        BigDecimal distancia, BigDecimal preco) {
         this.status = status;
-        this.idViagem = viagem;
-        this.idAssento = assento;
-        this.idPassageiro = passageiro;
+        this.idViagem = idViagem;
+        this.idAssento = idAssento;
+        this.idPassageiro = idPassageiro;
         this.dataPassagem = dataPassagem;
         this.horaPassagem = horaPassagem;
         this.origem = origem;
@@ -72,16 +101,4 @@ public class PassagemDTO {
 
     public BigDecimal getPreco() { return preco; }
     public void setPreco(BigDecimal preco) { this.preco = preco; }
-
-    public ViagemDTO getViagem() { return viagem; }
-    public void setViagem(ViagemDTO viagem) { this.viagem = viagem; }
-
-    public AssentoDTO getAssento() { return assento; }
-    public void setAssento(AssentoDTO assento) { this.assento = assento; }
-
-    public PassageiroDTO getPassageiro() { return passageiro; }
-    public void setPassageiro(PassageiroDTO passageiro) { this.passageiro = passageiro; }
-
-    public List<VendaDTO> getVendas() { return vendas; }
-    public void setVendas(List<VendaDTO> vendas) { this.vendas = vendas; }
 }

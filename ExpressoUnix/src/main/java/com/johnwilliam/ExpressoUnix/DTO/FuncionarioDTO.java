@@ -1,17 +1,41 @@
 package com.johnwilliam.ExpressoUnix.DTO;
 
 import java.time.LocalDate;
-import java.util.List;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class FuncionarioDTO {
     private Long id;
+
+    @NotBlank(message = "nome e obrigatorio")
+    @Size(max = 150, message = "nome deve ter no maximo 150 caracteres")
     private String nome;
+
+    @NotBlank(message = "email e obrigatorio")
+    @Email(message = "email invalido")
+    @Size(max = 150, message = "email deve ter no maximo 150 caracteres")
     private String email;
+
+    @NotBlank(message = "telefone e obrigatorio")
+    @Size(max = 15, message = "telefone deve ter no maximo 15 caracteres")
     private String telefone;
+
+    @NotBlank(message = "cpf e obrigatorio")
+    @Pattern(regexp = "\\d{11}", message = "cpf deve conter exatamente 11 digitos numericos")
     private String cpf;
+
+    @NotNull(message = "dataNascimento e obrigatoria")
+    @Past(message = "dataNascimento deve estar no passado")
     private LocalDate dataNascimento;
+
+    @NotBlank(message = "cargo e obrigatorio")
+    @Size(max = 100, message = "cargo deve ter no maximo 100 caracteres")
     private String cargo;
-    private List<VendaDTO> vendas;
 
     public FuncionarioDTO() {}
 
@@ -25,7 +49,7 @@ public class FuncionarioDTO {
     }
 
     public Long getId() { return id; }
-    public void setId(long id) { this.id = id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
@@ -44,7 +68,4 @@ public class FuncionarioDTO {
 
     public String getCargo() { return cargo; }
     public void setCargo(String cargo) { this.cargo = cargo; }
-
-    public List<VendaDTO> getVendas() { return vendas; }
-    public void setVendas(List<VendaDTO> vendas) { this.vendas = vendas; }
 }

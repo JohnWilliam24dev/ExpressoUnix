@@ -30,9 +30,11 @@ public class VendaRepository {
         return vendaJPA.findAll();
     }
     
-    public void updateVenda( VendaModels venda) {
-        
-        this.vendaJPA.save(venda);
+    public void updateVenda(VendaModels venda) {
+        if (venda.getId() == null || !vendaJPA.existsById(venda.getId())) {
+            throw new ResourceNotFoundException("Venda", venda.getId());
+        }
+        vendaJPA.save(venda);
     }
     
     public void deleteVenda(long id) {

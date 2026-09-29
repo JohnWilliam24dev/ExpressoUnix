@@ -30,9 +30,11 @@ public class ViagemRepository {
         return viagemJPA.findAll();
     }
     
-    public void updateViagem( ViagemModels viagem) {
-        
-        this.viagemJPA.save(viagem);
+    public void updateViagem(ViagemModels viagem) {
+        if (viagem.getId() == null || !viagemJPA.existsById(viagem.getId())) {
+            throw new ResourceNotFoundException("Viagem", viagem.getId());
+        }
+        viagemJPA.save(viagem);
     }
     
     public void deleteViagem(long id) {

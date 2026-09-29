@@ -30,9 +30,11 @@ public class VeiculoRepository {
         return veiculoJPA.findAll();
     }
     
-    public void updateVeiculo( VeiculoModels veiculo) {
-        
-        this.veiculoJPA.save(veiculo);
+    public void updateVeiculo(VeiculoModels veiculo) {
+        if (veiculo.getId() == null || !veiculoJPA.existsById(veiculo.getId())) {
+            throw new ResourceNotFoundException("Veiculo", veiculo.getId());
+        }
+        veiculoJPA.save(veiculo);
     }
     
     public void deleteVeiculo(long id) {

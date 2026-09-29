@@ -33,8 +33,11 @@ public class AssentoRepository {
     public List<AssentoModels> getAllAssento(){
         return assentoJPA.findAll();
     }
-    public void updateAssento( AssentoModels assento){
-        this.assentoJPA.save(assento);
+    public void updateAssento(AssentoModels assento) {
+        if (assento.getId() == null || !assentoJPA.existsById(assento.getId())) {
+            throw new ResourceNotFoundException("Assento", assento.getId());
+        }
+        assentoJPA.save(assento);
     }
     public void deleteAssento(long id){
         assentoJPA.deleteById(id);

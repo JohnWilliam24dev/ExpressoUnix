@@ -1,10 +1,15 @@
 package com.johnwilliam.ExpressoUnix.Controllers;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import com.johnwilliam.ExpressoUnix.Facade.ViagemFacade;
+
 import com.johnwilliam.ExpressoUnix.DTO.ViagemDTO;
+import com.johnwilliam.ExpressoUnix.Facade.ViagemFacade;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/viagem")
@@ -18,7 +23,9 @@ public class ViagemController {
     }
 
     @PostMapping
-    public void createViagem(@RequestBody ViagemDTO viagem) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createViagem(@Valid @RequestBody ViagemDTO viagem) {
+        viagem.setId(null); // criacao sempre gera um novo ID
         viagemFacade.createViagem(viagem);
     }
 
@@ -33,11 +40,14 @@ public class ViagemController {
     }
 
     @PutMapping("/{id}")
-    public void updateViagem(@RequestBody ViagemDTO viagem) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateViagem(@PathVariable long id, @Valid @RequestBody ViagemDTO viagem) {
+        viagem.setId(id); // o ID da URL e a fonte de verdade
         viagemFacade.updateViagem(viagem);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteViagem(@PathVariable long id) {
         viagemFacade.deleteViagem(id);
     }

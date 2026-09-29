@@ -25,9 +25,11 @@ public class FuncionarioRepository {
     public List<FuncionarioModels> getAllFuncionario(){
         return funcionarioJPA.findAll();
     }
-    public void updateFuncionario( FuncionarioModels funcionario){
-       
-       this.funcionarioJPA.save(funcionario);
+    public void updateFuncionario(FuncionarioModels funcionario) {
+        if (!funcionarioJPA.existsById(funcionario.getId())) {
+            throw new ResourceNotFoundException("Funcionario", funcionario.getId());
+        }
+        funcionarioJPA.save(funcionario);
     }
     public void deleteFuncionario(long id){
         funcionarioJPA.deleteById(id);

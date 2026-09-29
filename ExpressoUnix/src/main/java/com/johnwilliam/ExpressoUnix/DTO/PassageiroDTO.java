@@ -1,16 +1,37 @@
 package com.johnwilliam.ExpressoUnix.DTO;
 
 import java.time.LocalDate;
-import java.util.List;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class PassageiroDTO {
     private Long id;
+
+    @NotBlank(message = "nome e obrigatorio")
+    @Size(max = 150, message = "nome deve ter no maximo 150 caracteres")
     private String nome;
+
+    @NotBlank(message = "email e obrigatorio")
+    @Email(message = "email invalido")
+    @Size(max = 150, message = "email deve ter no maximo 150 caracteres")
     private String email;
+
+    @NotBlank(message = "telefone e obrigatorio")
+    @Size(max = 15, message = "telefone deve ter no maximo 15 caracteres")
     private String telefone;
+
+    @NotBlank(message = "cpf e obrigatorio")
+    @Pattern(regexp = "\\d{11}", message = "cpf deve conter exatamente 11 digitos numericos")
     private String cpf;
+
+    @NotNull(message = "dataNascimento e obrigatoria")
+    @Past(message = "dataNascimento deve estar no passado")
     private LocalDate dataNascimento;
-    private List<PassagemDTO> passagens;
 
     public PassageiroDTO() {}
 
@@ -39,7 +60,4 @@ public class PassageiroDTO {
 
     public LocalDate getDataNascimento() { return dataNascimento; }
     public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
-
-    public List<PassagemDTO> getPassagens() { return passagens; }
-    public void setPassagens(List<PassagemDTO> passagens) { this.passagens = passagens; }
 }

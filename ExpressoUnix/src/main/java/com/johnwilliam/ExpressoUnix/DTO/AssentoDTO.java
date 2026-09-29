@@ -1,21 +1,26 @@
 package com.johnwilliam.ExpressoUnix.DTO;
 
-import java.util.List;
 import com.johnwilliam.ExpressoUnix.Enums.StatusAssento;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class AssentoDTO {
     private Long id;
+
+    @Positive(message = "idViagem deve ser informado")
     private long idViagem;
+
+    @Positive(message = "numeroAssento deve ser maior que zero")
     private int numeroAssento;
+
+    @NotNull(message = "statusAssento nao pode ser nulo")
     private StatusAssento statusAssento = StatusAssento.Livre;
-    private List<PassagemDTO> passagens;
-    private ViagemDTO viagem;
 
     public AssentoDTO() {}
 
-    public AssentoDTO(ViagemDTO viagem, int numeroAssento, StatusAssento statusAssento) {
-        this.viagem = viagem;
-        this.idViagem = (viagem != null) ? viagem.getId() : 0;
+    public AssentoDTO(long idViagem, int numeroAssento, StatusAssento statusAssento) {
+        this.idViagem = idViagem;
         this.numeroAssento = numeroAssento;
         this.statusAssento = statusAssento;
     }
@@ -31,10 +36,4 @@ public class AssentoDTO {
 
     public StatusAssento getStatusAssento() { return statusAssento; }
     public void setStatusAssento(StatusAssento statusAssento) { this.statusAssento = statusAssento; }
-
-    public List<PassagemDTO> getPassagens() { return passagens; }
-    public void setPassagens(List<PassagemDTO> passagens) { this.passagens = passagens; }
-
-    public ViagemDTO getViagem() { return viagem; }
-    public void setViagem(ViagemDTO viagem) { this.viagem = viagem; }
 }

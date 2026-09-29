@@ -30,10 +30,11 @@ public class PassageiroRepository {
         return passageiroJPA.findAll();
     }
     
-    public void updatePassageiro( PassageiroModels passageiro) {
-        
-        
-        this.passageiroJPA.save(passageiro);
+    public void updatePassageiro(PassageiroModels passageiro) {
+        if (passageiro.getId() == null || !passageiroJPA.existsById(passageiro.getId())) {
+            throw new ResourceNotFoundException("Passageiro", passageiro.getId());
+        }
+        passageiroJPA.save(passageiro);
     }
     
     public void deletePassageiro(long id) {

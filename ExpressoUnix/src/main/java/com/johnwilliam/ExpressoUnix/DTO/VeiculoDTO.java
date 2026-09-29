@@ -1,15 +1,24 @@
 package com.johnwilliam.ExpressoUnix.DTO;
 
-import java.util.List;
 import com.johnwilliam.ExpressoUnix.Enums.Classe;
 import com.johnwilliam.ExpressoUnix.Enums.StatusVeiculo;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 public class VeiculoDTO {
     private Long id;
+
+    @NotNull(message = "classe e obrigatoria")
     private Classe classe;
+
+    @Min(value = 2, message = "capacidade minima e 2 assentos")
+    @Max(value = 60, message = "capacidade maxima e 60 assentos")
     private int capacidade;
+
+    @NotNull(message = "statusVeiculo nao pode ser nulo")
     private StatusVeiculo statusVeiculo = StatusVeiculo.Disponivel;
-    private List<ViagemDTO> viagens;
 
     public VeiculoDTO() {}
 
@@ -30,7 +39,4 @@ public class VeiculoDTO {
 
     public StatusVeiculo getStatusVeiculo() { return statusVeiculo; }
     public void setStatusVeiculo(StatusVeiculo statusVeiculo) { this.statusVeiculo = statusVeiculo; }
-
-    public List<ViagemDTO> getViagens() { return viagens; }
-    public void setViagens(List<ViagemDTO> viagens) { this.viagens = viagens; }
 }

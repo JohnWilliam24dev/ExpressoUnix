@@ -32,8 +32,10 @@ public class PassagemRepository {
     }
     
     public void updatePassagem(PassagemModels passagem) {
-        
-        this.passagemJPA.save(passagem);
+        if (passagem.getId() == null || !passagemJPA.existsById(passagem.getId())) {
+            throw new ResourceNotFoundException("Passagem", passagem.getId());
+        }
+        passagemJPA.save(passagem);
     }
     
     public void deletePassagem(long id) {

@@ -2,24 +2,36 @@ package com.johnwilliam.ExpressoUnix.DTO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 public class ViagemDTO {
     private Long id;
+
+    @Positive(message = "idVeiculo deve ser informado")
     private long idVeiculo;
+
+    @NotNull(message = "dataViagem e obrigatoria")
     private LocalDate dataViagem;
+
+    @NotNull(message = "horaViagem e obrigatoria")
     private LocalTime horaViagem;
+
+    @NotBlank(message = "origem e obrigatoria")
+    @Size(max = 100, message = "origem deve ter no maximo 100 caracteres")
     private String origem;
+
+    @NotBlank(message = "destino e obrigatorio")
+    @Size(max = 100, message = "destino deve ter no maximo 100 caracteres")
     private String destino;
-    private VeiculoDTO veiculo;
-    private List<AssentoDTO> assentos;
-    private List<PassagemDTO> passagens;
 
     public ViagemDTO() {}
 
-    public ViagemDTO(VeiculoDTO veiculo, LocalDate dataViagem, LocalTime horaViagem, String origem, String destino) {
-        this.veiculo = veiculo;
-        this.idVeiculo = (veiculo != null) ? veiculo.getId() : 0;
+    public ViagemDTO(long idVeiculo, LocalDate dataViagem, LocalTime horaViagem, String origem, String destino) {
+        this.idVeiculo = idVeiculo;
         this.dataViagem = dataViagem;
         this.horaViagem = horaViagem;
         this.origem = origem;
@@ -43,13 +55,4 @@ public class ViagemDTO {
 
     public String getDestino() { return destino; }
     public void setDestino(String destino) { this.destino = destino; }
-
-    public VeiculoDTO getVeiculo() { return veiculo; }
-    public void setVeiculo(VeiculoDTO veiculo) { this.veiculo = veiculo; }
-
-    public List<AssentoDTO> getAssentos() { return assentos; }
-    public void setAssentos(List<AssentoDTO> assentos) { this.assentos = assentos; }
-
-    public List<PassagemDTO> getPassagens() { return passagens; }
-    public void setPassagens(List<PassagemDTO> passagens) { this.passagens = passagens; }
 }

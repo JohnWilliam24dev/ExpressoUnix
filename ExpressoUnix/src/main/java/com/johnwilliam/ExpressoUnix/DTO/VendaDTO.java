@@ -2,21 +2,25 @@ package com.johnwilliam.ExpressoUnix.DTO;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.Positive;
+
 public class VendaDTO {
     private Long id;
+
+    /** Somente leitura: preenchido pelo banco na emissao. */
     private LocalDateTime horarioEmissao;
+
+    @Positive(message = "idFuncionario deve ser informado")
     private long idFuncionario;
+
+    @Positive(message = "idPassagem deve ser informado")
     private long idPassagem;
-    private FuncionarioDTO funcionario;
-    private PassagemDTO passagem;
 
     public VendaDTO() {}
 
-    public VendaDTO(FuncionarioDTO funcionario, PassagemDTO passagem) {
-        this.funcionario = funcionario;
-        this.idFuncionario = (funcionario != null) ? funcionario.getId() : 0;
-        this.passagem = passagem;
-        this.idPassagem = (passagem != null) ? passagem.getId() : 0;
+    public VendaDTO(long idFuncionario, long idPassagem) {
+        this.idFuncionario = idFuncionario;
+        this.idPassagem = idPassagem;
     }
 
     public Long getId() { return id; }
@@ -30,10 +34,4 @@ public class VendaDTO {
 
     public long getIdPassagem() { return idPassagem; }
     public void setIdPassagem(long idPassagem) { this.idPassagem = idPassagem; }
-
-    public FuncionarioDTO getFuncionario() { return funcionario; }
-    public void setFuncionario(FuncionarioDTO funcionario) { this.funcionario = funcionario; }
-
-    public PassagemDTO getPassagem() { return passagem; }
-    public void setPassagem(PassagemDTO passagem) { this.passagem = passagem; }
 }
