@@ -6,4 +6,5 @@ O Expresso Unix consiste em uma API/Backend versátil para qualquer empresa de t
 - [Guia-Técnico](Documentação/guia-tecnico.md)
 - [Comercial](Documentação/comercial.md)
 - [API](docs/api.md)
+- [Features do PDV](docs/pdv-features.md)
 
