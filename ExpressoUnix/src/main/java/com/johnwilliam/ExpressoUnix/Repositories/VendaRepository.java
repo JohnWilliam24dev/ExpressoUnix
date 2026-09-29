@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.johnwilliam.ExpressoUnix.Exceptions.ResourceNotFoundException;
 import com.johnwilliam.ExpressoUnix.Models.VendaModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.VendaJPA;
 
@@ -21,7 +22,8 @@ public class VendaRepository {
     }
     
     public VendaModels getVendaById(long id) {
-        return vendaJPA.findById(id).get();
+        return vendaJPA.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Venda", id));
     }
     
     public List<VendaModels> getAllVenda() {

@@ -69,7 +69,7 @@ public class Veiculo {
 
     public void verifyCapacity(){
         if (capacidade>60 || capacidade<2) {
-            throw new IllegalArgumentException("A capacidade deve ser no maximo 60 assentos");
+            throw new IllegalArgumentException("A capacidade deve estar entre 2 e 60 assentos");
         } 
     }
     public int getCapacidade() {

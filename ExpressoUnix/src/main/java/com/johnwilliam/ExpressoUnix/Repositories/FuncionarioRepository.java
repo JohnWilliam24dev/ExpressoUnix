@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.johnwilliam.ExpressoUnix.Exceptions.ResourceNotFoundException;
 import com.johnwilliam.ExpressoUnix.Models.FuncionarioModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.FuncionarioJPA;
 @Repository
@@ -18,7 +19,8 @@ public class FuncionarioRepository {
         funcionarioJPA.save(funcionario);
     }
     public FuncionarioModels getFuncionarioById(long id){
-        return funcionarioJPA.findById(id).get();
+        return funcionarioJPA.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Funcionario", id));
     }
     public List<FuncionarioModels> getAllFuncionario(){
         return funcionarioJPA.findAll();

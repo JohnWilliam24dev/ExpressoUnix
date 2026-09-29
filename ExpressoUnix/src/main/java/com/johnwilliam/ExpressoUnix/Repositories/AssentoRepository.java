@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.johnwilliam.ExpressoUnix.Exceptions.ResourceNotFoundException;
 
 import com.johnwilliam.ExpressoUnix.Models.AssentoModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.AssentoJPA;
@@ -26,7 +27,8 @@ public class AssentoRepository {
         assentoJPA.saveAll(lista_assentos);
     }
     public AssentoModels getAssentoById(long id){
-        return assentoJPA.findById(id).get();
+        return assentoJPA.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Assento", id));
     }
     public List<AssentoModels> getAllAssento(){
         return assentoJPA.findAll();

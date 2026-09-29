@@ -20,6 +20,7 @@ public class VeiculoApplication {
     
     public void createVeiculo(VeiculoDTO veiculo){
         Veiculo entity= veiculoMapper.DTOtoEntity(veiculo);
+        entity.verifyCapacity();
         veiculoRepository.createVeiculo(veiculoMapper.entityToModel(entity));
     }
     
@@ -33,6 +34,7 @@ public class VeiculoApplication {
     
     public void updateVeiculo( VeiculoDTO veiculo) {
         Veiculo entity= veiculoMapper.DTOtoEntity(veiculo);
+        entity.verifyCapacity();
         veiculoRepository.updateVeiculo(veiculoMapper.entityToModel(entity));
     }
     

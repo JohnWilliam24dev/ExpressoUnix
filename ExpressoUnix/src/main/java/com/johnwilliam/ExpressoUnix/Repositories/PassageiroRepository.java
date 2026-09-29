@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.johnwilliam.ExpressoUnix.Exceptions.ResourceNotFoundException;
 import com.johnwilliam.ExpressoUnix.Models.PassageiroModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.PassageiroJPA;
 
@@ -21,7 +22,8 @@ public class PassageiroRepository {
     }
     
     public PassageiroModels getPassageiroById(long id) {
-        return passageiroJPA.findById(id).get();
+        return passageiroJPA.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Passageiro", id));
     }
     
     public List<PassageiroModels> getAllPassageiro() {
