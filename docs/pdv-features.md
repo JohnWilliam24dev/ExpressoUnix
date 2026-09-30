@@ -155,16 +155,16 @@ Aberta ──(pagamentos cobrem o total)──► Finalizada
 
 | ID | Feature | Prioridade | Situação | Regras / critérios de aceite |
 |---|---|---|---|---|
-| VEN-01 | Venda com N passagens em uma única operação atômica | MVP | ❌ | Tudo ou nada: se um item falhar, nenhuma passagem é emitida e nenhum assento é ocupado. |
-| VEN-02 | Compra de **ida e volta** na mesma venda | MVP | ❌ | Gera duas passagens independentes (`IDA` e `VOLTA`) vinculadas apenas informativamente. Ver [1.2](#12-ida-e-volta-são-passagens-diferentes-compradas-juntas). |
-| VEN-03 | Validação de coerência ida × volta | MVP | ❌ | Viagem da volta deve ser posterior à da ida. Origem da volta = destino da ida (regra configurável). |
+| VEN-01 | Venda com N passagens em uma única operação atômica | MVP | ✅ | Tudo ou nada: se um item falhar, nenhuma passagem é emitida e nenhum assento é ocupado. |
+| VEN-02 | Compra de **ida e volta** na mesma venda | MVP | ✅ | Gera duas passagens independentes (`IDA` e `VOLTA`) vinculadas apenas informativamente. Ver [1.2](#12-ida-e-volta-são-passagens-diferentes-compradas-juntas). |
+| VEN-03 | Validação de coerência ida × volta | MVP | ✅ | Viagem da volta deve ser posterior à da ida. Origem da volta = destino da ida (regra configurável). |
 | VEN-04 | Assento deve pertencer à viagem e estar livre | MVP | ✅ | Pertencimento → `400`; ocupado → `409`. |
 | VEN-05 | Cálculo de preço no servidor | MVP | ✅ | O body não contém preço; o servidor calcula por passagem. |
 | VEN-06 | Tipos de tarifa (inteira, meia, gratuidade) | F2 | ❌ | Percentuais parametrizáveis; passagem guarda `tarifaBase`, `desconto` e `valorPago`. |
 | VEN-07 | Desconto promocional de ida e volta | F2 | ❌ | Rateado entre as duas passagens no momento da venda. |
 | VEN-08 | Operador vem do usuário autenticado | MVP | ❌ | `idFuncionario` não é aceito no body. |
 | VEN-09 | Venda vinculada ao caixa aberto do operador | MVP | ❌ | Sem caixa aberto, a venda é recusada (`409`). |
-| VEN-10 | Consulta de venda com suas passagens | MVP | 🟡 | Retorna a venda e a lista de passagens (cada uma com seu status). |
+| VEN-10 | Consulta de venda com suas passagens | MVP | ✅ | Retorna a venda e a lista de passagens (cada uma com seu status). |
 | VEN-11 | Limite de passagens por venda | F2 | ❌ | Parametrizável (ex.: máximo de 10). |
 | VEN-12 | Um mesmo passageiro não pode ter duas passagens ativas na mesma viagem | F2 | ❌ | Evita venda duplicada acidental. |
 
@@ -248,7 +248,7 @@ Todas as operações abaixo atuam **por passagem**, nunca sobre a venda inteira 
 | TEC-01 | Tratamento global de exceções (400/404/409/500) | MVP | ✅ | `GlobalExceptionHandler` + `ApiError`. |
 | TEC-02 | Bean Validation nos DTOs | MVP | ✅ | `@Valid` nos controllers. |
 | TEC-03 | Contrato REST (201/204, ID da URL no PUT) | MVP | ✅ | Documentado em `docs/api.md`. |
-| TEC-04 | POST retorna o recurso criado (ou `Location`) | MVP | ❌ | Necessário para o front conhecer o ID da venda e das passagens. |
+| TEC-04 | POST retorna o recurso criado (ou `Location`) | MVP | 🟡 | Necessário para o front conhecer o ID da venda e das passagens. Feito em `POST /venda` e `POST /rota`; demais recursos ainda devolvem vazio. |
 | TEC-05 | Testes unitários e de integração dos fluxos críticos | MVP | ❌ | Venda com N passagens, ida e volta, cancelamento independente, assento duplicado, caixa. |
 | TEC-06 | Migrações de banco (Flyway) no lugar de `ddl-auto=update` | F2 | ❌ | Necessário para evoluir o schema com segurança. |
 | TEC-07 | Documentação OpenAPI/Swagger | F3 | ❌ | Complementa `docs/api.md`. |

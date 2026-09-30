@@ -16,6 +16,10 @@ public class CotacaoDTO {
     private BigDecimal precoBase;
     private BigDecimal multiplicadorClasse;
     private BigDecimal percentualTarifa;
+    /** Tarifa cheia (precoBase x multiplicador), antes do desconto da tarifa. */
+    private BigDecimal tarifaBase;
+    private BigDecimal desconto;
+    /** Valor final a pagar (tarifaBase - desconto). */
     private BigDecimal preco;
 
     public CotacaoDTO() {}
@@ -46,6 +50,12 @@ public class CotacaoDTO {
 
     public BigDecimal getPercentualTarifa() { return percentualTarifa; }
     public void setPercentualTarifa(BigDecimal percentualTarifa) { this.percentualTarifa = percentualTarifa; }
+
+    public BigDecimal getTarifaBase() { return tarifaBase; }
+    public void setTarifaBase(BigDecimal tarifaBase) { this.tarifaBase = tarifaBase; }
+
+    public BigDecimal getDesconto() { return desconto; }
+    public void setDesconto(BigDecimal desconto) { this.desconto = desconto; }
 
     public BigDecimal getPreco() { return preco; }
     public void setPreco(BigDecimal preco) { this.preco = preco; }

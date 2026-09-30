@@ -1,27 +1,22 @@
 package com.johnwilliam.ExpressoUnix.DTO;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
-import jakarta.validation.constraints.Positive;
+import com.johnwilliam.ExpressoUnix.Enums.StatusVenda;
 
+/** Somente saida: a venda com suas passagens (cada uma com seu proprio status). */
 public class VendaDTO {
     private Long id;
-
-    /** Somente leitura: preenchido pelo banco na emissao. */
     private LocalDateTime horarioEmissao;
-
-    @Positive(message = "idFuncionario deve ser informado")
     private long idFuncionario;
-
-    @Positive(message = "idPassagem deve ser informado")
-    private long idPassagem;
+    private StatusVenda status;
+    private BigDecimal valorTotal;
+    private BigDecimal descontoTotal;
+    private List<PassagemDTO> passagens;
 
     public VendaDTO() {}
-
-    public VendaDTO(long idFuncionario, long idPassagem) {
-        this.idFuncionario = idFuncionario;
-        this.idPassagem = idPassagem;
-    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -32,6 +27,15 @@ public class VendaDTO {
     public long getIdFuncionario() { return idFuncionario; }
     public void setIdFuncionario(long idFuncionario) { this.idFuncionario = idFuncionario; }
 
-    public long getIdPassagem() { return idPassagem; }
-    public void setIdPassagem(long idPassagem) { this.idPassagem = idPassagem; }
+    public StatusVenda getStatus() { return status; }
+    public void setStatus(StatusVenda status) { this.status = status; }
+
+    public BigDecimal getValorTotal() { return valorTotal; }
+    public void setValorTotal(BigDecimal valorTotal) { this.valorTotal = valorTotal; }
+
+    public BigDecimal getDescontoTotal() { return descontoTotal; }
+    public void setDescontoTotal(BigDecimal descontoTotal) { this.descontoTotal = descontoTotal; }
+
+    public List<PassagemDTO> getPassagens() { return passagens; }
+    public void setPassagens(List<PassagemDTO> passagens) { this.passagens = passagens; }
 }

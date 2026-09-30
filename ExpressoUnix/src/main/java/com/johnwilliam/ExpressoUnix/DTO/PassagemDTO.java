@@ -5,66 +5,42 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
+import com.johnwilliam.ExpressoUnix.Enums.TipoTarifa;
+import com.johnwilliam.ExpressoUnix.Enums.TipoTrecho;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
-
+/** Somente saida: passagens so sao criadas dentro de uma venda (POST /venda). */
 public class PassagemDTO {
     private Long id;
-
-    @NotNull(message = "status e obrigatorio")
+    private long idVenda;
+    private TipoTrecho tipoTrecho;
+    private Long idPassagemVinculada;
     private StatusPassagem status;
-
-    @Positive(message = "idViagem deve ser informado")
     private long idViagem;
-
-    @Positive(message = "idAssento deve ser informado")
     private long idAssento;
-
-    @Positive(message = "idPassageiro deve ser informado")
     private long idPassageiro;
-
-    @NotNull(message = "dataPassagem e obrigatoria")
     private LocalDate dataPassagem;
-
-    @NotNull(message = "horaPassagem e obrigatoria")
     private LocalTime horaPassagem;
-
-    @NotBlank(message = "origem e obrigatoria")
-    @Size(max = 100, message = "origem deve ter no maximo 100 caracteres")
     private String origem;
-
-    @NotBlank(message = "destino e obrigatorio")
-    @Size(max = 100, message = "destino deve ter no maximo 100 caracteres")
     private String destino;
-
-    /** Somente saida: calculada pelo servidor a partir da rota. */
     private BigDecimal distancia;
-
-    /** Somente saida: calculado pelo servidor (rota x classe x tarifa). */
-    private BigDecimal preco;
+    private TipoTarifa tipoTarifa;
+    private BigDecimal tarifaBase;
+    private BigDecimal desconto;
+    private BigDecimal valorPago;
 
     public PassagemDTO() {}
 
-    public PassagemDTO(StatusPassagem status, long idViagem, long idAssento, long idPassageiro,
-                       LocalDate dataPassagem, LocalTime horaPassagem, String origem, String destino,
-                       BigDecimal distancia, BigDecimal preco) {
-        this.status = status;
-        this.idViagem = idViagem;
-        this.idAssento = idAssento;
-        this.idPassageiro = idPassageiro;
-        this.dataPassagem = dataPassagem;
-        this.horaPassagem = horaPassagem;
-        this.origem = origem;
-        this.destino = destino;
-        this.distancia = distancia;
-        this.preco = preco;
-    }
-
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
+    public long getIdVenda() { return idVenda; }
+    public void setIdVenda(long idVenda) { this.idVenda = idVenda; }
+
+    public TipoTrecho getTipoTrecho() { return tipoTrecho; }
+    public void setTipoTrecho(TipoTrecho tipoTrecho) { this.tipoTrecho = tipoTrecho; }
+
+    public Long getIdPassagemVinculada() { return idPassagemVinculada; }
+    public void setIdPassagemVinculada(Long idPassagemVinculada) { this.idPassagemVinculada = idPassagemVinculada; }
 
     public StatusPassagem getStatus() { return status; }
     public void setStatus(StatusPassagem status) { this.status = status; }
@@ -93,6 +69,15 @@ public class PassagemDTO {
     public BigDecimal getDistancia() { return distancia; }
     public void setDistancia(BigDecimal distancia) { this.distancia = distancia; }
 
-    public BigDecimal getPreco() { return preco; }
-    public void setPreco(BigDecimal preco) { this.preco = preco; }
+    public TipoTarifa getTipoTarifa() { return tipoTarifa; }
+    public void setTipoTarifa(TipoTarifa tipoTarifa) { this.tipoTarifa = tipoTarifa; }
+
+    public BigDecimal getTarifaBase() { return tarifaBase; }
+    public void setTarifaBase(BigDecimal tarifaBase) { this.tarifaBase = tarifaBase; }
+
+    public BigDecimal getDesconto() { return desconto; }
+    public void setDesconto(BigDecimal desconto) { this.desconto = desconto; }
+
+    public BigDecimal getValorPago() { return valorPago; }
+    public void setValorPago(BigDecimal valorPago) { this.valorPago = valorPago; }
 }

@@ -59,8 +59,17 @@ public class PrecoApplication {
         cotacao.setPrecoBase(rota.getPrecoBase());
         cotacao.setMultiplicadorClasse(tabela.getMultiplicador());
         cotacao.setPercentualTarifa(tipoTarifa.getPercentual());
-        cotacao.setPreco(calcularPreco(rota.getPrecoBase(), tabela.getMultiplicador(), tipoTarifa));
+        BigDecimal tarifaBase = calcularTarifaBase(rota.getPrecoBase(), tabela.getMultiplicador());
+        BigDecimal preco = calcularPreco(rota.getPrecoBase(), tabela.getMultiplicador(), tipoTarifa);
+        cotacao.setTarifaBase(tarifaBase);
+        cotacao.setDesconto(tarifaBase.subtract(preco));
+        cotacao.setPreco(preco);
         return cotacao;
+    }
+
+    /** Tarifa cheia da passagem (rota x classe), sem desconto de tarifa. */
+    public static BigDecimal calcularTarifaBase(BigDecimal precoBase, BigDecimal multiplicadorClasse) {
+        return precoBase.multiply(multiplicadorClasse).setScale(2, RoundingMode.HALF_UP);
     }
 
     /** Formula pura do preco, arredondada para 2 casas (HALF_UP). */

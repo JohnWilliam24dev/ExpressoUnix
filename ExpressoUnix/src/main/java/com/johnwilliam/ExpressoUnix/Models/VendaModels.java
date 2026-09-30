@@ -1,17 +1,19 @@
 package com.johnwilliam.ExpressoUnix.Models;
 
-
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.johnwilliam.ExpressoUnix.Enums.StatusVenda;
 
+import jakarta.persistence.*;
 
-
+/** Ato comercial: quem vendeu, quando e quanto. Agrupa 1..N passagens (que apontam para a venda). */
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
-
 public class VendaModels {
 
     @Id
@@ -28,28 +30,17 @@ public class VendaModels {
     @Column(name = "id_funcionario", nullable = false)
     private long idFuncionario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_passagem", referencedColumnName = "id", insertable = false, updatable = false)
-    private PassagemModels passagem;
-    @Column(name = "id_passagem", nullable = false)
-    private long idPassagem;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private StatusVenda status;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal valorTotal = BigDecimal.ZERO;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal descontoTotal = BigDecimal.ZERO;
 
     public VendaModels() {}
-
-    public VendaModels(FuncionarioModels funcionario, PassagemModels passagem) {
-        this.funcionario = funcionario;
-        this.idFuncionario = (funcionario != null) ? funcionario.getId() : 0;
-        this.passagem = passagem;
-        this.idPassagem = (passagem != null) ? passagem.getId() : 0;
-    }
-
-    public VendaModels(Long id, FuncionarioModels funcionario, PassagemModels passagem) {
-        this.id = id;
-        this.funcionario = funcionario;
-        this.idFuncionario = (funcionario != null) ? funcionario.getId() : 0;
-        this.passagem = passagem;
-        this.idPassagem = (passagem != null) ? passagem.getId() : 0;
-    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -60,19 +51,15 @@ public class VendaModels {
     public long getIdFuncionario() { return idFuncionario; }
     public void setIdFuncionario(long idFuncionario) { this.idFuncionario = idFuncionario; }
 
-    public long getIdPassagem() { return idPassagem; }
-    public void setIdPassagem(long idPassagem) { this.idPassagem = idPassagem; }
+    public FuncionarioModels getFuncionario() { return funcionario; }
+    public void setFuncionario(FuncionarioModels funcionario) { this.funcionario = funcionario; }
 
+    public StatusVenda getStatus() { return status; }
+    public void setStatus(StatusVenda status) { this.status = status; }
 
-    public PassagemModels getPassagem() { return passagem; }
-    public void setPassagem(PassagemModels passagem) { this.passagem = passagem; }
+    public BigDecimal getValorTotal() { return valorTotal; }
+    public void setValorTotal(BigDecimal valorTotal) { this.valorTotal = valorTotal; }
 
-    public FuncionarioModels getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(FuncionarioModels funcionario) {
-        this.funcionario = funcionario;
-    }
-    
+    public BigDecimal getDescontoTotal() { return descontoTotal; }
+    public void setDescontoTotal(BigDecimal descontoTotal) { this.descontoTotal = descontoTotal; }
 }

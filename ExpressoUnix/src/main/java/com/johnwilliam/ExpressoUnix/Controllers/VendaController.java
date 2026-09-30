@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import com.johnwilliam.ExpressoUnix.DTO.VendaDTO;
+import com.johnwilliam.ExpressoUnix.DTO.VendaRequestDTO;
 import com.johnwilliam.ExpressoUnix.Facade.VendaFacade;
 
 import jakarta.validation.Valid;
@@ -22,11 +23,11 @@ public class VendaController {
         this.vendaFacade = vendaFacade;
     }
 
+    /** Devolve a venda criada com suas passagens (IDs, precos e status). */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createVenda(@Valid @RequestBody VendaDTO venda) {
-        venda.setId(null); // criacao sempre gera um novo ID
-        vendaFacade.createVenda(venda);
+    public VendaDTO createVenda(@Valid @RequestBody VendaRequestDTO venda) {
+        return vendaFacade.createVenda(venda);
     }
 
     @GetMapping("/{id}")
@@ -37,18 +38,5 @@ public class VendaController {
     @GetMapping
     public List<VendaDTO> getAllVendas() {
         return vendaFacade.getAllVenda();
-    }
-
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateVenda(@PathVariable long id, @Valid @RequestBody VendaDTO venda) {
-        venda.setId(id); // o ID da URL e a fonte de verdade
-        vendaFacade.updateVenda(venda);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteVenda(@PathVariable long id) {
-        vendaFacade.deleteVenda(id);
     }
 }

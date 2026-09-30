@@ -14,7 +14,9 @@ Todos os recursos seguem o mesmo padrão CRUD:
 
 Recursos: `/veiculo`, `/viagem`, `/assento`, `/passageiro`, `/funcionario`, `/passagem`, `/venda`, `/rota`.
 
-Exceção ao padrão: `POST /rota` devolve a rota criada (com `id`) no body.
+Exceções ao padrão CRUD:
+- `POST /rota` e `POST /venda` devolvem o recurso criado (com `id`) no body.
+- `/venda` e `/passagem` são **somente criação via venda + consulta**: `POST /venda` (cria venda com passagens), `GET /venda`, `GET /venda/{id}`, `GET /passagem`, `GET /passagem/{id}`. Não há `PUT`/`DELETE` (cancelamento entra no bloco de cancelamento).
 
 Relacionamentos são sempre referenciados por ID (`idVeiculo`, `idViagem`, `idAssento`...), tanto na entrada quanto na saída.
 
@@ -71,15 +73,17 @@ Ao criar, os assentos `1..capacidade` do veículo são gerados automaticamente c
 { "nome": "Joao", "email": "joao@empresa.com", "telefone": "75988888888", "cpf": "12345678901", "dataNascimento": "1985-01-10", "cargo": "Bilheteiro" }
 ```
 
-### Passagem
+### Passagem (somente saída)
 ```json
 {
-  "status": "Valido", "idViagem": 1, "idAssento": 10, "idPassageiro": 1,
+  "id": 7, "idVenda": 3, "tipoTrecho": "IDA", "idPassagemVinculada": null, "status": "Emitida",
+  "idViagem": 1, "idAssento": 10, "idPassageiro": 1,
   "dataPassagem": "2026-10-15", "horaPassagem": "08:30:00",
-  "origem": "Feira de Santana", "destino": "Salvador"
+  "origem": "Feira de Santana", "destino": "Salvador", "distancia": 108.50,
+  "tipoTarifa": "INTEIRA", "tarifaBase": 56.25, "desconto": 0.00, "valorPago": 56.25
 }
 ```
-`distancia` e `preco` **não são aceitos no body**: o servidor calcula (rota × classe × tarifa) e devolve nas consultas.
+`status`: `Reservada`, `Emitida`, `Utilizada`, `Cancelada`, `Remarcada`, `Expirada` (hoje só `Emitida` é gerado). `tipoTrecho`: `AVULSA`, `IDA`, `VOLTA`. `origem`, `destino`, data e hora são copiados da viagem pelo servidor.
 
 ### Rota
 ```json
@@ -100,15 +104,35 @@ Na primeira subida a tabela é populada com: Convencional 1.00, Executivo 1.25, 
 `preco = precoBase da rota × multiplicador da classe do veículo × percentual da tarifa`, arredondado a 2 casas (HALF_UP). Retorna `400` se não houver rota cadastrada para origem/destino da viagem.
 
 ### Venda
+`POST /venda` cria a venda com N passagens em uma única transação (tudo ou nada). O body **não aceita preço**:
 ```json
-{ "idFuncionario": 1, "idPassagem": 1 }
+{
+  "idFuncionario": 1,
+  "itens": [
+    { "tipoTrecho": "IDA",   "idViagem": 10, "idAssento": 101, "idPassageiro": 5 },
+    { "tipoTrecho": "VOLTA", "idViagem": 18, "idAssento": 220, "idPassageiro": 5, "vinculadaAoItem": 0 }
+  ]
+}
 ```
-`horarioEmissao` é preenchido pelo banco e devolvido nas consultas.
+`tipoTarifa` é opcional por item (padrão `INTEIRA`). `vinculadaAoItem` é o índice (base 0) do item `IDA` na mesma lista e só vale para `VOLTA`. `idFuncionario` no body é **temporário**: sai quando a autenticação entrar (VEN-08).
+
+Resposta `201`:
+```json
+{
+  "id": 3, "horarioEmissao": "2026-10-01T10:00:00", "idFuncionario": 1, "status": "Finalizada",
+  "valorTotal": 112.50, "descontoTotal": 0.00,
+  "passagens": [ { "id": 7, "tipoTrecho": "IDA", "...": "..." }, { "id": 8, "tipoTrecho": "VOLTA", "idPassagemVinculada": 7, "...": "..." } ]
+}
+```
+Enquanto o bloco de pagamento não existe, a venda nasce `Finalizada` e as passagens `Emitida`.
 
 ## Regras de negócio
 
-- Emitir uma passagem exige que o assento pertença à viagem (400) e esteja `Livre` (409); o assento passa a `Ocupado` na mesma transação.
-- Excluir uma passagem libera o assento.
-- Não é permitido trocar viagem ou assento de uma passagem existente via `PUT` (400): exclua e emita outra.
+- Uma venda tem 1..N passagens. Ida e volta são **passagens independentes**, compradas juntas; o vínculo (`tipoTrecho` + `idPassagemVinculada`) é só informativo.
+- Toda a venda é atômica: se qualquer item falhar, nenhuma passagem é emitida e nenhum assento é ocupado.
+- Cada item exige viagem, passageiro e assento existentes (404); o assento deve pertencer à viagem (400) e estar `Livre` (409). O assento passa a `Ocupado` na mesma transação.
+- O mesmo assento da mesma viagem não pode aparecer duas vezes na venda (400).
+- `VOLTA` exige `vinculadaAoItem` apontando para um item `IDA`; toda `IDA` exige exatamente uma `VOLTA`; `AVULSA` e `IDA` não aceitam `vinculadaAoItem` (400).
+- A viagem da volta deve partir depois da ida (400). Com `expressounix.venda.volta-origem-igual-destino-ida=true` (padrão), a origem da volta também deve ser o destino da ida.
 - Um assento só pode ter uma passagem por viagem (constraint `id_viagem + id_assento`); violação resulta em 409.
-- Venda exige funcionário e passagem existentes (404).
+- Venda exige funcionário existente (404).

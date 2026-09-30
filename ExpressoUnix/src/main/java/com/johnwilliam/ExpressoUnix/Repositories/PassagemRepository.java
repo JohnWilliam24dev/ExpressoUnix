@@ -2,11 +2,9 @@ package com.johnwilliam.ExpressoUnix.Repositories;
 
 import java.util.List;
 
-
 import org.springframework.stereotype.Repository;
 
 import com.johnwilliam.ExpressoUnix.Exceptions.ResourceNotFoundException;
-
 import com.johnwilliam.ExpressoUnix.Models.PassagemModels;
 import com.johnwilliam.ExpressoUnix.Repositories.JPA.PassagemJPA;
 
@@ -17,28 +15,22 @@ public class PassagemRepository {
     public PassagemRepository(PassagemJPA passagemJPA) {
         this.passagemJPA = passagemJPA;
     }
-    
-    public void createPassagem(PassagemModels passagem) {
-        passagemJPA.save(passagem);
+
+    /** Devolve a passagem salva, ja com o ID gerado pelo banco. */
+    public PassagemModels createPassagem(PassagemModels passagem) {
+        return passagemJPA.save(passagem);
     }
-    
+
     public PassagemModels getPassagemById(long id) {
         return passagemJPA.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Passagem", id));
     }
-    
+
     public List<PassagemModels> getAllPassagem() {
         return passagemJPA.findAll();
     }
-    
-    public void updatePassagem(PassagemModels passagem) {
-        if (passagem.getId() == null || !passagemJPA.existsById(passagem.getId())) {
-            throw new ResourceNotFoundException("Passagem", passagem.getId());
-        }
-        passagemJPA.save(passagem);
-    }
-    
-    public void deletePassagem(long id) {
-        passagemJPA.deleteById(id);
+
+    public List<PassagemModels> getByVenda(long idVenda) {
+        return passagemJPA.findByIdVendaOrderByIdAsc(idVenda);
     }
 }

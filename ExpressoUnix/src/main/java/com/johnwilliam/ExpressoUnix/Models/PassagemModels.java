@@ -1,22 +1,20 @@
 package com.johnwilliam.ExpressoUnix.Models;
 
-
-
-import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
+import com.johnwilliam.ExpressoUnix.Enums.TipoTarifa;
+import com.johnwilliam.ExpressoUnix.Enums.TipoTrecho;
 
+import jakarta.persistence.*;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"id_viagem", "id_assento"})})
-
 public class PassagemModels {
 
     @Id
@@ -24,8 +22,25 @@ public class PassagemModels {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private StatusPassagem status;
+
+    @ManyToOne
+    @JoinColumn(name = "id_venda", referencedColumnName = "id", insertable = false, updatable = false)
+    private VendaModels venda;
+    @Column(name = "id_venda", nullable = false)
+    private long idVenda;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
+    private TipoTrecho tipoTrecho = TipoTrecho.AVULSA;
+
+    /** Vinculo informativo: na VOLTA aponta para a IDA. Nunca comanda o comportamento das passagens. */
+    @ManyToOne
+    @JoinColumn(name = "id_passagem_vinculada", referencedColumnName = "id", insertable = false, updatable = false)
+    private PassagemModels passagemVinculada;
+    @Column(name = "id_passagem_vinculada")
+    private Long idPassagemVinculada;
 
     @ManyToOne
     @JoinColumn(name = "id_viagem", referencedColumnName = "id", insertable = false, updatable = false)
@@ -45,6 +60,8 @@ public class PassagemModels {
     @Column(name = "id_passageiro", nullable = false)
     private long idPassageiro;
 
+    // origem, destino, data e hora repetem dados da Viagem (decisao em aberto 2 do pdv-features.md);
+    // hoje sao preenchidos pelo servidor a partir da viagem.
     @Column(nullable = false)
     private LocalDate dataPassagem;
 
@@ -60,31 +77,22 @@ public class PassagemModels {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal distancia;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal preco;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private TipoTarifa tipoTarifa = TipoTarifa.INTEIRA;
 
-    @OneToMany(mappedBy = "passagem", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private List<VendaModels> vendas;
+    /** Tarifa cheia da passagem (rota x classe), antes de qualquer desconto. */
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal tarifaBase;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal desconto = BigDecimal.ZERO;
+
+    /** Valor final da passagem (tarifaBase - desconto). Base de qualquer reembolso. */
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal valorPago;
 
     public PassagemModels() {}
-
-    public PassagemModels(StatusPassagem status, long viagem, long assento, long passageiro,
-                    LocalDate dataPassagem, LocalTime horaPassagem, String origem, String destino,
-                    BigDecimal distancia, BigDecimal preco) {
-        this.status = status;
-       
-        this.idViagem = viagem ;
-        
-        this.idAssento = assento ;
-        
-        this.idPassageiro = passageiro;
-        this.dataPassagem = dataPassagem;
-        this.horaPassagem = horaPassagem;
-        this.origem = origem;
-        this.destino = destino;
-        this.distancia = distancia;
-        this.preco = preco;
-    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -92,11 +100,35 @@ public class PassagemModels {
     public StatusPassagem getStatus() { return status; }
     public void setStatus(StatusPassagem status) { this.status = status; }
 
+    public VendaModels getVenda() { return venda; }
+    public void setVenda(VendaModels venda) { this.venda = venda; }
+
+    public long getIdVenda() { return idVenda; }
+    public void setIdVenda(long idVenda) { this.idVenda = idVenda; }
+
+    public TipoTrecho getTipoTrecho() { return tipoTrecho; }
+    public void setTipoTrecho(TipoTrecho tipoTrecho) { this.tipoTrecho = tipoTrecho; }
+
+    public PassagemModels getPassagemVinculada() { return passagemVinculada; }
+    public void setPassagemVinculada(PassagemModels passagemVinculada) { this.passagemVinculada = passagemVinculada; }
+
+    public Long getIdPassagemVinculada() { return idPassagemVinculada; }
+    public void setIdPassagemVinculada(Long idPassagemVinculada) { this.idPassagemVinculada = idPassagemVinculada; }
+
+    public ViagemModels getViagem() { return viagem; }
+    public void setViagem(ViagemModels viagem) { this.viagem = viagem; }
+
     public long getIdViagem() { return idViagem; }
     public void setIdViagem(long idViagem) { this.idViagem = idViagem; }
 
+    public AssentoModels getAssento() { return assento; }
+    public void setAssento(AssentoModels assento) { this.assento = assento; }
+
     public long getIdAssento() { return idAssento; }
     public void setIdAssento(long idAssento) { this.idAssento = idAssento; }
+
+    public PassageiroModels getPassageiro() { return passageiro; }
+    public void setPassageiro(PassageiroModels passageiro) { this.passageiro = passageiro; }
 
     public long getIdPassageiro() { return idPassageiro; }
     public void setIdPassageiro(long idPassageiro) { this.idPassageiro = idPassageiro; }
@@ -116,40 +148,15 @@ public class PassagemModels {
     public BigDecimal getDistancia() { return distancia; }
     public void setDistancia(BigDecimal distancia) { this.distancia = distancia; }
 
-    public BigDecimal getPreco() { return preco; }
-    public void setPreco(BigDecimal preco) { this.preco = preco; }
+    public TipoTarifa getTipoTarifa() { return tipoTarifa; }
+    public void setTipoTarifa(TipoTarifa tipoTarifa) { this.tipoTarifa = tipoTarifa; }
 
-    public ViagemModels getViagem() {
-        return viagem;
-    }
+    public BigDecimal getTarifaBase() { return tarifaBase; }
+    public void setTarifaBase(BigDecimal tarifaBase) { this.tarifaBase = tarifaBase; }
 
-    public void setViagem(ViagemModels viagem) {
-        this.viagem = viagem;
-    }
+    public BigDecimal getDesconto() { return desconto; }
+    public void setDesconto(BigDecimal desconto) { this.desconto = desconto; }
 
-    public AssentoModels getAssento() {
-        return assento;
-    }
-
-    public void setAssento(AssentoModels assento) {
-        this.assento = assento;
-    }
-
-    public PassageiroModels getPassageiro() {
-        return passageiro;
-    }
-
-    public void setPassageiro(PassageiroModels passageiro) {
-        this.passageiro = passageiro;
-    }
-
-    public List<VendaModels> getVendas() {
-        return vendas;
-    }
-
-    public void setVendas(List<VendaModels> vendas) {
-        this.vendas = vendas;
-    }
-    
-
+    public BigDecimal getValorPago() { return valorPago; }
+    public void setValorPago(BigDecimal valorPago) { this.valorPago = valorPago; }
 }
