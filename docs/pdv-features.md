@@ -133,8 +133,8 @@ Aberta ──(pagamentos cobrem o total)──► Finalizada
 |---|---|---|---|---|
 | CAT-01 | Cadastro de veículos (classe, capacidade 2–60, status) | MVP | ✅ | Capacidade validada; veículo indisponível não pode ser usado em viagem. |
 | CAT-02 | Cadastro de viagens (veículo, data, hora, origem, destino) | MVP | ✅ | Ao criar, gera assentos `1..capacidade` como `Livre`, na mesma transação. |
-| CAT-03 | Cadastro de rotas (origem, destino, distância, preço base) | MVP | ❌ | Substitui a distância obtida por scraping no handler Fastify como fonte de preço. |
-| CAT-04 | Tabela de preços por classe e tipo de tarifa | MVP | ❌ | Preço = `precoBase` × multiplicador da classe × percentual do tipo de tarifa. |
+| CAT-03 | Cadastro de rotas (origem, destino, distância, preço base) | MVP | ✅ | Substitui a distância obtida por scraping no handler Fastify como fonte de preço. |
+| CAT-04 | Tabela de preços por classe e tipo de tarifa | MVP | ✅ | Preço = `precoBase` × multiplicador da classe × percentual do tipo de tarifa. |
 | CAT-05 | Busca de viagens por origem, destino e data | MVP | ❌ | Retorna apenas viagens futuras, com quantidade de assentos livres e preço calculado. |
 | CAT-06 | Mapa de assentos da viagem | MVP | ❌ | Lista todos os assentos com status (`Livre`, `Reservado`, `Ocupado`). |
 | CAT-07 | Paginação e ordenação nas listagens | F2 | ❌ | Todas as listagens `GET /recurso` aceitam `page`, `size`, `sort`. |
@@ -159,7 +159,7 @@ Aberta ──(pagamentos cobrem o total)──► Finalizada
 | VEN-02 | Compra de **ida e volta** na mesma venda | MVP | ❌ | Gera duas passagens independentes (`IDA` e `VOLTA`) vinculadas apenas informativamente. Ver [1.2](#12-ida-e-volta-são-passagens-diferentes-compradas-juntas). |
 | VEN-03 | Validação de coerência ida × volta | MVP | ❌ | Viagem da volta deve ser posterior à da ida. Origem da volta = destino da ida (regra configurável). |
 | VEN-04 | Assento deve pertencer à viagem e estar livre | MVP | ✅ | Pertencimento → `400`; ocupado → `409`. |
-| VEN-05 | Cálculo de preço no servidor | MVP | ❌ | O body não contém preço; o servidor calcula por passagem. |
+| VEN-05 | Cálculo de preço no servidor | MVP | ✅ | O body não contém preço; o servidor calcula por passagem. |
 | VEN-06 | Tipos de tarifa (inteira, meia, gratuidade) | F2 | ❌ | Percentuais parametrizáveis; passagem guarda `tarifaBase`, `desconto` e `valorPago`. |
 | VEN-07 | Desconto promocional de ida e volta | F2 | ❌ | Rateado entre as duas passagens no momento da venda. |
 | VEN-08 | Operador vem do usuário autenticado | MVP | ❌ | `idFuncionario` não é aceito no body. |

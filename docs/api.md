@@ -12,7 +12,9 @@ Todos os recursos seguem o mesmo padrão CRUD:
 | PUT | `/{recurso}/{id}` | `204 No Content` | Atualiza (o `id` da URL é a fonte de verdade) |
 | DELETE | `/{recurso}/{id}` | `204 No Content` | Remove |
 
-Recursos: `/veiculo`, `/viagem`, `/assento`, `/passageiro`, `/funcionario`, `/passagem`, `/venda`.
+Recursos: `/veiculo`, `/viagem`, `/assento`, `/passageiro`, `/funcionario`, `/passagem`, `/venda`, `/rota`.
+
+Exceção ao padrão: `POST /rota` devolve a rota criada (com `id`) no body.
 
 Relacionamentos são sempre referenciados por ID (`idVeiculo`, `idViagem`, `idAssento`...), tanto na entrada quanto na saída.
 
@@ -74,9 +76,28 @@ Ao criar, os assentos `1..capacidade` do veículo são gerados automaticamente c
 {
   "status": "Valido", "idViagem": 1, "idAssento": 10, "idPassageiro": 1,
   "dataPassagem": "2026-10-15", "horaPassagem": "08:30:00",
-  "origem": "Feira de Santana", "destino": "Salvador", "distancia": 108.5, "preco": 45.00
+  "origem": "Feira de Santana", "destino": "Salvador"
 }
 ```
+`distancia` e `preco` **não são aceitos no body**: o servidor calcula (rota × classe × tarifa) e devolve nas consultas.
+
+### Rota
+```json
+{ "origem": "Feira de Santana", "destino": "Salvador", "distanciaKm": 108.50, "precoBase": 45.00 }
+```
+Origem e destino não podem ser iguais (400); o par origem/destino é único, sem diferenciar maiúsculas (409).
+
+### Tabela de preços
+`GET /tabela-preco` lista o multiplicador de cada classe. `PUT /tabela-preco/{classe}` (204) atualiza:
+```json
+{ "multiplicador": 1.25 }
+```
+Na primeira subida a tabela é populada com: Convencional 1.00, Executivo 1.25, SemiLeito 1.50, Leito 1.80, Premium 2.20.
+
+### Cotação de preço
+`GET /preco/cotacao?idViagem=1&tipoTarifa=INTEIRA` (`tipoTarifa` é opcional; hoje só existe `INTEIRA`).
+
+`preco = precoBase da rota × multiplicador da classe do veículo × percentual da tarifa`, arredondado a 2 casas (HALF_UP). Retorna `400` se não houver rota cadastrada para origem/destino da viagem.
 
 ### Venda
 ```json

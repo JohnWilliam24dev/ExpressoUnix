@@ -6,11 +6,9 @@ import java.time.LocalTime;
 
 import com.johnwilliam.ExpressoUnix.Enums.StatusPassagem;
 
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
 public class PassagemDTO {
@@ -42,14 +40,10 @@ public class PassagemDTO {
     @Size(max = 100, message = "destino deve ter no maximo 100 caracteres")
     private String destino;
 
-    @NotNull(message = "distancia e obrigatoria")
-    @Positive(message = "distancia deve ser maior que zero")
-    @Digits(integer = 8, fraction = 2, message = "distancia aceita ate 8 inteiros e 2 decimais")
+    /** Somente saida: calculada pelo servidor a partir da rota. */
     private BigDecimal distancia;
 
-    @NotNull(message = "preco e obrigatorio")
-    @PositiveOrZero(message = "preco nao pode ser negativo")
-    @Digits(integer = 8, fraction = 2, message = "preco aceita ate 8 inteiros e 2 decimais")
+    /** Somente saida: calculado pelo servidor (rota x classe x tarifa). */
     private BigDecimal preco;
 
     public PassagemDTO() {}
