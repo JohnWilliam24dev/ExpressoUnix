@@ -8,3 +8,5 @@ O Expresso Unix consiste em uma API/Backend versátil para qualquer empresa de t
 - [API](docs/api.md)
 - [Features do PDV](docs/pdv-features.md)
 
+
+> Push de teste via Claude — 2026-09-30
