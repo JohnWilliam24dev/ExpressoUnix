@@ -111,6 +111,9 @@ Na primeira subida a tabela é populada com: Convencional 1.00, Executivo 1.25, 
   "itens": [
     { "tipoTrecho": "IDA",   "idViagem": 10, "idAssento": 101, "idPassageiro": 5 },
     { "tipoTrecho": "VOLTA", "idViagem": 18, "idAssento": 220, "idPassageiro": 5, "vinculadaAoItem": 0 }
+  ],
+  "pagamentos": [
+    { "forma": "DINHEIRO", "valor": 90.00, "valorRecebido": 100.00 }
   ]
 }
 ```
@@ -121,10 +124,13 @@ Resposta `201`:
 {
   "id": 3, "horarioEmissao": "2026-10-01T10:00:00", "idFuncionario": 1, "status": "Finalizada",
   "valorTotal": 112.50, "descontoTotal": 0.00,
-  "passagens": [ { "id": 7, "tipoTrecho": "IDA", "...": "..." }, { "id": 8, "tipoTrecho": "VOLTA", "idPassagemVinculada": 7, "...": "..." } ]
+  "passagens": [ { "id": 7, "tipoTrecho": "IDA", "...": "..." }, { "id": 8, "tipoTrecho": "VOLTA", "idPassagemVinculada": 7, "...": "..." } ],
+  "pagamentos": [
+    { "id": 1, "idVenda": 3, "forma": "DINHEIRO", "valor": 90.00, "valorRecebido": 100.00, "troco": 10.00, "status": "Aprovado", "horario": "2026-10-01T10:00:00" }
+  ]
 }
 ```
-Enquanto o bloco de pagamento não existe, a venda nasce `Finalizada` e as passagens `Emitida`.
+`forma`: `DINHEIRO`, `DEBITO`, `CREDITO`, `PIX`. Não há gateway: todo pagamento válido é registrado como `Aprovado`. Como os pagamentos precisam cobrir o total na própria requisição, a venda já nasce `Finalizada` e as passagens `Emitida`.
 
 ## Regras de negócio
 
@@ -136,3 +142,6 @@ Enquanto o bloco de pagamento não existe, a venda nasce `Finalizada` e as passa
 - A viagem da volta deve partir depois da ida (400). Com `expressounix.venda.volta-origem-igual-destino-ida=true` (padrão), a origem da volta também deve ser o destino da ida.
 - Um assento só pode ter uma passagem por viagem (constraint `id_viagem + id_assento`); violação resulta em 409.
 - Venda exige funcionário existente (404).
+- O preço total é calculado pelo servidor. A soma dos `valor` dos pagamentos deve ser **exatamente** esse total (400 se faltar ou sobrar); a sobra só existe como troco de dinheiro.
+- `DINHEIRO` exige `valorRecebido` maior ou igual ao `valor`, e `troco = valorRecebido - valor`. Nas demais formas, `valorRecebido` não pode ser informado (400).
+- Uma venda aceita mais de um pagamento (pagamento misto).

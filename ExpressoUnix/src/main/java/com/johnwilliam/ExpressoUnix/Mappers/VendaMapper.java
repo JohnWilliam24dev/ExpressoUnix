@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.johnwilliam.ExpressoUnix.DTO.VendaDTO;
+import com.johnwilliam.ExpressoUnix.Models.PagamentoModels;
 import com.johnwilliam.ExpressoUnix.Models.PassagemModels;
 import com.johnwilliam.ExpressoUnix.Models.VendaModels;
 
@@ -12,12 +13,14 @@ import com.johnwilliam.ExpressoUnix.Models.VendaModels;
 @Component
 public class VendaMapper {
     private final PassagemMapper passagemMapper;
+    private final PagamentoMapper pagamentoMapper;
 
-    public VendaMapper(PassagemMapper passagemMapper) {
+    public VendaMapper(PassagemMapper passagemMapper, PagamentoMapper pagamentoMapper) {
         this.passagemMapper = passagemMapper;
+        this.pagamentoMapper = pagamentoMapper;
     }
 
-    public VendaDTO modelToDTO(VendaModels model, List<PassagemModels> passagens) {
+    public VendaDTO modelToDTO(VendaModels model, List<PassagemModels> passagens, List<PagamentoModels> pagamentos) {
         VendaDTO dto = new VendaDTO();
         dto.setId(model.getId());
         dto.setHorarioEmissao(model.getHorarioEmissao());
@@ -26,6 +29,7 @@ public class VendaMapper {
         dto.setValorTotal(model.getValorTotal());
         dto.setDescontoTotal(model.getDescontoTotal());
         dto.setPassagens(passagemMapper.modelToDTOList(passagens));
+        dto.setPagamentos(pagamentoMapper.modelToDTOList(pagamentos));
         return dto;
     }
 }

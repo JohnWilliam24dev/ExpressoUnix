@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.johnwilliam.ExpressoUnix.DTO.CotacaoDTO;
 import com.johnwilliam.ExpressoUnix.DTO.ItemVendaDTO;
+import com.johnwilliam.ExpressoUnix.DTO.PagamentoRequestDTO;
 import com.johnwilliam.ExpressoUnix.DTO.VendaDTO;
 import com.johnwilliam.ExpressoUnix.DTO.VendaRequestDTO;
 import com.johnwilliam.ExpressoUnix.Enums.StatusAssento;
@@ -20,11 +21,13 @@ import com.johnwilliam.ExpressoUnix.Exceptions.BusinessException;
 import com.johnwilliam.ExpressoUnix.Exceptions.ConflictException;
 import com.johnwilliam.ExpressoUnix.Mappers.VendaMapper;
 import com.johnwilliam.ExpressoUnix.Models.AssentoModels;
+import com.johnwilliam.ExpressoUnix.Models.PagamentoModels;
 import com.johnwilliam.ExpressoUnix.Models.PassagemModels;
 import com.johnwilliam.ExpressoUnix.Models.VendaModels;
 import com.johnwilliam.ExpressoUnix.Models.ViagemModels;
 import com.johnwilliam.ExpressoUnix.Repositories.AssentoRepository;
 import com.johnwilliam.ExpressoUnix.Repositories.FuncionarioRepository;
+import com.johnwilliam.ExpressoUnix.Repositories.PagamentoRepository;
 import com.johnwilliam.ExpressoUnix.Repositories.PassageiroRepository;
 import com.johnwilliam.ExpressoUnix.Repositories.PassagemRepository;
 import com.johnwilliam.ExpressoUnix.Repositories.VendaRepository;
@@ -41,13 +44,16 @@ public class VendaApplication {
     private final AssentoRepository assentoRepository;
     private final AssentoApplication assentoApplication;
     private final PrecoApplication precoApplication;
+    private final PagamentoApplication pagamentoApplication;
+    private final PagamentoRepository pagamentoRepository;
     private final ValidadorTrechos validadorTrechos;
 
     public VendaApplication(VendaRepository vendaRepository, VendaMapper vendaMapper,
                             FuncionarioRepository funcionarioRepository, PassagemRepository passagemRepository,
                             PassageiroRepository passageiroRepository, ViagemRepository viagemRepository,
                             AssentoRepository assentoRepository, AssentoApplication assentoApplication,
-                            PrecoApplication precoApplication, ValidadorTrechos validadorTrechos) {
+                            PrecoApplication precoApplication, PagamentoApplication pagamentoApplication,
+                            PagamentoRepository pagamentoRepository, ValidadorTrechos validadorTrechos) {
         this.vendaRepository = vendaRepository;
         this.vendaMapper = vendaMapper;
         this.funcionarioRepository = funcionarioRepository;
@@ -57,6 +63,8 @@ public class VendaApplication {
         this.assentoRepository = assentoRepository;
         this.assentoApplication = assentoApplication;
         this.precoApplication = precoApplication;
+        this.pagamentoApplication = pagamentoApplication;
+        this.pagamentoRepository = pagamentoRepository;
         this.validadorTrechos = validadorTrechos;
     }
 
@@ -64,7 +72,9 @@ public class VendaApplication {
      * Cria a venda com N passagens em uma unica transacao (tudo ou nada, VEN-01):
      * qualquer falha desfaz a venda, as passagens e a ocupacao dos assentos.
      *
-     * Ainda nao ha pagamento (bloco Pagamento): a venda nasce Finalizada e as passagens Emitidas.
+     * Os pagamentos vao no mesmo request e precisam cobrir exatamente o total calculado pelo servidor;
+     * como tudo e validado antes de gravar, a venda so existe ja paga: nasce Finalizada e as passagens Emitidas
+     * (o estado Aberta/Reservada so faz sentido com a reserva temporaria, fase 2).
      */
     @Transactional
     public VendaDTO createVenda(VendaRequestDTO request) {
@@ -72,12 +82,22 @@ public class VendaApplication {
 
         funcionarioRepository.getFuncionarioById(request.getIdFuncionario()); // 404
         validadorTrechos.validarEstrutura(itens); // 400
+        List<PagamentoRequestDTO> pagamentos = request.getPagamentos();
+        for (int i = 0; i < pagamentos.size(); i++) {
+            PagamentoApplication.validarPagamento(pagamentos.get(i), i); // 400
+        }
 
         List<ViagemModels> viagens = new ArrayList<>();
+        List<CotacaoDTO> cotacoes = new ArrayList<>();
+        BigDecimal totalCotado = BigDecimal.ZERO;
         for (int i = 0; i < itens.size(); i++) {
             viagens.add(validarItem(itens.get(i), i));
+            CotacaoDTO cotacao = precoApplication.cotar(itens.get(i).getIdViagem(), tarifaDe(itens.get(i))); // 400 sem rota
+            cotacoes.add(cotacao);
+            totalCotado = totalCotado.add(cotacao.getPreco());
         }
         validadorTrechos.validarCoerencia(itens, viagens);
+        PagamentoApplication.validarCobertura(totalCotado, pagamentos); // 400
 
         VendaModels venda = new VendaModels();
         venda.setIdFuncionario(request.getIdFuncionario());
@@ -94,7 +114,7 @@ public class VendaApplication {
                     continue;
                 }
                 Long idIda = volta ? emitidas[item.getVinculadaAoItem()].getId() : null;
-                emitidas[i] = emitirPassagem(venda.getId(), item, viagens.get(i), idIda);
+                emitidas[i] = emitirPassagem(venda.getId(), item, viagens.get(i), cotacoes.get(i), idIda);
             }
         }
 
@@ -108,18 +128,21 @@ public class VendaApplication {
         venda.setDescontoTotal(descontoTotal);
         vendaRepository.updateVenda(venda);
 
-        return vendaMapper.modelToDTO(venda, List.of(emitidas));
+        List<PagamentoModels> registrados = pagamentoApplication.registrar(venda.getId(), pagamentos);
+
+        return vendaMapper.modelToDTO(venda, List.of(emitidas), registrados);
     }
 
     public VendaDTO getVendaById(long id) {
         VendaModels venda = vendaRepository.getVendaById(id);
-        return vendaMapper.modelToDTO(venda, passagemRepository.getByVenda(id));
+        return vendaMapper.modelToDTO(venda, passagemRepository.getByVenda(id), pagamentoRepository.getByVenda(id));
     }
 
     public List<VendaDTO> getAllVenda() {
         List<VendaDTO> vendas = new ArrayList<>();
         for (VendaModels venda : vendaRepository.getAllVenda()) {
-            vendas.add(vendaMapper.modelToDTO(venda, passagemRepository.getByVenda(venda.getId())));
+            vendas.add(vendaMapper.modelToDTO(venda, passagemRepository.getByVenda(venda.getId()),
+                    pagamentoRepository.getByVenda(venda.getId())));
         }
         return vendas;
     }
@@ -140,9 +163,13 @@ public class VendaApplication {
         return viagem;
     }
 
-    private PassagemModels emitirPassagem(long idVenda, ItemVendaDTO item, ViagemModels viagem, Long idPassagemIda) {
-        TipoTarifa tipoTarifa = item.getTipoTarifa() == null ? TipoTarifa.INTEIRA : item.getTipoTarifa();
-        CotacaoDTO cotacao = precoApplication.cotar(item.getIdViagem(), tipoTarifa);
+    private TipoTarifa tarifaDe(ItemVendaDTO item) {
+        return item.getTipoTarifa() == null ? TipoTarifa.INTEIRA : item.getTipoTarifa();
+    }
+
+    private PassagemModels emitirPassagem(long idVenda, ItemVendaDTO item, ViagemModels viagem,
+                                          CotacaoDTO cotacao, Long idPassagemIda) {
+        TipoTarifa tipoTarifa = tarifaDe(item);
 
         PassagemModels passagem = new PassagemModels();
         passagem.setStatus(StatusPassagem.Emitida);

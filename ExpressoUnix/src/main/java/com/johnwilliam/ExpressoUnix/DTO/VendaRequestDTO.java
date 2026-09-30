@@ -17,10 +17,17 @@ public class VendaRequestDTO {
     @Valid
     private List<ItemVendaDTO> itens;
 
+    @NotEmpty(message = "a venda deve ter ao menos um pagamento")
+    @Valid
+    private List<PagamentoRequestDTO> pagamentos;
+
     public VendaRequestDTO() {}
 
     public long getIdFuncionario() { return idFuncionario; }
     public void setIdFuncionario(long idFuncionario) { this.idFuncionario = idFuncionario; }
+
+    public List<PagamentoRequestDTO> getPagamentos() { return pagamentos; }
+    public void setPagamentos(List<PagamentoRequestDTO> pagamentos) { this.pagamentos = pagamentos; }
 
     public List<ItemVendaDTO> getItens() { return itens; }
     public void setItens(List<ItemVendaDTO> itens) { this.itens = itens; }

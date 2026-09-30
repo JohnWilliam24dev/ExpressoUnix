@@ -15,6 +15,7 @@ public class VendaDTO {
     private BigDecimal valorTotal;
     private BigDecimal descontoTotal;
     private List<PassagemDTO> passagens;
+    private List<PagamentoDTO> pagamentos;
 
     public VendaDTO() {}
 
@@ -35,6 +36,9 @@ public class VendaDTO {
 
     public BigDecimal getDescontoTotal() { return descontoTotal; }
     public void setDescontoTotal(BigDecimal descontoTotal) { this.descontoTotal = descontoTotal; }
+
+    public List<PagamentoDTO> getPagamentos() { return pagamentos; }
+    public void setPagamentos(List<PagamentoDTO> pagamentos) { this.pagamentos = pagamentos; }
 
     public List<PassagemDTO> getPassagens() { return passagens; }
     public void setPassagens(List<PassagemDTO> passagens) { this.passagens = passagens; }

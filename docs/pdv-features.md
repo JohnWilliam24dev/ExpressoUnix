@@ -181,10 +181,10 @@ Aberta ──(pagamentos cobrem o total)──► Finalizada
 
 | ID | Feature | Prioridade | Situação | Regras / critérios de aceite |
 |---|---|---|---|---|
-| PAG-01 | Registro de pagamento por forma (dinheiro, débito, crédito, Pix) | MVP | ❌ | Soma dos pagamentos deve cobrir o `valorTotal` da venda. |
-| PAG-02 | Pagamento em dinheiro com cálculo de troco | MVP | ❌ | `troco = valorRecebido − valor`; nunca negativo. |
-| PAG-03 | Pagamento misto (mais de uma forma na mesma venda) | F2 | ❌ | Lista de pagamentos por venda. |
-| PAG-04 | Pagamento simulado (sem gateway real) | MVP | ❌ | Cartão/Pix são registrados como aprovados; como é projeto didático, não há integração externa. |
+| PAG-01 | Registro de pagamento por forma (dinheiro, débito, crédito, Pix) | MVP | ✅ | Soma dos pagamentos deve cobrir o `valorTotal` da venda. |
+| PAG-02 | Pagamento em dinheiro com cálculo de troco | MVP | ✅ | `troco = valorRecebido − valor`; nunca negativo. |
+| PAG-03 | Pagamento misto (mais de uma forma na mesma venda) | F2 | ✅ | Lista de pagamentos por venda. |
+| PAG-04 | Pagamento simulado (sem gateway real) | MVP | ✅ | Cartão/Pix são registrados como aprovados; como é projeto didático, não há integração externa. |
 | PAG-05 | Estorno vinculado a cancelamento | F2 | ❌ | Gera `Pagamento` negativo ou `MovimentoCaixa` de estorno. |
 
 ### 3.6 Cancelamento, reembolso e remarcação
